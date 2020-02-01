@@ -12,9 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer;
 import static frc.robot.Constants.Direction;
-import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,9 +23,10 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private final Conveyor c = new Conveyor();
-  private final Shooter s = new Shooter();
+  private final Conveyor conveyor = new Conveyor();
+  private final Shooter shooter = new Shooter();
   private final Drive drive = new Drive();
+  private final Intake intake = new Intake();
   
 
   /**
@@ -105,9 +104,38 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {  
+<<<<<<< HEAD
     double Joystick1y = m_robotContainer.RightJoystick.getY();
     double Joystick2y = m_robotContainer.leftJoystick.getY();
     Drive.move(Joystick1y, Joystick2y);
+=======
+    double Joystick1x = m_robotContainer.rightJoystick.getY();
+    double Joystick2x = m_robotContainer.leftJoystick.getY();
+    drive.move(Joystick1x, Joystick2x);
+
+    //trigger turns conveyor on
+    if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
+    {
+      conveyor.toggleState(Constants.Direction.forward);
+    }
+
+    //bottom button on the face of joystick turns shooter on
+    if(m_robotContainer.rightJoystick.getRawButton(2) || m_robotContainer.leftJoystick.getRawButton(2))
+    {
+      shooter.toggleState(Constants.Direction.forward);
+    }
+
+    if(m_robotContainer.rightJoystick.getRawButton(3) || m_robotContainer.leftJoystick.getRawButton(3))
+    {
+      intake.wheelToggleState(Constants.Direction.forward);
+    } 
+
+
+
+
+
+
+>>>>>>> 2a2a490736203d3ba686a09bec8ce94ec2ca6323
   }
 
   @Override

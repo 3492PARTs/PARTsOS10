@@ -31,9 +31,9 @@ public static WPI_TalonSRX Left1 = new WPI_TalonSRX(Left1_port);
 public static WPI_TalonSRX Left2 = new WPI_TalonSRX(Left2_port);
 public static WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
 
-public SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
-public SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
-public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
+public static SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
+public static SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
+public static DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   public Drive() {
   }
 /**
@@ -41,7 +41,7 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
  * @param Speed left between 1, -1
  * @param Speed2 right drive train between 1,-1
  */
-public void move(Double Speed1,Double Speed2){
+public static void move(Double Speed1,Double Speed2){
   M_drive.tankDrive(Speed1, Speed2);
 }
 
