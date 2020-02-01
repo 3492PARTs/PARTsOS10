@@ -12,8 +12,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer;
+import static frc.robot.Constants.Direction;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -23,12 +25,11 @@ import frc.robot.subsystems.Drive;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
-
-
-
-
   private RobotContainer m_robotContainer;
+  private final Conveyor c = new Conveyor();
+  private final Shooter s = new Shooter();
+  private final Drive drive = new Drive();
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -105,9 +106,27 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {  
-    double Joystick1x = m_robotContainer.RightJoystick.getY();
+    double Joystick1x = m_robotContainer.rightJoystick.getY();
     double Joystick2x = m_robotContainer.leftJoystick.getY();
-    Drive.move(Joystick1x, Joystick2x);
+    drive.move(Joystick1x, Joystick2x);
+
+    //trigger turns conveyor on
+    if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
+    {
+      c.toggleState(Constants.Direction.forward);
+    }
+
+    //bottom button on the face of joystick turns shooter on
+    if(m_robotContainer.rightJoystick.getRawButton(2) || m_robotContainer.leftJoystick.getRawButton(2))
+    {
+      s.toggleState(Constants.Direction.forward);
+    }
+
+
+
+
+
+
   }
 
   @Override

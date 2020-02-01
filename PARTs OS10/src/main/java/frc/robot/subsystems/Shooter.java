@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import com.ctre.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import static frc.robot.Constants.Direction;
 
 public class Shooter extends PIDSubsystem {
   /**
@@ -37,5 +39,16 @@ public class Shooter extends PIDSubsystem {
   public double getMeasurement() {
     // Return the process variable measurement here
     return 0;
+  }
+
+  public void toggleState(Direction dir){
+    if(dir == Direction.forward){
+      shooterRight.set(ControlMode.PercentOutput, 1);
+      shooterLeft.set(ControlMode.PercentOutput, 1);
+   } 
+   else{
+    shooterRight.set(ControlMode.PercentOutput,0);
+    shooterLeft.set(ControlMode.PercentOutput, 0);
+   }
   }
 }

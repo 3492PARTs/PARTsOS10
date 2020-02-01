@@ -3,24 +3,24 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import static frc.robot.Constants.Direction;;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import static frc.robot.Constants.Direction;
 
-public class Conveyer extends SubsystemBase {
+public class Conveyor extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-  WPI_TalonSRX conveyor;
+  TalonSRX conveyor;
   int Conveyor_port = 4;
 
-  public Conveyer() {
-    conveyor = new WPI_TalonSRX(Conveyor_port);
+  public Conveyor() {
+    conveyor = new TalonSRX(Conveyor_port);
   }
   /**
    * 
    * @param result a value for the direction the motor should rotate. 0 is none, 1 is forward, 2 is out.
    */
-  public void ToggleState(Direction dir){
+  public void toggleState(Direction dir){
       if(dir == Direction.forward){
        conveyor.set(ControlMode.PercentOutput, .4);
     } 
