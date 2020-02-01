@@ -8,20 +8,53 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Direction;
+
 import com.ctre.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
+  private final double forwardHalt = 0.0; //TODO: set value
+  private final double reverseHalt = 0.0;
   private final TalonSRX wheelIntake;
   private final TalonSRX pivotIntake;
+  
 
   public Intake() {
     wheelIntake = new TalonSRX(10);
     pivotIntake = new TalonSRX(9);
-  
+  }
+
+  public void wheelToggleState(final Direction dir) {
+    if (dir == Direction.forward) {
+      wheelIntake.set(ControlMode.PercentOutput, .5);
+    } else if (dir == Direction.reverse) {
+      wheelIntake.set(ControlMode.PercentOutput, -.5);
+    } else {
+      wheelIntake.set(ControlMode.PercentOutput, 0);
+    }
+  }
+
+  public void pivotToggleState(final Direction dir){
+    if(dir == Direction.forward){
+      while(pivotIntake.getSelectedSensorPosition() < forwardHalt){
+      pivotIntake.set(ControlMode.PercentOutput,.3);
+      }
+      pivotIntake.set(ControlMode.PercentOutput, 0);
+    }
+    else if(dir == Direction.reverse){
+      while(pivotIntake.getSelectedSensorPosition() < reverseHalt){
+        pivotIntake.set(ControlMode.PercentOutput, -.3);
+      }
+      pivotIntake.set(ControlMode.PercentOutput, 0);
+    }
+    else{
+      pivotIntake.set(ControlMode.PercentOutput, 0);
+    }
   }
 
 
