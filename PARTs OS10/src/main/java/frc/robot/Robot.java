@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -105,6 +104,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {  
+<<<<<<< HEAD
+    double Joystick1y = m_robotContainer.RightJoystick.getY();
+    double Joystick2y = m_robotContainer.leftJoystick.getY();
+    Drive.move(Joystick1y, Joystick2y);
+=======
     double Joystick1x = m_robotContainer.rightJoystick.getY();
     double Joystick2x = m_robotContainer.leftJoystick.getY();
     drive.move(Joystick1x, Joystick2x);
@@ -131,6 +135,7 @@ public class Robot extends TimedRobot {
 
 
 
+>>>>>>> 2a2a490736203d3ba686a09bec8ce94ec2ca6323
   }
 
   @Override
