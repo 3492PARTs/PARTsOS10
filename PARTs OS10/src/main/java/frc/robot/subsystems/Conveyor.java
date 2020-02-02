@@ -22,10 +22,10 @@ public class Conveyor extends SubsystemBase {
    */
   public void toggleState(Direction dir){
       if(dir == Direction.forward){
-       conveyor.set(ControlMode.PercentOutput, .4);
+       conveyor.set(ControlMode.PercentOutput, 1);
     } 
     else if(dir == Direction.reverse){
-        conveyor.set(ControlMode.PercentOutput, -.4);
+        conveyor.set(ControlMode.PercentOutput, -1);
     }
     else conveyor.set(ControlMode.PercentOutput, 0);
   }

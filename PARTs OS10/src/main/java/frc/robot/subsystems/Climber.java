@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Direction;
 
-import com.ctre.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Climber extends SubsystemBase {
@@ -31,7 +30,7 @@ public class Climber extends SubsystemBase {
 
   public void downToggleState(Direction dir){
     if(dir == Direction.forward){
-      
+
     }
   }
 
