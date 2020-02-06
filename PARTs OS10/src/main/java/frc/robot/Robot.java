@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer;
@@ -67,6 +68,8 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
   }
 
+
+  
   /**
    * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
    */
@@ -104,14 +107,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {  
-<<<<<<< HEAD
-    double Joystick1y = m_robotContainer.RightJoystick.getY();
+    double Joystick1y = m_robotContainer.rightJoystick.getY();
     double Joystick2y = m_robotContainer.leftJoystick.getY();
     Drive.move(Joystick1y, Joystick2y);
-=======
-    double Joystick1x = m_robotContainer.rightJoystick.getY();
-    double Joystick2x = m_robotContainer.leftJoystick.getY();
-    drive.move(Joystick1x, Joystick2x);
 
     //trigger turns conveyor on
     if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
@@ -127,16 +125,15 @@ public class Robot extends TimedRobot {
 
     if(m_robotContainer.rightJoystick.getRawButton(3) || m_robotContainer.leftJoystick.getRawButton(3))
     {
-      intake.wheelToggleState(Constants.Direction.forward);
-    } 
+      intake.wheelToggleState(Constants.Direction.forward);}
+    }
+   
 
 
 
 
 
 
->>>>>>> 2a2a490736203d3ba686a09bec8ce94ec2ca6323
-  }
 
   @Override
   public void testInit() {
