@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
+import java.util.Arrays;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -84,6 +86,12 @@ public static void testmove(Double speed1, Double speed2) throws InterruptedExce
   RightValues_1[2] = righttest_1.getBusVoltage();
   RightValues_2[2]= righttest_2.getBusVoltage();
   RightValues_3[2] = righttest_3.getBusVoltage();
+  System.out.println("Left one values:" + Arrays.toString(LeftValues_1));
+  System.out.println("Left Two values:" + Arrays.toString(LeftValues_2));
+  System.out.println("Left Three values:" + Arrays.toString(LeftValues_3));
+  System.out.println("Right one values:" + Arrays.toString(RightValues_1));
+  System.out.println("Right Two values:" + Arrays.toString(RightValues_2));
+  System.out.println("Right Three values:" + Arrays.toString(RightValues_3));
 }
 
   @Override
