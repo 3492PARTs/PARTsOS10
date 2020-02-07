@@ -12,7 +12,11 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.time.StopWatch;
+import edu.wpi.first.wpilibj.Timer;
+
 import static frc.robot.Constants.Direction;
+
 
 public class Shooter extends PIDSubsystem {
   /**
@@ -23,15 +27,43 @@ public class Shooter extends PIDSubsystem {
   private final Encoder rShooterEnc = new Encoder(0,1);
   private final Encoder lShooterEnc = new Encoder(2,3);
   
+  
+ 
   public Shooter() {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
-  }
 
+    
+  
+
+  } 
+  double setSpeed;
+  double expected;
+  
+  double current;
+  double wheelc = 6*Math.PI; // IN INCHES
+  StopWatch timer  = new StopWatch();
+  double integral = 0.0;
+  double acceptableDeviation = .01; 
   @Override
   public void useOutput(double output, double setpoint) {
-    // Use the output here
+    // Use the output here    
+    timer.start();
+    // an attempt at PID 
+    double time = timer.getDuration();
+    current = (rShooterEnc.get() + lShooterEnc.get())/2;
+    expected = wheelc * time;
+    double error = current - expected;
+    integral = integral + error * time;
+    output = integral*error;
+    if(output > acceptableDeviation ){
+      if(output > 0){
+        shooterRight.set(ControlMode.PercentOutput, 1.0);
+        shooterLeft.set(ControlMode.PercentOutput, 1.0);
+      }
+    
+    }
   }
 
   @Override
@@ -48,6 +80,7 @@ public class Shooter extends PIDSubsystem {
    else{
     shooterRight.set(ControlMode.PercentOutput,0);
     shooterLeft.set(ControlMode.PercentOutput, 0);
+    
    }
   }
 }
