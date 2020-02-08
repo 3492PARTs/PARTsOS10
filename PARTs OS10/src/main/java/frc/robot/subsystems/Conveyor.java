@@ -10,6 +10,7 @@ public class Conveyor extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
+  double speed = 0.4; // TODO: add comp speed 
   TalonSRX conveyor;
   int Conveyor_port = 4;
 

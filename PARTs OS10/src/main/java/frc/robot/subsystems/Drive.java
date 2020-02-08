@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -23,23 +24,23 @@ public class Drive extends SubsystemBase {
   /**
    * Creates a new Drive.
    */
-public int Right1_port = 13;
-public int Right2_port = 14;
-public int Right3_port = 15;
-public WPI_TalonSRX Right1 = new WPI_TalonSRX(Right1_port);
-public WPI_TalonSRX Right2 = new WPI_TalonSRX(Right2_port);
-public WPI_TalonSRX Right3 = new WPI_TalonSRX(Right3_port);
+public static int Right1_port = 13;
+public static int Right2_port = 14;
+public static int Right3_port = 15;
+public static WPI_TalonSRX Right1 = new WPI_TalonSRX(Right1_port);
+public static WPI_TalonSRX Right2 = new WPI_TalonSRX(Right2_port);
+public static WPI_TalonSRX Right3 = new WPI_TalonSRX(Right3_port);
 
-public int Left1_port = 2;
-public int Left2_port = 1;
-public int Left3_port = 0;
-public WPI_TalonSRX Left1 = new WPI_TalonSRX(Left1_port);
-public WPI_TalonSRX Left2 = new WPI_TalonSRX(Left2_port);
-public WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
+public static int Left1_port = 2;
+public static int Left2_port = 1;
+public static int Left3_port = 0;
+public static WPI_TalonSRX Left1 = new WPI_TalonSRX(Left1_port);
+public static WPI_TalonSRX Left2 = new WPI_TalonSRX(Left2_port);
+public static WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
 
-public SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
-public SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
-public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
+public static SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
+public static SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
+public static DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 // making the test motors
  TalonSRX lefttest_1 = new TalonSRX(Left1_port);
  TalonSRX lefttest_2 = new TalonSRX(Left2_port);
@@ -65,32 +66,36 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   lefttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_1.enableCurrentLimit(true); 
   
+  
   lefttest_2.configPeakCurrentDuration(100, 10); 
   lefttest_2.configContinuousCurrentLimit(amps, timeoutMs);
   lefttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_2.enableCurrentLimit(true); 
   
+  
   lefttest_3.configPeakCurrentDuration(100, 10); 
   lefttest_3.configContinuousCurrentLimit(amps, timeoutMs);
   lefttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_3.enableCurrentLimit(true); 
+  
 
   righttest_1.configPeakCurrentDuration(100, 10); 
   righttest_1.configContinuousCurrentLimit(amps, timeoutMs);
   righttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_1.enableCurrentLimit(true);
+  
 
   righttest_2.configPeakCurrentDuration(100, 10); 
   righttest_2.configContinuousCurrentLimit(amps, timeoutMs);
   righttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_2.enableCurrentLimit(true);
-
+  
 
   righttest_3.configPeakCurrentDuration(100, 10); 
   righttest_3.configContinuousCurrentLimit(amps, timeoutMs);
   righttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_3.enableCurrentLimit(true); 
-
+  
   }
 /**
  * makes the robit move
@@ -98,6 +103,8 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
  * @param Speed2 right drive train between 1,-1
  */
 public void move(Double Speed1,Double Speed2){
+  System.out.println("drive");
+  System.out.println(M_drive);
   M_drive.tankDrive(Speed1, Speed2);
   SmartDashboard.putNumber("The Voltage of Left 1 is", lefttest_1.getBusVoltage());
   SmartDashboard.putNumber("The Voltage of Left 2 is", lefttest_2.getBusVoltage());
@@ -106,6 +113,12 @@ public void move(Double Speed1,Double Speed2){
   SmartDashboard.putNumber("The Voltage of Right 2 is", righttest_2.getBusVoltage());
   SmartDashboard.putNumber("The Voltage of Right 3 is", righttest_3.getBusVoltage());
 
+  SmartDashboard.putNumber("Amps of left 1", lefttest_1.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of left 2", lefttest_2.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of left 3", lefttest_3.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of right 1", righttest_1.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of right 2", righttest_2.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of right 3", righttest_3.getSupplyCurrent());
 }
 
 public void testmove(Double speed1, Double speed2) throws InterruptedException {
@@ -136,6 +149,7 @@ public void testmove(Double speed1, Double speed2) throws InterruptedException {
   System.out.println("Right one values:" + Arrays.toString(RightValues_1));
   System.out.println("Right Two values:" + Arrays.toString(RightValues_2));
   System.out.println("Right Three values:" + Arrays.toString(RightValues_3));
+  lefttest_1.getSupplyCurrent();
 }
 
   @Override
