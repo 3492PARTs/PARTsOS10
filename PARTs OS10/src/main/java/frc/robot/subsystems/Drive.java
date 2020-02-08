@@ -65,32 +65,36 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   lefttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_1.enableCurrentLimit(true); 
   
+  
   lefttest_2.configPeakCurrentDuration(100, 10); 
   lefttest_2.configContinuousCurrentLimit(amps, timeoutMs);
   lefttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_2.enableCurrentLimit(true); 
   
+  
   lefttest_3.configPeakCurrentDuration(100, 10); 
   lefttest_3.configContinuousCurrentLimit(amps, timeoutMs);
   lefttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_3.enableCurrentLimit(true); 
+  
 
   righttest_1.configPeakCurrentDuration(100, 10); 
   righttest_1.configContinuousCurrentLimit(amps, timeoutMs);
   righttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_1.enableCurrentLimit(true);
+  
 
   righttest_2.configPeakCurrentDuration(100, 10); 
   righttest_2.configContinuousCurrentLimit(amps, timeoutMs);
   righttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_2.enableCurrentLimit(true);
-
+  
 
   righttest_3.configPeakCurrentDuration(100, 10); 
   righttest_3.configContinuousCurrentLimit(amps, timeoutMs);
   righttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_3.enableCurrentLimit(true); 
-
+  
   }
 /**
  * makes the robit move
@@ -106,6 +110,12 @@ public void move(Double Speed1,Double Speed2){
   SmartDashboard.putNumber("The Voltage of Right 2 is", righttest_2.getBusVoltage());
   SmartDashboard.putNumber("The Voltage of Right 3 is", righttest_3.getBusVoltage());
 
+  SmartDashboard.putNumber("Amps of left 1", lefttest_1.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of left 2", lefttest_2.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of left 3", lefttest_3.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of right 1", righttest_1.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of right 2", righttest_2.getSupplyCurrent());
+  SmartDashboard.putNumber("Amps of right 3", righttest_3.getSupplyCurrent());
 }
 
 public void testmove(Double speed1, Double speed2) throws InterruptedException {
@@ -136,6 +146,7 @@ public void testmove(Double speed1, Double speed2) throws InterruptedException {
   System.out.println("Right one values:" + Arrays.toString(RightValues_1));
   System.out.println("Right Two values:" + Arrays.toString(RightValues_2));
   System.out.println("Right Three values:" + Arrays.toString(RightValues_3));
+  lefttest_1.getSupplyCurrent();
 }
 
   @Override

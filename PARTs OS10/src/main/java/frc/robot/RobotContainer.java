@@ -31,7 +31,7 @@ public class RobotContainer {
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
   public Joystick leftJoystick = new Joystick(1);
-  public Joystick launchPad = new Joystick(2);
+  public static Joystick launchPad = new Joystick(2);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */

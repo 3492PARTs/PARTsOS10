@@ -98,7 +98,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-
+    try {
+      drive.testmove(0.1, 0.2);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -116,33 +121,53 @@ public class Robot extends TimedRobot {
    * This function is called periodically during operator control.
    */
   int i = 0;
+  double limitedJS1 = 0;
+  double limitedJS2 = 0;
+
   @Override
   public void teleopPeriodic() {
+
+      /*
     double Joystick1y = -(m_robotContainer.rightJoystick.getY());
     double Joystick2y = -(m_robotContainer.leftJoystick.getY());
+    */
+
+
+    //elevator pivot up
+    double Joystick1y = -(m_robotContainer.rightJoystick.getY());
+    double limit = .012;
+    double change = Joystick1y - limitedJS1;
+    if (change>limit) change = limit;
+    else if( change<=limit) change = -limit;
+    limitedJS1 += change;
+
+    double Joystick2y = -(m_robotContainer.leftJoystick.getY());
+    limit = .05;
+    change = Joystick2y - limitedJS2;
+    if (change>limit) change = limit;
+    else if( change<=limit) change = -limit;
+    limitedJS2 += change;
+
+    drive.move(limitedJS1, limitedJS2);
+
 
     //trigger turns conveyor on
     JoystickButton button_10 = new JoystickButton(RobotContainer.launchPad, 10);
     if(RobotContainer.launchPad.getRawButton(10))
     shooter.toggleState(Direction.off);
-    drive.move(Joystick1y, Joystick2y);
+    
     if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
-    drive.move(Joystick1y, Joystick2y);
+    
 
     if(m_robotContainer.rightJoystick.getRawButton(3) || m_robotContainer.leftJoystick.getRawButton(3))
     {
       intake.wheelToggleState(Constants.Direction.forward);
     }
    
-    /*  
-    //elevator pivot up
-    Joystick1y = Joystick1y.getY();
-    double limit = .05;
-    double change = Joystick1y - limit;
-    if (change>limit) change = limit;
-    else if( change<=limit) change = -limit;
-    limitedJoystick += change;
-    */
+    
+
+    
+    
     if(m_robotContainer.launchPad.getRawButton(1))
     {
       climber.pivotToggleState(Constants.Direction.forward);
