@@ -22,11 +22,23 @@ public class Intake extends SubsystemBase {
   private final double reverseHalt = 0.0;
   private final TalonSRX wheelIntake;
   private final TalonSRX pivotIntake;
-  
+  int amps = 25;
+  int timeoutMs = 0;
 
   public Intake() {
+  
+  
     wheelIntake = new TalonSRX(10);
     pivotIntake = new TalonSRX(9);
+    wheelIntake.configPeakCurrentDuration(100, 10); 
+    wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
+    wheelIntake.configPeakCurrentLimit(amps, timeoutMs);
+    wheelIntake.enableCurrentLimit(true);
+    
+    wheelIntake.configPeakCurrentDuration(100, 10); 
+    wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
+    wheelIntake.configPeakCurrentLimit(amps, timeoutMs);
+    wheelIntake.enableCurrentLimit(true);
   }
 
   public void wheelToggleState(final Direction dir) {

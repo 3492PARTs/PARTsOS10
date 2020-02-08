@@ -22,51 +22,47 @@ public class Shooter extends PIDSubsystem {
   /**
    * Creates a new Shooter.
    */
-  private final TalonSRX shooterRight = new TalonSRX(12);
-  private final TalonSRX shooterLeft = new TalonSRX(3);
-  private final Encoder rShooterEnc = new Encoder(0,1);
-  private final Encoder lShooterEnc = new Encoder(2,3);
+  private static final TalonSRX shooterRight = new TalonSRX(12);
+  private static final TalonSRX shooterLeft = new TalonSRX(3);
+  private static final Encoder rShooterEnc = new Encoder(0,1);
+  private static final Encoder lShooterEnc = new Encoder(2,3);
   
-  
- 
+int amps = 40;
+int timeoutMs = 0;
   public Shooter() {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
-
+        shooterLeft.configPeakCurrentDuration(100, 10); 
+        shooterLeft.configContinuousCurrentLimit(55, timeoutMs);
+        shooterLeft.configPeakCurrentLimit(amps, timeoutMs);
+        shooterLeft.enableCurrentLimit(true);
+    
+        shooterRight.configPeakCurrentDuration(100, 10); 
+        shooterRight.configContinuousCurrentLimit(55, timeoutMs);
+        shooterRight.configPeakCurrentLimit(amps, timeoutMs);
+        shooterRight.enableCurrentLimit(true);
     
   
 
   } 
+  /*
   double setSpeed;
   double expected;
-  
   double current;
   double wheelc = 6*Math.PI; // IN INCHES
   StopWatch timer  = new StopWatch();
   double integral = 0.0;
   double acceptableDeviation = .01; 
-  double kp = 0.0;//TODO: set constant
-  double ki = 0.0;//TODO: set constant
+  double kp = 0.1;//TODO: set constant
+  double ki = 1.0;//TODO: set constant
+  */
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here    
-    timer.start();
-    // an attempt at PID 
-    double time = timer.getDuration();
-    current = (rShooterEnc.get() + lShooterEnc.get())/2;
-    expected = wheelc * time;
-    double error = current - expected;
-    integral = integral + error * time;
-    output = kp*integral*error*ki;
-    if(output > acceptableDeviation ){
-      if(output > 0){
-        shooterRight.set(ControlMode.PercentOutput, 1.0);
-        shooterLeft.set(ControlMode.PercentOutput, 1.0);
-      }
-    
+    shooterRight.set(ControlMode.PercentOutput, 1.0);
+    shooterLeft.set(ControlMode.PercentOutput, 1.0);
     }
-  }
 
   @Override
   public double getMeasurement() {

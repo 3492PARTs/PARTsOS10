@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Conveyor;
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -24,6 +25,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  Climber climber = new Climber();
+  Conveyor conveyor = new Conveyor();
 
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
@@ -44,6 +47,78 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //elevator pivot up
+    if(launchPad.getRawButton(9))
+    {
+      climber.pivotToggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.pivotToggleState(Constants.Direction.off);
+    }
+
+    //elevator up
+    if(launchPad.getRawButton(8))
+    {
+      climber.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.toggleState(Constants.Direction.off);
+    }
+
+    //climber up
+    if(launchPad.getRawButton(5))
+    {
+      climber.climbToggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.climbToggleState(Constants.Direction.off);
+    }
+
+    //elevator pivot down
+    if(launchPad.getRawButton(7))
+    {
+      climber.pivotToggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      climber.pivotToggleState(Constants.Direction.reverse);
+    }
+
+    //elevator down
+    if(launchPad.getRawButton(6))
+    {
+      climber.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      climber.toggleState(Constants.Direction.off);
+    }
+
+    // conveyor in
+    if(launchPad.getRawButton(3))
+    {
+      conveyor.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      conveyor.toggleState(Constants.Direction.off);
+    }
+
+    //conveyor out
+    if(launchPad.getRawButton(1))
+    {
+      conveyor.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      conveyor.toggleState(Constants.Direction.off);
+    }
+
+    //
+    
   }
 
 

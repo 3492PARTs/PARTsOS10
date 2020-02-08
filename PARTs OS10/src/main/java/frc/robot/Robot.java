@@ -11,11 +11,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
+import frc.robot.commands.Time;
+
 import static frc.robot.Constants.Direction;
 import frc.robot.subsystems.*;
 import frc.robot.commands.DriveForwardOnly;
 
+import frc.robot.RobotContainer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -117,24 +121,17 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during operator control.
    */
+  int i = 0;
   @Override
   public void teleopPeriodic() {
-    double Joystick1y = m_robotContainer.rightJoystick.getY();
-    double Joystick2y = m_robotContainer.leftJoystick.getY();
+    double Joystick1y = -(m_robotContainer.rightJoystick.getY());
+    double Joystick2y = -(m_robotContainer.leftJoystick.getY());
 
-    double A = .5;
-    for (int i = 0; i < 20; i++) { // TODO: Change to i<100 20 is for safety
-      Joystick1y = (A / 50) * i;
-      Joystick2y = (A / 50) * i;
-      try {
-        Thread.sleep(1, 0);
-      } catch (final InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    drive.move(Joystick1y, Joystick2y);
-    }
     //trigger turns conveyor on
+    JoystickButton button_10 = new JoystickButton(RobotContainer.launchPad, 10);
+    if(RobotContainer.launchPad.getRawButton(10))
+    shooter.toggleState(Direction.off);
+    drive.move(Joystick1y, Joystick2y);
     if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
     drive.move(Joystick1y, Joystick2y);
 
@@ -143,8 +140,15 @@ public class Robot extends TimedRobot {
       intake.wheelToggleState(Constants.Direction.forward);
     }
    
-
+    /*  
     //elevator pivot up
+    Joystick1y = Joystick1y.getY();
+    double limit = .05;
+    double change = Joystick1y - limit;
+    if (change>limit) change = limit;
+    else if( change<=limit) change = -limit;
+    limitedJoystick += change;
+    */
     if(m_robotContainer.launchPad.getRawButton(1))
     {
       climber.pivotToggleState(Constants.Direction.forward);
