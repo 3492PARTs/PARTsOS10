@@ -122,8 +122,8 @@ public class Robot extends TimedRobot {
     double Joystick2y = -(m_robotContainer.leftJoystick.getY());
 
     //trigger turns conveyor on
-    JoystickButton button_10 = new JoystickButton(RobotContainer.launchPad, 10);
-    if(RobotContainer.launchPad.getRawButton(10))
+    JoystickButton button_10 = new JoystickButton(m_robotContainer.launchPad, 10);
+    if(m_robotContainer.launchPad.getRawButton(10))
     shooter.toggleState(Direction.off);
     drive.move(Joystick1y, Joystick2y);
     if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))

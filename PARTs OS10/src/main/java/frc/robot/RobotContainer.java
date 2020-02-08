@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
@@ -27,6 +28,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   Climber climber = new Climber();
   Conveyor conveyor = new Conveyor();
+  Shooter shooter = new Shooter();
 
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
@@ -117,7 +119,18 @@ public class RobotContainer {
       conveyor.toggleState(Constants.Direction.off);
     }
 
-    //
+    //shooter on
+    if(launchPad.getRawButton(11))
+    {
+      shooter.toggleState(Constants.Direction.reverse);
+    }
+    
+    //shooter off
+    if(launchPad.getRawButton(10))
+    {
+      shooter.toggleState(Constants.Direction.off);
+    }
+
     
   }
 
