@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends SubsystemBase {
   /**
@@ -52,42 +53,42 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   Double[] RightValues_1;
   Double[] RightValues_2;
   Double[] RightValues_3;
-int amps = 55;
-int timeoutMs = 0;
 
+  int amps = 55;
+  int timeoutMs = 0;
+  int peakAmps = 40;
 
   public Drive() {
-
-//Cc,CP
+//current limiting for drive
   lefttest_1.configPeakCurrentDuration(100, 10); 
   lefttest_1.configContinuousCurrentLimit(amps, timeoutMs); 
-  lefttest_1.configPeakCurrentLimit(amps, timeoutMs);
+  lefttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_1.enableCurrentLimit(true); 
   
   lefttest_2.configPeakCurrentDuration(100, 10); 
   lefttest_2.configContinuousCurrentLimit(amps, timeoutMs);
-  lefttest_2.configPeakCurrentLimit(amps, timeoutMs);
+  lefttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_2.enableCurrentLimit(true); 
   
   lefttest_3.configPeakCurrentDuration(100, 10); 
   lefttest_3.configContinuousCurrentLimit(amps, timeoutMs);
-  lefttest_3.configPeakCurrentLimit(amps, timeoutMs);
+  lefttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
   lefttest_3.enableCurrentLimit(true); 
 
   righttest_1.configPeakCurrentDuration(100, 10); 
   righttest_1.configContinuousCurrentLimit(amps, timeoutMs);
-  righttest_1.configPeakCurrentLimit(amps, timeoutMs);
+  righttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_1.enableCurrentLimit(true);
 
   righttest_2.configPeakCurrentDuration(100, 10); 
   righttest_2.configContinuousCurrentLimit(amps, timeoutMs);
-  righttest_2.configPeakCurrentLimit(amps, timeoutMs);
+  righttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_2.enableCurrentLimit(true);
 
 
   righttest_3.configPeakCurrentDuration(100, 10); 
   righttest_3.configContinuousCurrentLimit(amps, timeoutMs);
-  righttest_3.configPeakCurrentLimit(amps, timeoutMs);
+  righttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
   righttest_3.enableCurrentLimit(true); 
 
   }
@@ -98,6 +99,12 @@ int timeoutMs = 0;
  */
 public void move(Double Speed1,Double Speed2){
   M_drive.tankDrive(Speed1, Speed2);
+  SmartDashboard.putNumber("The Voltage of Left 1 is", lefttest_1.getBusVoltage());
+  SmartDashboard.putNumber("The Voltage of Left 2 is", lefttest_2.getBusVoltage());
+  SmartDashboard.putNumber("The Voltage of Left 3 is", lefttest_2.getBusVoltage());
+  SmartDashboard.putNumber("The Voltage of Right 1 is", righttest_1.getBusVoltage());
+  SmartDashboard.putNumber("The Voltage of Right 2 is", righttest_2.getBusVoltage());
+  SmartDashboard.putNumber("The Voltage of Right 3 is", righttest_3.getBusVoltage());
 }
 
 public void testmove(Double speed1, Double speed2) throws InterruptedException {
