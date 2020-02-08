@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer;
 import static frc.robot.Constants.Direction;
 import frc.robot.subsystems.*;
+import frc.robot.commands.DriveForwardOnly;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +25,7 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private final Command m_autonomousCommand = new DriveForwardOnly();
   private RobotContainer m_robotContainer;
   private final Conveyor conveyor = new Conveyor();
   private final Shooter shooter = new Shooter();
@@ -81,11 +83,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    // schedule the autonomous command (example)
+    //schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+      System.out.println(m_autonomousCommand!= null);
+      
+    
     }
   }
 
@@ -94,6 +99,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    
 
   }
 
@@ -117,12 +123,12 @@ public class Robot extends TimedRobot {
     double Joystick2y = m_robotContainer.leftJoystick.getY();
 
     double A = .5;
-    for (int i = 0; i < 20; i++) {  // TODO: Change to i<100 20 is for safety
+    for (int i = 0; i < 20; i++) { // TODO: Change to i<100 20 is for safety
       Joystick1y = (A / 50) * i;
       Joystick2y = (A / 50) * i;
       try {
         Thread.sleep(1, 0);
-      } catch (InterruptedException e) {
+      } catch (final InterruptedException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }

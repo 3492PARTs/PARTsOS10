@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -22,23 +23,23 @@ public class Drive extends SubsystemBase {
   /**
    * Creates a new Drive.
    */
-public int Right1_port = 13;
-public int Right2_port = 14;
-public int Right3_port = 15;
-public WPI_TalonSRX Right1 = new WPI_TalonSRX(Right1_port);
-public WPI_TalonSRX Right2 = new WPI_TalonSRX(Right2_port);
-public WPI_TalonSRX Right3 = new WPI_TalonSRX(Right3_port);
+public static int Right1_port = 13;
+public static int Right2_port = 14;
+public static int Right3_port = 15;
+public static WPI_TalonSRX Right1 = new WPI_TalonSRX(Right1_port);
+public static WPI_TalonSRX Right2 = new WPI_TalonSRX(Right2_port);
+public static WPI_TalonSRX Right3 = new WPI_TalonSRX(Right3_port);
 
-public int Left1_port = 2;
-public int Left2_port = 1;
-public int Left3_port = 0;
-public WPI_TalonSRX Left1 = new WPI_TalonSRX(Left1_port);
-public WPI_TalonSRX Left2 = new WPI_TalonSRX(Left2_port);
-public WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
+public static int Left1_port = 2;
+public static int Left2_port = 1;
+public static int Left3_port = 0;
+public static WPI_TalonSRX Left1 = new WPI_TalonSRX(Left1_port);
+public static WPI_TalonSRX Left2 = new WPI_TalonSRX(Left2_port);
+public static WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
 
-public SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
-public SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
-public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
+public static SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
+public static SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
+public static DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 // making the test motors
  TalonSRX lefttest_1 = new TalonSRX(Left1_port);
  TalonSRX lefttest_2 = new TalonSRX(Left2_port);
@@ -97,6 +98,8 @@ int timeoutMs = 0;
  * @param Speed2 right drive train between 1,-1
  */
 public void move(Double Speed1,Double Speed2){
+  System.out.println("drive");
+  System.out.println(M_drive);
   M_drive.tankDrive(Speed1, Speed2);
 }
 
