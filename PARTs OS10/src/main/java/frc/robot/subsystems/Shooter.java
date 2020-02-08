@@ -7,18 +7,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.time.StopWatch;
-import edu.wpi.first.wpilibj.Timer;
 
-import static frc.robot.Constants.Direction;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Direction;
 
-
-public class Shooter extends PIDSubsystem {
+public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
@@ -26,59 +22,32 @@ public class Shooter extends PIDSubsystem {
   private static final TalonSRX shooterLeft = new TalonSRX(3);
   private static final Encoder rShooterEnc = new Encoder(0,1);
   private static final Encoder lShooterEnc = new Encoder(2,3);
-  
-int amps = 40;
-int timeoutMs = 0;
   public Shooter() {
-    super(
-        // The PIDController used by the subsystem
-        new PIDController(0, 0, 0));
-        shooterLeft.configPeakCurrentDuration(100, 10); 
-        shooterLeft.configContinuousCurrentLimit(55, timeoutMs);
-        shooterLeft.configPeakCurrentLimit(amps, timeoutMs);
-        shooterLeft.enableCurrentLimit(true);
-    
-        shooterRight.configPeakCurrentDuration(100, 10); 
-        shooterRight.configContinuousCurrentLimit(55, timeoutMs);
-        shooterRight.configPeakCurrentLimit(amps, timeoutMs);
-        shooterRight.enableCurrentLimit(true);
-    
-  
 
-  } 
-  /*
-  double setSpeed;
-  double expected;
-  double current;
-  double wheelc = 6*Math.PI; // IN INCHES
-  StopWatch timer  = new StopWatch();
-  double integral = 0.0;
-  double acceptableDeviation = .01; 
-  double kp = 0.1;//TODO: set constant
-  double ki = 1.0;//TODO: set constant
-  */
-  @Override
-  public void useOutput(double output, double setpoint) {
-    // Use the output here    
-    shooterRight.set(ControlMode.PercentOutput, 1.0);
-    shooterLeft.set(ControlMode.PercentOutput, 1.0);
-    }
-
-  @Override
-  public double getMeasurement() {
-    // Return the process variable measurement here
-    return 0;
   }
 
   public void toggleState(Direction dir){
+    System.out.println("shoot");
     if(dir == Direction.forward){
-      shooterRight.set(ControlMode.PercentOutput, 1);
-      shooterLeft.set(ControlMode.PercentOutput, 1);
+      System.out.println("fwd");
+      shooterRight.set(ControlMode.PercentOutput, -1);
+      shooterLeft.set(ControlMode.PercentOutput, -1);
    } 
+   else if(dir == Direction.reverse){
+    System.out.println("bak");
+    shooterRight.set(ControlMode.PercentOutput, 1);
+    shooterLeft.set(ControlMode.PercentOutput, 1);
+ } 
    else{
+    System.out.println("off");
     shooterRight.set(ControlMode.PercentOutput,0);
     shooterLeft.set(ControlMode.PercentOutput, 0);
     
    }
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
   }
 }

@@ -137,7 +137,7 @@ public class Robot extends TimedRobot {
     double Joystick2y = -(m_robotContainer.leftJoystick.getY());
     */
 
-
+    
     //elevator pivot up
     double Joystick1y = -(m_robotContainer.rightJoystick.getY());
     double limit = .012;
@@ -155,25 +155,7 @@ public class Robot extends TimedRobot {
 
     drive.move(limitedJS1, limitedJS2);
 
-
-    //trigger turns conveyor on
-    JoystickButton button_10 = new JoystickButton(m_robotContainer.launchPad, 10);
-    if(m_robotContainer.launchPad.getRawButton(10))
-    shooter.toggleState(Direction.off);
-    
-    if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
-    
-
-    if(m_robotContainer.rightJoystick.getRawButton(3) || m_robotContainer.leftJoystick.getRawButton(3))
-    {
-      intake.wheelToggleState(Constants.Direction.forward);
-    }
-   
-    
-
-    
-    
-    if(m_robotContainer.launchPad.getRawButton(1))
+    if(m_robotContainer.launchPad.getRawButton(9))
     {
       climber.pivotToggleState(Constants.Direction.forward);
     }
@@ -183,7 +165,7 @@ public class Robot extends TimedRobot {
     }
 
     //elevator up
-    if(m_robotContainer.launchPad.getRawButton(2))
+    if(m_robotContainer.launchPad.getRawButton(8))
     {
       climber.toggleState(Constants.Direction.forward);
     }
@@ -193,7 +175,7 @@ public class Robot extends TimedRobot {
     }
 
     //climber up
-    if(m_robotContainer.launchPad.getRawButton(3))
+    if(m_robotContainer.launchPad.getRawButton(5))
     {
       climber.climbToggleState(Constants.Direction.forward);
     }
@@ -201,19 +183,19 @@ public class Robot extends TimedRobot {
     {
       climber.climbToggleState(Constants.Direction.off);
     }
-    
+
     //elevator pivot down
-    if(m_robotContainer.launchPad.getRawButton(4))
+    if(m_robotContainer.launchPad.getRawButton(7))
     {
       climber.pivotToggleState(Constants.Direction.reverse);
     }
     else
     {
-      climber.pivotToggleState(Constants.Direction.off);
+      climber.pivotToggleState(Constants.Direction.reverse);
     }
 
     //elevator down
-    if(m_robotContainer.launchPad.getRawButton(5))
+    if(m_robotContainer.launchPad.getRawButton(6))
     {
       climber.toggleState(Constants.Direction.reverse);
     }
@@ -222,9 +204,13 @@ public class Robot extends TimedRobot {
       climber.toggleState(Constants.Direction.off);
     }
 
-
-    //conveyor in
-    if(m_robotContainer.launchPad.getRawButton(7))
+    // conveyor in
+    //conveyor out
+    if(m_robotContainer.launchPad.getRawButton(1))
+    {
+      conveyor.toggleState(Constants.Direction.forward);
+    }
+    else if(m_robotContainer.launchPad.getRawButton(3))
     {
       conveyor.toggleState(Constants.Direction.reverse);
     }
@@ -232,29 +218,17 @@ public class Robot extends TimedRobot {
     {
       conveyor.toggleState(Constants.Direction.off);
     }
-    //conveyor out
-    if(m_robotContainer.launchPad.getRawButton(9))
-    {
-      conveyor.toggleState(Constants.Direction.forward);
-    }
-    else
-    {
-      conveyor.toggleState(Constants.Direction.off);
-    }
-
 
     //shooter out
-    if(m_robotContainer.launchPad.getRawButton(8))
-    {
-      shooter.toggleState(Constants.Direction.reverse);
-    }
-    else
-    {
-      shooter.toggleState(Constants.Direction.off);
-    }
     //shooter in
     if(m_robotContainer.launchPad.getRawButton(10))
     {
+      System.out.println("btn 10");
+      shooter.toggleState(Constants.Direction.reverse);
+    }
+    else if(m_robotContainer.launchPad.getRawButton(11))
+    {
+      System.out.println("btn 11");
       shooter.toggleState(Constants.Direction.forward);
     }
     else
@@ -263,11 +237,9 @@ public class Robot extends TimedRobot {
     }
 
 
-
-
-
   }
-
+    //trigger turns conveyor on
+    
 
   @Override
   public void testInit() {

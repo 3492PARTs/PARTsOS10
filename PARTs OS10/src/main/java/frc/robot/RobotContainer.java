@@ -33,7 +33,7 @@ public class RobotContainer {
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
   public Joystick leftJoystick = new Joystick(1);
-  public static Joystick launchPad = new Joystick(2);
+  public Joystick launchPad = new Joystick(2);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -50,87 +50,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //elevator pivot up
-    if(launchPad.getRawButton(9))
-    {
-      climber.pivotToggleState(Constants.Direction.forward);
-    }
-    else
-    {
-      climber.pivotToggleState(Constants.Direction.off);
-    }
-
-    //elevator up
-    if(launchPad.getRawButton(8))
-    {
-      climber.toggleState(Constants.Direction.forward);
-    }
-    else
-    {
-      climber.toggleState(Constants.Direction.off);
-    }
-
-    //climber up
-    if(launchPad.getRawButton(5))
-    {
-      climber.climbToggleState(Constants.Direction.forward);
-    }
-    else
-    {
-      climber.climbToggleState(Constants.Direction.off);
-    }
-
-    //elevator pivot down
-    if(launchPad.getRawButton(7))
-    {
-      climber.pivotToggleState(Constants.Direction.reverse);
-    }
-    else
-    {
-      climber.pivotToggleState(Constants.Direction.reverse);
-    }
-
-    //elevator down
-    if(launchPad.getRawButton(6))
-    {
-      climber.toggleState(Constants.Direction.reverse);
-    }
-    else
-    {
-      climber.toggleState(Constants.Direction.off);
-    }
-
-    // conveyor in
-    if(launchPad.getRawButton(3))
-    {
-      conveyor.toggleState(Constants.Direction.reverse);
-    }
-    else
-    {
-      conveyor.toggleState(Constants.Direction.off);
-    }
-
-    //conveyor out
-    if(launchPad.getRawButton(1))
-    {
-      conveyor.toggleState(Constants.Direction.forward);
-    }
-    else
-    {
-      conveyor.toggleState(Constants.Direction.off);
-    }
-
-    //shooter on
-    if(launchPad.getRawButton(11))
-    {
-      shooter.toggleState(Constants.Direction.reverse);
-    }
     
-    //shooter off
-    if(launchPad.getRawButton(10))
-    {
-      shooter.toggleState(Constants.Direction.off);
-    }
-
     
   }
 
