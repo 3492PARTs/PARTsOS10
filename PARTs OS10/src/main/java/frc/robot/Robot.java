@@ -17,6 +17,8 @@ import frc.robot.commands.Time;
 
 import static frc.robot.Constants.Direction;
 import frc.robot.subsystems.*;
+import frc.robot.commands.DriveForwardOnly;
+
 import frc.robot.RobotContainer;
 
 /**
@@ -27,7 +29,7 @@ import frc.robot.RobotContainer;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private final Command m_autonomousCommand = new DriveForwardOnly();
   private RobotContainer m_robotContainer;
   private final Conveyor conveyor = new Conveyor();
   private final Shooter shooter = new Shooter();
@@ -85,11 +87,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    // schedule the autonomous command (example)
+    //schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+      System.out.println(m_autonomousCommand!= null);
+      
+    
     }
   }
 
