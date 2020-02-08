@@ -105,6 +105,7 @@ public void move(Double Speed1,Double Speed2){
   SmartDashboard.putNumber("The Voltage of Right 1 is", righttest_1.getBusVoltage());
   SmartDashboard.putNumber("The Voltage of Right 2 is", righttest_2.getBusVoltage());
   SmartDashboard.putNumber("The Voltage of Right 3 is", righttest_3.getBusVoltage());
+
 }
 
 public void testmove(Double speed1, Double speed2) throws InterruptedException {

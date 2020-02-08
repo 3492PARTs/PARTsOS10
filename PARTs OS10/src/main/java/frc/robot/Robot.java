@@ -134,8 +134,15 @@ public class Robot extends TimedRobot {
       intake.wheelToggleState(Constants.Direction.forward);
     }
    
-
+    /*  
     //elevator pivot up
+    Joystick1y = Joystick1y.getY();
+    double limit = .05;
+    double change = Joystick1y - limit;
+    if (change>limit) change = limit;
+    else if( change<=limit) change = -limit;
+    limitedJoystick += change;
+    */
     if(m_robotContainer.launchPad.getRawButton(1))
     {
       climber.pivotToggleState(Constants.Direction.forward);
