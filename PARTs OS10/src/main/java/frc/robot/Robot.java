@@ -28,6 +28,8 @@ public class Robot extends TimedRobot {
   private final Shooter shooter = new Shooter();
   private final Drive drive = new Drive();
   private final Intake intake = new Intake();
+  private final Climber climber = new Climber();
+
   
 
   /**
@@ -109,30 +111,109 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {  
     double Joystick1y = m_robotContainer.rightJoystick.getY();
     double Joystick2y = m_robotContainer.leftJoystick.getY();
-    Drive.move(Joystick1y, Joystick2y);
-
-    //trigger turns conveyor on
-    if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
-    {
-      conveyor.toggleState(Constants.Direction.forward);
-    }
-
-    //bottom button on the face of joystick turns shooter on
-    if(m_robotContainer.rightJoystick.getRawButton(2) || m_robotContainer.leftJoystick.getRawButton(2))
-    {
-      shooter.toggleState(Constants.Direction.forward);
-    }
+    drive.move(Joystick1y, Joystick2y);
 
     if(m_robotContainer.rightJoystick.getRawButton(3) || m_robotContainer.leftJoystick.getRawButton(3))
     {
-      intake.wheelToggleState(Constants.Direction.forward);}
+      intake.wheelToggleState(Constants.Direction.forward);
     }
    
 
+    //elevator pivot up
+    if(m_robotContainer.launchPad.getRawButton(1))
+    {
+      climber.pivotToggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.pivotToggleState(Constants.Direction.off);
+    }
+
+    //elevator up
+    if(m_robotContainer.launchPad.getRawButton(2))
+    {
+      climber.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.toggleState(Constants.Direction.off);
+    }
+
+    //climber up
+    if(m_robotContainer.launchPad.getRawButton(3))
+    {
+      climber.climbToggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.climbToggleState(Constants.Direction.off);
+    }
+    
+    //elevator pivot down
+    if(m_robotContainer.launchPad.getRawButton(4))
+    {
+      climber.pivotToggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      climber.pivotToggleState(Constants.Direction.off);
+    }
+
+    //elevator down
+    if(m_robotContainer.launchPad.getRawButton(5))
+    {
+      climber.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      climber.toggleState(Constants.Direction.off);
+    }
+
+
+    //conveyor in
+    if(m_robotContainer.launchPad.getRawButton(7))
+    {
+      conveyor.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      conveyor.toggleState(Constants.Direction.off);
+    }
+    //conveyor out
+    if(m_robotContainer.launchPad.getRawButton(9))
+    {
+      conveyor.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      conveyor.toggleState(Constants.Direction.off);
+    }
+
+
+    //shooter out
+    if(m_robotContainer.launchPad.getRawButton(8))
+    {
+      shooter.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      shooter.toggleState(Constants.Direction.off);
+    }
+    //shooter in
+    if(m_robotContainer.launchPad.getRawButton(10))
+    {
+      shooter.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      shooter.toggleState(Constants.Direction.off);
+    }
 
 
 
 
+
+  }
 
 
   @Override

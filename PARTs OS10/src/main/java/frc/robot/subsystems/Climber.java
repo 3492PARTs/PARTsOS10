@@ -7,11 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Direction;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Climber extends SubsystemBase {
@@ -28,11 +27,36 @@ public class Climber extends SubsystemBase {
     climbPivot = new TalonSRX(5);
   }
 
-  public void downToggleState(Direction dir){
+  public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
-
-    }
+      climbPivot.set(ControlMode.PercentOutput, 1);
+   } 
+   else if(dir == Direction.reverse){
+       climbPivot.set(ControlMode.PercentOutput, -1);
+   }
+   else climbPivot.set(ControlMode.PercentOutput, 0);
   }
+
+  public void toggleState(Direction dir){
+    if(dir == Direction.forward){
+      climbUp.set(ControlMode.PercentOutput, 1);
+   } 
+   else if(dir == Direction.reverse){
+       climbUp.set(ControlMode.PercentOutput, -1);
+   }
+   else climbUp.set(ControlMode.PercentOutput, 0);
+  }
+
+  public void climbToggleState(Direction dir){
+    if(dir == Direction.forward){
+      climbDown.set(ControlMode.PercentOutput, 1);
+   } 
+   else if(dir == Direction.reverse){
+       climbDown.set(ControlMode.PercentOutput, -1);
+   }
+   else climbDown.set(ControlMode.PercentOutput, 0);
+  }
+
 
   
 
