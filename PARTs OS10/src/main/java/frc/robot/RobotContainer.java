@@ -10,34 +10,30 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Constants.Direction;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.Time;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Conveyor;
 /**
- * This class is where the bulk of the robot should be declared. Since
- * Command-based is a "declarative" paradigm, very little robot logic should
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls). Instead, the structure of the robot (including subsystems,
- * commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared.  Since Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
+ * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  Shooter shooter = new Shooter();
+  Climber climber = new Climber();
+  Conveyor conveyor = new Conveyor();
 
-  // The two joysticks
+// The two joysticks
   public Joystick rightJoystick = new Joystick(0);
   public Joystick leftJoystick = new Joystick(1);
-  public static Joystick launchPad = new Joystick(2);
-
+  public Joystick launchPad = new Joystick(2);
   /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
+   * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
@@ -45,16 +41,84 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings.  Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
+   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton button_8 = new JoystickButton(launchPad, 8);
-    button_8.whenPressed(new Time());
+    //elevator pivot up
+    if(launchPad.getRawButton(9))
+    {
+      climber.pivotToggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.pivotToggleState(Constants.Direction.off);
+    }
+
+    //elevator up
+    if(launchPad.getRawButton(8))
+    {
+      climber.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.toggleState(Constants.Direction.off);
+    }
+
+    //climber up
+    if(launchPad.getRawButton(5))
+    {
+      climber.climbToggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      climber.climbToggleState(Constants.Direction.off);
+    }
+
+    //elevator pivot down
+    if(launchPad.getRawButton(7))
+    {
+      climber.pivotToggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      climber.pivotToggleState(Constants.Direction.reverse);
+    }
+
+    //elevator down
+    if(launchPad.getRawButton(6))
+    {
+      climber.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      climber.toggleState(Constants.Direction.off);
+    }
+
+    // conveyor in
+    if(launchPad.getRawButton(3))
+    {
+      conveyor.toggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      conveyor.toggleState(Constants.Direction.off);
+    }
+
+    //conveyor out
+    if(launchPad.getRawButton(1))
+    {
+      conveyor.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      conveyor.toggleState(Constants.Direction.off);
+    }
+
+    //
     
-      
   }
 
 
