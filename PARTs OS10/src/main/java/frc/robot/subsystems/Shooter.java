@@ -46,6 +46,8 @@ public class Shooter extends PIDSubsystem {
   StopWatch timer  = new StopWatch();
   double integral = 0.0;
   double acceptableDeviation = .01; 
+  double kp = 0.0;//TODO: set constant
+  double ki = 0.0;//TODO: set constant
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here    
@@ -56,7 +58,7 @@ public class Shooter extends PIDSubsystem {
     expected = wheelc * time;
     double error = current - expected;
     integral = integral + error * time;
-    output = integral*error;
+    output = kp*integral*error*ki;
     if(output > acceptableDeviation ){
       if(output > 0){
         shooterRight.set(ControlMode.PercentOutput, 1.0);

@@ -40,10 +40,10 @@ public static SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Righ
 public static SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
 public static DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 // making the test motors
-public static TalonSRX lefttest_1 = new TalonSRX(Left1_port);
-public static TalonSRX lefttest_2 = new TalonSRX(Left2_port);
-public static TalonSRX lefttest_3 = new TalonSRX(Left3_port);
-public static TalonSRX righttest_1 = new TalonSRX(Right1_port);
+ TalonSRX lefttest_1 = new TalonSRX(Left1_port);
+ TalonSRX lefttest_2 = new TalonSRX(Left2_port);
+ TalonSRX lefttest_3 = new TalonSRX(Left3_port);
+ TalonSRX righttest_1 = new TalonSRX(Right1_port);
 public static TalonSRX righttest_2 = new TalonSRX(Right2_port);
 public static TalonSRX righttest_3 = new TalonSRX(Right3_port);
 public static Double[] LeftValues_1;
@@ -52,19 +52,55 @@ public static Double[] LeftValues_3;
 public static Double[] RightValues_1;
 public static Double[] RightValues_2;
 public static Double[] RightValues_3;
+int amps = 55;
+int timeoutMs = 0;
+
 
   public Drive() {
+
+//Cc,CP
+  lefttest_1.configPeakCurrentDuration(100, 10); 
+  lefttest_1.configContinuousCurrentLimit(amps, timeoutMs); 
+  lefttest_1.configPeakCurrentLimit(amps, timeoutMs);
+  lefttest_1.enableCurrentLimit(true); 
+  
+  lefttest_2.configPeakCurrentDuration(100, 10); 
+  lefttest_2.configContinuousCurrentLimit(amps, timeoutMs);
+  lefttest_2.configPeakCurrentLimit(amps, timeoutMs);
+  lefttest_2.enableCurrentLimit(true); 
+  
+  lefttest_3.configPeakCurrentDuration(100, 10); 
+  lefttest_3.configContinuousCurrentLimit(amps, timeoutMs);
+  lefttest_3.configPeakCurrentLimit(amps, timeoutMs);
+  lefttest_3.enableCurrentLimit(true); 
+
+  righttest_1.configPeakCurrentDuration(100, 10); 
+  righttest_1.configContinuousCurrentLimit(amps, timeoutMs);
+  righttest_1.configPeakCurrentLimit(amps, timeoutMs);
+  righttest_1.enableCurrentLimit(true);
+
+  righttest_2.configPeakCurrentDuration(100, 10); 
+  righttest_2.configContinuousCurrentLimit(amps, timeoutMs);
+  righttest_2.configPeakCurrentLimit(amps, timeoutMs);
+  righttest_2.enableCurrentLimit(true);
+
+
+  righttest_3.configPeakCurrentDuration(100, 10); 
+  righttest_3.configContinuousCurrentLimit(amps, timeoutMs);
+  righttest_3.configPeakCurrentLimit(amps, timeoutMs);
+  righttest_3.enableCurrentLimit(true); 
+
   }
 /**
  * makes the robit move
  * @param Speed left between 1, -1
  * @param Speed2 right drive train between 1,-1
  */
-public static void move(Double Speed1,Double Speed2){
+public void move(Double Speed1,Double Speed2){
   M_drive.tankDrive(Speed1, Speed2);
 }
 
-public static void testmove(Double speed1, Double speed2) throws InterruptedException {
+public void testmove(Double speed1, Double speed2) throws InterruptedException {
   M_drive.tankDrive(speed1, speed1);
   LeftValues_1[0] = lefttest_1.getBusVoltage();
   LeftValues_2[0] = lefttest_2.getBusVoltage();

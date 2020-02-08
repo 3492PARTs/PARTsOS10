@@ -16,9 +16,10 @@ import static frc.robot.Constants.Direction;
 import frc.robot.subsystems.*;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the TimedRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
@@ -28,31 +29,36 @@ public class Robot extends TimedRobot {
   private final Shooter shooter = new Shooter();
   private final Drive drive = new Drive();
   private final Intake intake = new Intake();
-  
 
   /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // Instantiate our RobotContainer. This will perform all our button bindings,
+    // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use this for items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
+   * This function is called every robot packet, no matter the mode. Use this for
+   * items like diagnostics that you want ran during disabled, autonomous,
+   * teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // Runs the Scheduler. This is responsible for polling buttons, adding
+    // newly-scheduled
+    // commands, running already-scheduled commands, removing finished or
+    // interrupted commands,
+    // and running subsystem periodic() methods. This must be called from the
+    // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
@@ -68,10 +74,9 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
   }
 
-
-  
   /**
-   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
+   * This autonomous runs the autonomous command selected by your
+   * {@link RobotContainer} class.
    */
   @Override
   public void autonomousInit() {
@@ -106,11 +111,22 @@ public class Robot extends TimedRobot {
    * This function is called periodically during operator control.
    */
   @Override
-  public void teleopPeriodic() {  
+  public void teleopPeriodic() {
     double Joystick1y = m_robotContainer.rightJoystick.getY();
     double Joystick2y = m_robotContainer.leftJoystick.getY();
-    Drive.move(Joystick1y, Joystick2y);
 
+    double A = .5;
+    for (int i = 0; i < 20; i++) {  // TODO: Change to i<100 20 is for safety
+      Joystick1y = (A / 50) * i;
+      Joystick2y = (A / 50) * i;
+      try {
+        Thread.sleep(1, 0);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    drive.move(Joystick1y, Joystick2y);
+    }
     //trigger turns conveyor on
     if(m_robotContainer.rightJoystick.getRawButton(1) || m_robotContainer.leftJoystick.getRawButton(1))
     {
