@@ -10,12 +10,15 @@ public class Conveyor extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-  double speed = 0.4; // TODO: add comp speed 
   TalonSRX conveyor;
   int Conveyor_port = 4;
-
+  int timeoutMs = 0;
   public Conveyor() {
-    conveyor = new TalonSRX(Conveyor_port);
+    conveyor = new TalonSRX(Conveyor_port);  
+  conveyor.configPeakCurrentDuration(100, 10); 
+  conveyor.configContinuousCurrentLimit(45, timeoutMs);
+  conveyor.configPeakCurrentLimit(25, timeoutMs);
+  conveyor.enableCurrentLimit(true);
   }
   /**
    * 

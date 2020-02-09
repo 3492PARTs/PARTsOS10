@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.time.StopWatch;
-import edu.wpi.first.wpilibj.Timer;
+
 
 import static frc.robot.Constants.Direction;
 
@@ -24,8 +23,8 @@ public class PIDShooter extends PIDSubsystem {
    */
   private static final TalonSRX shooterRight = new TalonSRX(12);
   private static final TalonSRX shooterLeft = new TalonSRX(3);
-  private static final Encoder rShooterEnc = new Encoder(0,1);
-  private static final Encoder lShooterEnc = new Encoder(2,3);
+  // private static final Encoder rShooterEnc = new Encoder(0,1);
+  // private static final Encoder lShooterEnc = new Encoder(2,3);
   
 int amps = 40;
 int timeoutMs = 0;
@@ -55,8 +54,8 @@ int timeoutMs = 0;
   StopWatch timer  = new StopWatch();
   double integral = 0.0;
   double acceptableDeviation = .01; 
-  double kp = 0.1;//TODO: set constant
-  double ki = 1.0;//TODO: set constant
+  double kp = 0.1;
+  double ki = 1.0;
   */
   @Override
   public void useOutput(double output, double setpoint) {

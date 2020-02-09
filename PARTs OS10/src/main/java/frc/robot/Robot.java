@@ -8,18 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.RobotContainer;
-import frc.robot.commands.Time;
-
-import static frc.robot.Constants.Direction;
-import frc.robot.subsystems.*;
 import frc.robot.commands.DriveForwardOnly;
-
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -103,12 +99,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    try {
-      drive.testmove(0.1, 0.2);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
   }
 
   @Override
@@ -125,7 +115,7 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during operator control.
    */
-  int i = 0;
+
   double limitedJS1 = 0;
   double limitedJS2 = 0;
 

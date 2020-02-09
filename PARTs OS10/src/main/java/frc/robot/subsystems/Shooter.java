@@ -20,18 +20,33 @@ public class Shooter extends SubsystemBase {
    */
   private static final TalonSRX shooterRight = new TalonSRX(12);
   private static final TalonSRX shooterLeft = new TalonSRX(3);
-  private static final Encoder rShooterEnc = new Encoder(0,1);
-  private static final Encoder lShooterEnc = new Encoder(2,3);
+  // private static final Encoder rShooterEnc = new Encoder(0,1);
+  // private static final Encoder lShooterEnc = new Encoder(2,3);
+  int amps = 40;
+  int timeoutMs= 0;
   public Shooter() {
+    shooterLeft.configPeakCurrentDuration(100, 10); 
+    shooterLeft.configContinuousCurrentLimit(55, timeoutMs);
+    shooterLeft.configPeakCurrentLimit(amps, timeoutMs);
+    shooterLeft.enableCurrentLimit(true);
 
+    shooterRight.configPeakCurrentDuration(100, 10); 
+    shooterRight.configContinuousCurrentLimit(55, timeoutMs);
+    shooterRight.configPeakCurrentLimit(amps, timeoutMs);
+    shooterRight.enableCurrentLimit(true);
   }
-
+  double speed = .1;
+  int counter = 0;
   public void toggleState(Direction dir){
-    System.out.println("shoot");
+    System.out.println("shoot");//TODO: test ramp up tweak values if it works
     if(dir == Direction.forward){
       System.out.println("fwd");
-      shooterRight.set(ControlMode.PercentOutput, -1);
-      shooterLeft.set(ControlMode.PercentOutput, -1);
+      for(;counter<90; counter++){
+        speed += .01;
+        // end test rampup
+        shooterRight.set(ControlMode.PercentOutput, -speed);
+        shooterLeft.set(ControlMode.PercentOutput, -speed);
+      }
    } 
    else if(dir == Direction.reverse){
     System.out.println("bak");
