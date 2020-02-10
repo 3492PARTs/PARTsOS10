@@ -27,10 +27,10 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private final Command m_autonomousCommand = new DriveForwardOnly();
   private RobotContainer m_robotContainer;
-  private final Conveyor conveyor = new Conveyor();
-  private final Shooter shooter = new Shooter();
-  private final Drive drive = new Drive();
-  private final Intake intake = new Intake();
+  private final Conveyor conveyor = RobotContainer.conveyor;
+  private final Shooter shooter =  RobotContainer.shooter;
+  private final Drive drive = RobotContainer.drive;
+  private final Intake intake = RobotContainer.intake;
   //private final Climber climber = new Climber();
   Climber climber = RobotContainer.climber;
   /**
