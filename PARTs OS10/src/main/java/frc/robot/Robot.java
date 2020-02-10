@@ -31,8 +31,8 @@ public class Robot extends TimedRobot {
   private final Shooter shooter = new Shooter();
   private final Drive drive = new Drive();
   private final Intake intake = new Intake();
-  private final Climber climber = new Climber();
-
+  //private final Climber climber = new Climber();
+  Climber climber = RobotContainer.climber;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.

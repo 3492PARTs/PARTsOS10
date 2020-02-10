@@ -55,6 +55,11 @@ public class Climber extends SubsystemBase {
    else climbPivot.set(ControlMode.PercentOutput, 0);
   }
 
+
+  public int pivotEncoder(){
+    return climbPivot.getSelectedSensorPosition();
+  }
+
   public void toggleState(Direction dir){
     if(dir == Direction.forward){
       climbUp.set(ControlMode.PercentOutput, 1);

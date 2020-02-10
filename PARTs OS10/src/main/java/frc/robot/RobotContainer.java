@@ -24,11 +24,11 @@ import frc.robot.subsystems.Conveyor;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  Climber climber = new Climber();
-  Conveyor conveyor = new Conveyor();
-  Shooter shooter = new Shooter();
+  private static ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private static ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  public static Climber climber = new Climber();
+  public static  Conveyor conveyor = new Conveyor();
+  public static Shooter shooter = new Shooter();
 
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
