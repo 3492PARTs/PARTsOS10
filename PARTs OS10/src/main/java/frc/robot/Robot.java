@@ -137,7 +137,6 @@ public class Robot extends TimedRobot {
     limitedJS1 += change;
 
     double Joystick2y = -(m_robotContainer.leftJoystick.getY());
-    limit = .05;
     change = Joystick2y - limitedJS2;
     if (change>limit) change = limit;
     else if( change<=limit) change = -limit;
