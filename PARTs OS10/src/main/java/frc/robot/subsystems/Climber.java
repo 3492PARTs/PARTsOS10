@@ -20,11 +20,29 @@ public class Climber extends SubsystemBase {
   private final TalonSRX climbUp;
   private final TalonSRX climbDown;
   private final TalonSRX climbPivot;
-
+    int peakAmps = 25;
+    int amps = 45;
+    int timeoutMs = 0;
   public Climber() {
     climbUp = new TalonSRX(6);
     climbDown = new TalonSRX(11);
     climbPivot = new TalonSRX(5);
+    climbUp.configPeakCurrentDuration(100, 10); 
+    climbUp.configContinuousCurrentLimit(amps, timeoutMs); 
+    climbUp.configPeakCurrentLimit(peakAmps, timeoutMs);
+    climbUp.enableCurrentLimit(true); 
+
+
+    climbDown.configPeakCurrentDuration(100, 10); 
+    climbDown.configContinuousCurrentLimit(amps, timeoutMs); 
+    climbDown.configPeakCurrentLimit(peakAmps, timeoutMs);
+    climbDown.enableCurrentLimit(true);
+
+
+    climbPivot.configPeakCurrentDuration(100, 10); 
+    climbPivot.configContinuousCurrentLimit(amps, timeoutMs); 
+    climbPivot.configPeakCurrentLimit(peakAmps, timeoutMs);
+    climbPivot.enableCurrentLimit(true); 
   }
 
   public void pivotToggleState(Direction dir){
