@@ -18,7 +18,8 @@ public class Climber_Command extends CommandBase {
    */
   double rotations = 0;
   int encodervalue = 0;
-  Climber climber = RobotContainer.climber;
+  Climber climber = Climber.getInstance();
+  private static Climber_Command _staticClimber_Command = new Climber_Command();
   public Climber_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,6 +27,9 @@ public class Climber_Command extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+  }
+  public static Climber_Command getInstance(){
+    return _staticClimber_Command;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,6 +39,8 @@ public class Climber_Command extends CommandBase {
   rotations = climber.pivotEncoder()/4096;
   climber.toggleState(Direction.forward);
   }
+
+
 
   // Called once the command ends or is interrupted.
   @Override

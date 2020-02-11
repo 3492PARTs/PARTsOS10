@@ -31,11 +31,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private static ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static Climber climber = new Climber();
-  public static  Conveyor conveyor = new Conveyor();
-  public static Shooter shooter = new Shooter();
-  public static Intake intake = new Intake();
-  public static Drive drive = new Drive();
+  public static Climber climber = Climber.getInstance();
+  public static  Conveyor conveyor = Conveyor.getInstance();
+  public static Shooter shooter = Shooter.getInstance();
+  public static Intake intake = Intake.getInstance();
+  public static Drive drive = Drive.getInstance();
   public static Climber_Command climberCommand = new Climber_Command();
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);

@@ -14,12 +14,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Direction;
 
+
 public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
   private static final TalonSRX shooterRight = new TalonSRX(12);
   private static final TalonSRX shooterLeft = new TalonSRX(3);
+  private static Shooter _staticShooter = new Shooter();
   // private static final Encoder rShooterEnc = new Encoder(0,1);
   // private static final Encoder lShooterEnc = new Encoder(2,3);
   int amps = 40;
@@ -60,7 +62,9 @@ public class Shooter extends SubsystemBase {
     
    }
   }
-
+  public static Shooter getInstance(){
+    return _staticShooter;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

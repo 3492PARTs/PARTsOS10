@@ -22,6 +22,7 @@ public class Intake extends SubsystemBase {
   private final double reverseHalt = 0.0;
   private final TalonSRX wheelIntake;
   private final TalonSRX pivotIntake;
+  private static Intake _staticIntake = new Intake();
   int amps = 25;
   int timeoutMs = 0;
 
@@ -67,6 +68,11 @@ public class Intake extends SubsystemBase {
     else{
       pivotIntake.set(ControlMode.PercentOutput, 0);
     }
+  }
+
+
+  public static Intake getInstance(){
+    return _staticIntake;
   }
 
 

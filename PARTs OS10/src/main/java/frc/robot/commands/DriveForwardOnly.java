@@ -16,7 +16,7 @@ public class DriveForwardOnly extends CommandBase {
    */
     Drive M_drive = new Drive();
     Double Speed1, Speed2 = .2;
-    
+  private static DriveForwardOnly _staticDriveForwardOnly = new DriveForwardOnly();
 
   public DriveForwardOnly() {
     
@@ -32,6 +32,10 @@ public class DriveForwardOnly extends CommandBase {
   @Override
   public void execute() {
     M_drive.move(Speed1, Speed2);
+  }
+
+  public static DriveForwardOnly getInstance(){
+    return _staticDriveForwardOnly;
   }
 
   // Called once the command ends or is interrupted.

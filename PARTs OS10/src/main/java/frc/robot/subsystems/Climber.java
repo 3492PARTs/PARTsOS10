@@ -17,6 +17,7 @@ public class Climber extends SubsystemBase {
   /**
    * Creates a new Climber.
    */
+  private static Climber _staticClimber = new Climber();
   private final TalonSRX climbUp;
   private final TalonSRX climbDown;
   private final TalonSRX climbPivot;
@@ -53,6 +54,11 @@ public class Climber extends SubsystemBase {
        climbPivot.set(ControlMode.PercentOutput, -1);
    }
    else climbPivot.set(ControlMode.PercentOutput, 0);
+  }
+
+  public static Climber getInstance(){
+    return _staticClimber;
+
   }
 
 

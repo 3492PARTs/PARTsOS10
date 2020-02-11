@@ -28,12 +28,14 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private final Command m_autonomousCommand = new DriveForwardOnly();
   private RobotContainer m_robotContainer;
-  private final Conveyor conveyor = RobotContainer.conveyor;
-  private final Shooter shooter =  RobotContainer.shooter;
-  private final Drive drive = RobotContainer.drive;
-  private final Intake intake = RobotContainer.intake;
+  private final Conveyor conveyor = Conveyor.getInstance();
+  private final Shooter shooter =  Shooter.getInstance();
+  private  Drive drive = Drive.getInstance();
+  private final Intake intake = Intake.getInstance();
+  Climber climber = Climber.getInstance();
+  
   //private final Climber climber = new Climber();
-  Climber climber = RobotContainer.climber;
+  
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.

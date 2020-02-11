@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import static frc.robot.Constants.Direction;
@@ -13,6 +14,7 @@ public class Conveyor extends SubsystemBase {
   TalonSRX conveyor;
   int Conveyor_port = 4;
   int timeoutMs = 0;
+  private static Conveyor _staticConveyor = new Conveyor();
   public Conveyor() {
     conveyor = new TalonSRX(Conveyor_port);  
   conveyor.configPeakCurrentDuration(100, 10); 
@@ -33,7 +35,9 @@ public class Conveyor extends SubsystemBase {
     }
     else conveyor.set(ControlMode.PercentOutput, 0);
   }
-
+  public static Conveyor getInstance(){
+    return _staticConveyor;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -16,7 +16,8 @@ public class Time extends CommandBase {
   /**
    * Creates a new Time.
    */
-  Shooter shooter = new Shooter();
+  Shooter shooter = Shooter.getInstance();
+  private static Time _staticTime = new Time();
  long currentTime;
   public Time() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -42,6 +43,10 @@ public class Time extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+  }
+  
+  public static Time GetInstance(){
+    return _staticTime;
   }
 
   // Returns true when the command should end.
