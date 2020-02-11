@@ -24,6 +24,7 @@ public class DriveCom extends CommandBase {
     this.distance = distance;
     this.direction = dir;
   }
+
   
   // Called when the command is initially scheduled.
   @Override
@@ -33,6 +34,7 @@ public class DriveCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    drive.move(.4, .4);
 
   }
 
