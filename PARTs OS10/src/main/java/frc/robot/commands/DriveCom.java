@@ -8,21 +8,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Drive;
 
-public class DriveForwardOnly extends CommandBase {
+
+public class DriveCom extends CommandBase {
   /**
-   * Creates a new DriveForwardOnly.
+   * Creates a new Drive.
    */
-    Drive M_drive = new Drive();
-    Double Speed1, Speed2 = .2;
-  private static DriveForwardOnly _staticDriveForwardOnly = new DriveForwardOnly();
-
-  public DriveForwardOnly() {
-    
+  private Double distance;
+  private Direction direction;
+  Drive drive = Drive.getInstance();
+  public DriveCom(double distance, Direction dir) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.distance = distance;
+    this.direction = dir;
   }
-
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -31,11 +33,7 @@ public class DriveForwardOnly extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    M_drive.move(Speed1, Speed2);
-  }
 
-  public static DriveForwardOnly getInstance(){
-    return _staticDriveForwardOnly;
   }
 
   // Called once the command ends or is interrupted.

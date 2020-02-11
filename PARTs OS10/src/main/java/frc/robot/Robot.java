@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Climber_Command;
-import frc.robot.commands.DriveForwardOnly;
+import frc.robot.commands.DriveCom;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
@@ -26,7 +26,6 @@ import frc.robot.subsystems.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
-  private final Command m_autonomousCommand = new DriveForwardOnly();
   private RobotContainer m_robotContainer;
   private final Conveyor conveyor = Conveyor.getInstance();
   private final Shooter shooter =  Shooter.getInstance();
@@ -92,12 +91,8 @@ public class Robot extends TimedRobot {
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
     //schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-      System.out.println(m_autonomousCommand!= null);
       
     
-    }
   }
 
   /**
@@ -113,9 +108,6 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
   }
 
   /**
