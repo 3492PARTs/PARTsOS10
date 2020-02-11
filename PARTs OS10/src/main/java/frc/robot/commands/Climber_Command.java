@@ -10,21 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.Direction;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
 
-public class Time extends CommandBase {
+public class Climber_Command extends CommandBase {
   /**
-   * Creates a new Time.
+   * Creates a new Climber_Command.
    */
-  Shooter shooter = new Shooter();
- long currentTime;
-  public Time() {
+  double rotations = 0;
+  int encodervalue = 0;
+  Climber climber = RobotContainer.climber;
+  public Climber_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
-    currentTime = System.currentTimeMillis();
-  }
-  public void stopShooter(){
-    shooter.toggleState(Direction.off);
-    
   }
 
   // Called when the command is initially scheduled.
@@ -33,20 +29,23 @@ public class Time extends CommandBase {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
+  
   @Override
   public void execute() {
-    Shooter shooter = RobotContainer.shooter;
-    shooter.toggleState(Direction.forward);
+  rotations = climber.pivotEncoder()/4096;
+  climber.toggleState(Direction.forward);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    climber.toggleState(Direction.off);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return System.currentTimeMillis()-currentTime >= 3000;
+
+    return rotations>=.275;
   }
 }

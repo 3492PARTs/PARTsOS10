@@ -72,7 +72,7 @@ public class Climber extends SubsystemBase {
 
   public void climbToggleState(Direction dir){
     if(dir == Direction.forward){
-      climbDown.set(ControlMode.PercentOutput, 1);
+      climbDown.set(ControlMode.PercentOutput, .3);
    } 
    else if(dir == Direction.reverse){
        climbDown.set(ControlMode.PercentOutput, -1);

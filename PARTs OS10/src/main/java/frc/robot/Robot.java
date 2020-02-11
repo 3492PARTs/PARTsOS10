@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Climber_Command;
 import frc.robot.commands.DriveForwardOnly;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
@@ -37,12 +38,15 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
+  Climber_Command pivotCommand = new Climber_Command();
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+  
+    // m_robotContainer.pivoter.whenPressed(new Climber_Command());
   }
 
   /**
@@ -84,7 +88,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    
     //schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -144,16 +148,23 @@ public class Robot extends TimedRobot {
 
     drive.move(limitedJS1, limitedJS2);
 
+    // if(m_robotContainer.launchPad.getRawButton(9))
+    // {
+    //   climber.pivotToggleState(Constants.Direction.forward);
+    // }
+    // else
+    // {
+    //   climber.pivotToggleState(Constants.Direction.off);
+    // }
+    
     if(m_robotContainer.launchPad.getRawButton(9))
     {
-      climber.pivotToggleState(Constants.Direction.forward);
-    }
-    else
-    {
-      climber.pivotToggleState(Constants.Direction.off);
+      pivotCommand.execute();
     }
 
+
     //elevator up
+  
     if(m_robotContainer.launchPad.getRawButton(8))
     {
       climber.toggleState(Constants.Direction.forward);

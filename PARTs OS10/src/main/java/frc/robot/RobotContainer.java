@@ -10,14 +10,17 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Climber_Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -33,6 +36,7 @@ public class RobotContainer {
   public static Shooter shooter = new Shooter();
   public static Intake intake = new Intake();
   public static Drive drive = new Drive();
+  public static Climber_Command climberCommand = new Climber_Command();
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
   public Joystick leftJoystick = new Joystick(1);
@@ -50,10 +54,12 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
+   */    
+  public JoystickButton pivoter = new JoystickButton(launchPad, 9);
   private void configureButtonBindings() {
     //elevator pivot up
-    
+
+ 
     
   }
 
