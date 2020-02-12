@@ -15,7 +15,7 @@ import frc.robot.subsystems.Drive;
  */
 public class Encoders {
     private static Encoders _staticEncoders = new Encoders();
-    public Encoders getInstance()
+    public static Encoders getInstance()
     {
         return _staticEncoders;
     }

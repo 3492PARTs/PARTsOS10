@@ -15,7 +15,7 @@ import frc.robot.subsystems.Drive;
  */
 public class Gyro {
      private static Gyro _staticGyro = new Gyro();
-     public Gyro getInstance(){
+     public static Gyro getInstance(){
          return _staticGyro;
      }
     

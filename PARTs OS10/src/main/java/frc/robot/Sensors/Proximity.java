@@ -15,7 +15,7 @@ import frc.robot.subsystems.Drive;
  */
 public class Proximity {
      private static Proximity _staticProximity = new Proximity();
-     public Proximity getInstance(){
+     public static Proximity getInstance(){
          return _staticProximity;
      }
     
