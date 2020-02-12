@@ -11,13 +11,15 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Direction;
+import com.ctre.phoenix.*;
+import edu.wpi.first.wpilibj.*;
 
 
 public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  private static final TalonSRX shooterRight = new TalonSRX(12);
+  private static final CANTalon shooterRight = new CANTalon(12);
   private static final TalonSRX shooterLeft = new TalonSRX(3);
   private static Shooter _staticShooter = new Shooter();
   // private static final Encoder rShooterEnc = new Encoder(0,1);
