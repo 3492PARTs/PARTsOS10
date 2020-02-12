@@ -49,16 +49,15 @@ public class Climber extends SubsystemBase {
   public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
       climbPivot.set(ControlMode.PercentOutput, 1);
-   } 
+  } 
    else if(dir == Direction.reverse){
        climbPivot.set(ControlMode.PercentOutput, -1);
-   }
+  }
    else climbPivot.set(ControlMode.PercentOutput, 0);
   }
 
   public static Climber getInstance(){
     return _staticClimber;
-
   }
 
 
@@ -69,10 +68,10 @@ public class Climber extends SubsystemBase {
   public void toggleState(Direction dir){
     if(dir == Direction.forward){
       climbUp.set(ControlMode.PercentOutput, 1);
-   } 
+  } 
    else if(dir == Direction.reverse){
        climbUp.set(ControlMode.PercentOutput, -1);
-   }
+  }
    else climbUp.set(ControlMode.PercentOutput, 0);
   }
 

@@ -24,6 +24,7 @@ public class Encoders {
     public double getDistanceMovedRight(){
         return Math.abs(((drive.righttest_1.getSelectedSensorPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
     }
+    
 
     public void resetEncoders(){
         startPositionLeft = drive.lefttest_1.getSelectedSensorPosition();
