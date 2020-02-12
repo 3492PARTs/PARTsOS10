@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Direction;
 
@@ -46,8 +44,8 @@ public class Shooter extends SubsystemBase {
       for(;counter<90; counter++){
         speed += .01;
         // end test rampup
-        shooterRight.set(ControlMode.PercentOutput, -speed);
-        shooterLeft.set(ControlMode.PercentOutput, -speed);
+        shooterRight.set(ControlMode.PercentOutput, speed);
+        shooterLeft.set(ControlMode.PercentOutput, speed);
       }
    } 
    else if(dir == Direction.reverse){
