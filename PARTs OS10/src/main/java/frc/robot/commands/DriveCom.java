@@ -21,6 +21,12 @@ public class DriveCom extends CommandBase {
   Encoders encoders = Encoders.getInstance();
   private Direction direction;
   Drive drive = Drive.getInstance();
+
+  /**
+   * 
+   * @param distance the distance it should move
+   * @param dir the direction it should move
+   */
   public DriveCom(double distance, Direction dir) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.distance = distance;

@@ -18,7 +18,11 @@ public class Turn extends CommandBase {
   private double objDegrees;
   private final double Speed = .1; //TODO: test for safe turning speed
   private Drive drive = Drive.getInstance();
-
+/**
+ * 
+ * @param degrees the current degrees
+ * @param objDegrees the degrees it should be
+ */
   public Turn(double degrees, double objDegrees) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.degrees = degrees;

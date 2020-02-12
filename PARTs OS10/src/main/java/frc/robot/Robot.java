@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Sensors.Gyro;
 import frc.robot.commands.Climber_Command;
 import frc.robot.commands.DriveCom;
 import frc.robot.subsystems.Climber;
@@ -31,8 +32,8 @@ public class Robot extends TimedRobot {
   private final Shooter shooter =  Shooter.getInstance();
   private  Drive drive = Drive.getInstance();
   private final Intake intake = Intake.getInstance();
-  Climber climber = Climber.getInstance();
-  
+  private Climber climber = Climber.getInstance();
+  private Gyro gyro = Gyro.getInstance();
   //private final Climber climber = new Climber();
   
   /**
@@ -46,6 +47,10 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    gyro.gyro.initGyro();
+    gyro.gyro.calibrate();
+    //TODO: init gyro and calibrate
+
   
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
   }
