@@ -40,10 +40,10 @@ public  SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3
 public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 private static Drive _staticDrive = new Drive();
 // making the test motors
- TalonSRX lefttest_1 = new TalonSRX(Left1_port);
+ public TalonSRX lefttest_1 = new TalonSRX(Left1_port);
  TalonSRX lefttest_2 = new TalonSRX(Left2_port);
  TalonSRX lefttest_3 = new TalonSRX(Left3_port);
- TalonSRX righttest_1 = new TalonSRX(Right1_port);
+ public TalonSRX righttest_1 = new TalonSRX(Right1_port);
  TalonSRX righttest_2 = new TalonSRX(Right2_port);
   TalonSRX righttest_3 = new TalonSRX(Right3_port);
 

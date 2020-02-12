@@ -17,6 +17,8 @@ package frc.robot;
  */
 public final class Constants {
 
+    public static final double GEAR_RATIO = 8.01;
+    public static final double WHEEL_CIRCUMFERENCE = 6 * Math.PI;
 
 public static enum Direction {
     forward, reverse, off
