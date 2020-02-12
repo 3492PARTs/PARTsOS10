@@ -14,6 +14,11 @@ import frc.robot.subsystems.Drive;
  * Add your docs here.
  */
 public class Encoders {
+    private static Encoders _staticEncoders = new Encoders();
+    public Encoders getInstance()
+    {
+        return _staticEncoders;
+    }
     Drive drive = Drive.getInstance();
     private static double startPositionRight = 0;
     private static double startPositionLeft = 0;

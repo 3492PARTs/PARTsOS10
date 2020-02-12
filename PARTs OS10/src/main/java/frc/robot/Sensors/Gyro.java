@@ -13,10 +13,10 @@ import frc.robot.subsystems.Drive;
 /**
  * Add your docs here.
  */
-public class Proximity {
-     private static Proximity _staticProximity = new Proximity();
-     public Proximity getInstance(){
-         return _staticProximity;
+public class Gyro {
+     private static Gyro _staticGyro = new Gyro();
+     public Gyro getInstance(){
+         return _staticGyro;
      }
     
 
