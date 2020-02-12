@@ -27,9 +27,7 @@ public class Climber_Command extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  }
-  public static Climber_Command getInstance(){
-    return _staticClimber_Command;
+  //TODO: reset encoder
   }
 
   // Called every time the scheduler runs while the command is scheduled.

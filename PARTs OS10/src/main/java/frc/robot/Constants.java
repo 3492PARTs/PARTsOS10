@@ -19,7 +19,7 @@ public final class Constants {
 
 
 public static enum Direction {
-    forward, reverse, off
+    forward, reverse, off, left, right
 }
 
 
