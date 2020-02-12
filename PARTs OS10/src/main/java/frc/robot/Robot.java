@@ -185,7 +185,7 @@ public class Robot extends TimedRobot {
     }
     else
     {
-      climber.pivotToggleState(Constants.Direction.reverse);
+      climber.toggleState(Constants.Direction.off);
     }
 
     //elevator down

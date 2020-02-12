@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Encoders;
 import frc.robot.subsystems.Drive;
 
 
@@ -16,7 +17,8 @@ public class DriveCom extends CommandBase {
   /**
    * Creates a new Drive.
    */
-  private Double distance;
+  double distance;
+  Encoders encoders = Encoders.getInstance();
   private Direction direction;
   Drive drive = Drive.getInstance();
   public DriveCom(double distance,Double degrees,Double objective, Direction dir) {
@@ -35,6 +37,7 @@ public class DriveCom extends CommandBase {
   @Override
   public void execute() {
     drive.move(.4, .4);
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -46,6 +49,6 @@ public class DriveCom extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;//TODO: add if degrees => objective
+    return distance > encoders.getDistanceMovedRight();
   }
 }
