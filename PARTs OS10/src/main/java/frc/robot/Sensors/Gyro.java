@@ -7,6 +7,7 @@
 
 package frc.robot.Sensors;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 
@@ -18,6 +19,6 @@ public class Gyro {
      public static Gyro getInstance(){
          return _staticGyro;
      }
-    
+    private AnalogGyro gyro = new AnalogGyro(0);
 
 }
