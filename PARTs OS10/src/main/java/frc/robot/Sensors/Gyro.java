@@ -20,5 +20,6 @@ public class Gyro {
          return _staticGyro;
      }
     public AnalogGyro gyro = new AnalogGyro(0);
+    
 
 }

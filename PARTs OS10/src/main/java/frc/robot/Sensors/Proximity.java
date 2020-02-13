@@ -9,15 +9,28 @@ package frc.robot.Sensors;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
  * Add your docs here.
  */
 public class Proximity {
      private static Proximity _staticProximity = new Proximity();
+     public static AnalogInput proximitySensor = new AnalogInput(1);
+    
      public static Proximity getInstance(){
          return _staticProximity;
      }
-    
+     
+     
+     /**
+      * 
+      * @return in feet
+      */
+     public static double getDistance(){
+         return ((proximitySensor.getVoltage() / 0.04883) * Constants.VOLTS_TO_DIST) / 30.48;
+     }
+
+
 
 }
