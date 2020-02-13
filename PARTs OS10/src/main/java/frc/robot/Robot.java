@@ -49,7 +49,6 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
-    //TODO: init gyro and calibrate
 
   
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
