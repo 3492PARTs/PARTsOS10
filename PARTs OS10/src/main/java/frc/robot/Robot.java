@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Gyro;
 import frc.robot.commands.Climber_Command;
 import frc.robot.commands.DriveCom;
@@ -30,17 +31,17 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private final Conveyor conveyor = Conveyor.getInstance();
   private final Shooter shooter =  Shooter.getInstance();
-  private  Drive drive = Drive.getInstance();
+  private final Drive drive = Drive.getInstance();
   private final Intake intake = Intake.getInstance();
-  private Climber climber = Climber.getInstance();
-  private Gyro gyro = Gyro.getInstance();
-  //private final Climber climber = new Climber();
-  
+  private final Climber climber = Climber.getInstance();
+  private final Gyro gyro = Gyro.getInstance();
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
   Climber_Command pivotCommand = new Climber_Command();
+
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer. This will perform all our button bindings,
@@ -49,9 +50,8 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
-    //TODO: init gyro and calibrate
+    // TODO: init gyro and calibrate
 
-  
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
   }
 
@@ -93,11 +93,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    
-    //schedule the autonomous command (example)
-      
-    
+    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    // schedule the autonomous command (example)
+
   }
 
   /**
@@ -125,21 +124,22 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-      /*
-    double Joystick1y = -(m_robotContainer.rightJoystick.getY());
-    double Joystick2y = -(m_robotContainer.leftJoystick.getY());
-    */
+    /*
+     * double Joystick1y = -(m_robotContainer.rightJoystick.getY()); double
+     * Joystick2y = -(m_robotContainer.leftJoystick.getY());
+     */
 
-    
-    //elevator pivot up
-    double Joystick1y = -(m_robotContainer.rightJoystick.getY());
-    double limit = .012;
+    // elevator pivot up
+    final double Joystick1y = -(m_robotContainer.rightJoystick.getY());
+    final double limit = .012;
     double change = Joystick1y - limitedJS1;
-    if (change>limit) change = limit;
-    else if( change<=limit) change = -limit;
+    if (change > limit)
+      change = limit;
+    else if (change <= limit)
+      change = -limit;
     limitedJS1 += change;
 
-    double Joystick2y = -(m_robotContainer.leftJoystick.getY());
+    final double Joystick2y = -(m_robotContainer.leftJoystick.getY());
     change = Joystick2y - limitedJS2;
     if (change>limit) change = limit;
     else if( change<=limit) change = -limit;
@@ -155,12 +155,31 @@ public class Robot extends TimedRobot {
     // {
     //   climber.pivotToggleState(Constants.Direction.off);
     // }
-    
+    // conveyor in
+    //conveyor out
+    if(m_robotContainer.launchPad.getRawButton(1))
+    {
+      conveyor.toggleState(Constants.Direction.forward);
+    }
+    else if(m_robotContainer.launchPad.getRawButton(3))
+    {
+      conveyor.toggleState(Constants.Direction.reverse);
+    }
     if(m_robotContainer.launchPad.getRawButton(9))
     {
       pivotCommand.execute();
     }
 
+
+
+    if(m_robotContainer.leftJoystick.getRawButton(1) ||  m_robotContainer.rightJoystick.getRawButton(1))
+    {
+      intake.wheelToggleState(Direction.forward);
+    }
+    else
+    { 
+    intake.wheelToggleState(Direction.off);
+    }
 
     //elevator up
   
@@ -203,20 +222,6 @@ public class Robot extends TimedRobot {
       climber.toggleState(Constants.Direction.off);
     }
 
-    // conveyor in
-    //conveyor out
-    if(m_robotContainer.launchPad.getRawButton(1))
-    {
-      conveyor.toggleState(Constants.Direction.forward);
-    }
-    else if(m_robotContainer.launchPad.getRawButton(3))
-    {
-      conveyor.toggleState(Constants.Direction.reverse);
-    }
-    else
-    {
-      conveyor.toggleState(Constants.Direction.off);
-    }
 
     //shooter out
     //shooter in
