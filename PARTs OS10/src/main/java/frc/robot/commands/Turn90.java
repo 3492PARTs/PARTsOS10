@@ -28,6 +28,7 @@ public class Turn90 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    gyro.gyro.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,10 +38,11 @@ public class Turn90 extends CommandBase {
     if(rotationTarget < 180){
       drive.move(speed, -speed);
     }
-    else{
-      drive.move(-speed, speed);
-    }
   }
+    // else if(rotationTarget > 180){
+    //   drive.move(-speed, speed);
+    //   }
+    // } TODO: FIX
 
   // Called once the command ends or is interrupted.
   @Override
