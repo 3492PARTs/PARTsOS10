@@ -8,12 +8,14 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.Drive;
 
 public class Turn extends CommandBase {
   /**
    * Creates a new Turn.
    */
+  Gyro gyro = Gyro.getInstance();
   private double degrees;
   private double objDegrees;
   private final double Speed = .1; //TODO: test for safe turning speed
@@ -23,9 +25,8 @@ public class Turn extends CommandBase {
  * @param degrees the current degrees
  * @param objDegrees the degrees it should be
  */
-  public Turn(double degrees, double objDegrees) {
+  public Turn( double objDegrees) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.degrees = degrees;
     this.objDegrees = objDegrees;
   }
 
@@ -38,10 +39,11 @@ public class Turn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(degrees > 0){
+    degrees = gyro.gyro.getAngle();
+    if(degrees < 180){
       drive.move(Speed, -Speed);
     }
-    if(degrees < 0){
+    if(degrees > 180){
       drive.move(-Speed, Speed);
     }
   }
