@@ -28,25 +28,28 @@ public class Turn90 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    gyro.gyro.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    degrees = gyro.gyro.getAngle();
+    degrees = gyro.gyro.getAngle();    
+    if(rotationTarget < 180){
+      drive.move(speed, -speed);
+    }
   }
+    // else if(rotationTarget > 180){
+    //   drive.move(-speed, speed);
+    //   }
+    // } TODO: FIX
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+  drive.move(.0, .0);
+  }
 
-    if(rotationTarget < 180){
-      drive.move(speed, -speed);
-    }
-    else if(rotationTarget > 180){
-      drive.move(-speed, speed);
-    }
-}
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
@@ -57,5 +60,6 @@ public class Turn90 extends CommandBase {
       return (rotationTarget) <= degrees; 
     }
     return false;
-  }
+    }
+
 }

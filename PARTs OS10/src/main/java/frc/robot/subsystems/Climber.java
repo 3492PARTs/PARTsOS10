@@ -25,9 +25,11 @@ public class Climber extends SubsystemBase {
     int amps = 45;
     int timeoutMs = 0;
   public Climber() {
-    climbUp = new TalonSRX(6);
-    climbDown = new TalonSRX(11);
-    climbPivot = new TalonSRX(5);
+  climbUp = new TalonSRX(6);
+  climbDown = new TalonSRX(11);
+  climbPivot = new TalonSRX(5);
+
+
     climbUp.configPeakCurrentDuration(100, 10); 
     climbUp.configContinuousCurrentLimit(amps, timeoutMs); 
     climbUp.configPeakCurrentLimit(peakAmps, timeoutMs);
