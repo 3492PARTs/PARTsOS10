@@ -28,8 +28,10 @@ public class Right_Autonomous extends SequentialCommandGroup {
     addCommands(
       new Turn(235.44),
       new DriveCom(distance),
-      new Shoot(distance, degrees)
-  
+      new Turn(degrees),
+      new Shoot(distance)
     );
+  
+  
   }
 }
