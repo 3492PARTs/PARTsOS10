@@ -29,10 +29,9 @@ public class DriveCom extends CommandBase {
    * @param distance the distance it should move
    * @param dir the direction it should move
    */
-  public DriveCom(double distance, Direction dir) {
+  public DriveCom(double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.distance = distance;
-    this.direction = dir;
   }
 
   

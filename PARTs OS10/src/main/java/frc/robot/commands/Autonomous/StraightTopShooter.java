@@ -26,7 +26,7 @@ public class StraightTopShooter extends SequentialCommandGroup {
     super();
     addCommands(/* new shoot,*/ 
     
-      new DriveCom(distance, Direction.reverse));
+      new DriveCom(distance));
   }
   
 }

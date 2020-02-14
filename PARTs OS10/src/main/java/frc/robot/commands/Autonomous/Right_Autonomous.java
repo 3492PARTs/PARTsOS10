@@ -27,7 +27,7 @@ public class Right_Autonomous extends SequentialCommandGroup {
     super();
     addCommands(
       new StraightTopShooter(),
-      new DriveCom(distance, Direction.reverse)
+      new DriveCom(distance)
     
   
     );

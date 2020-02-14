@@ -8,7 +8,6 @@
 package frc.robot.Sensors;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
