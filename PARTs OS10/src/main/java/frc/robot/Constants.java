@@ -19,7 +19,7 @@ public final class Constants {
 
     public static final double GEAR_RATIO = 8.01;
     public static final double WHEEL_CIRCUMFERENCE = 6 * Math.PI;
-    public static final double VOLTS_TO_DIST = 5.0;
+    public static final double  VOLTS_TO_DIST = 5.0;
     public static final double DRIVE_SPEED = .4;
 
 public static enum Direction {

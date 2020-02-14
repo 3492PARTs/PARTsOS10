@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Encoders;
 import frc.robot.subsystems.Drive;
@@ -42,7 +43,7 @@ public class DriveCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.move(.4, .4);
+    drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
     
   }
 
