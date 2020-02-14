@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
+    Constants.driveOrientation = true;
 
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
   }
@@ -107,6 +108,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Constants.driveOrientation = false;
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -123,13 +125,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    /*
-     * double Joystick1y = -(m_robotContainer.rightJoystick.getY()); double
-     * Joystick2y = -(m_robotContainer.leftJoystick.getY());
-     */
-
-    // elevator pivot up
-    final double Joystick1y = -(m_robotContainer.rightJoystick.getY());
+    
+   //rampUp code
+    final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());
     final double limit = .012;
     double change = Joystick1y - limitedJS1;
     if (change > limit)
@@ -138,7 +136,7 @@ public class Robot extends TimedRobot {
       change = -limit;
     limitedJS1 += change;
 
-    final double Joystick2y = -(m_robotContainer.leftJoystick.getY());
+    final double Joystick2y = (Constants.mult)*(m_robotContainer.leftJoystick.getY());
     change = Joystick2y - limitedJS2;
     if (change>limit) change = limit;
     else if( change<=limit) change = -limit;
@@ -146,6 +144,17 @@ public class Robot extends TimedRobot {
 
     drive.move(limitedJS1, limitedJS2);
 
+    //intake front
+    if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
+    {
+      drive.switchFront(false);
+    }
+
+    //shooter front
+    if(m_robotContainer.leftJoystick.getRawButton(4) || m_robotContainer.rightJoystick.getRawButton(4))
+    {
+      drive.switchFront(true);
+    }
     // if(m_robotContainer.launchPad.getRawButton(9))
     // {
     //   climber.pivotToggleState(Constants.Direction.forward);

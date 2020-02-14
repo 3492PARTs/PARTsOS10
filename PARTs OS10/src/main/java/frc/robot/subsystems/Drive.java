@@ -8,11 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +21,10 @@ public class Drive extends SubsystemBase {
   /**
    * Creates a new Drive.
    */
+private RobotContainer m_robotContainer;
+private final Drive drive = Drive.getInstance();
+public double limitedJS1 = 0;
+public double limitedJS2 = 0; 
 public  int Right1_port = 13;
 public  int Right2_port = 14;
 public  int Right3_port = 15;
@@ -124,6 +128,18 @@ public void move(Double Speed1,Double Speed2){
   SmartDashboard.putNumber("Amps of right 1", righttest_1.getSupplyCurrent());
   SmartDashboard.putNumber("Amps of right 2", righttest_2.getSupplyCurrent());
   SmartDashboard.putNumber("Amps of right 3", righttest_3.getSupplyCurrent());
+}
+
+public void switchFront(boolean orientation)
+{
+  if(orientation)
+  {
+    Constants.mult = 1;
+  }
+  else
+  {
+    Constants.mult = -1;
+  }
 }
 
 
