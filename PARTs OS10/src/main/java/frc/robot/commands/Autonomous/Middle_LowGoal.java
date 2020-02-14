@@ -15,14 +15,14 @@ import frc.robot.commands.Shoot;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Middle_LowGoal_Autonomous extends SequentialCommandGroup {
+public class Middle_LowGoal extends SequentialCommandGroup {
   /**
    * Creates a new Middle_LowGoal_Autonomous.
    */
   double length = 0;//TODO: set value
   double distanceToGoal = 10;// 
   int degrees = 0;//TODO: set value
-  public Middle_LowGoal_Autonomous() {
+  public Middle_LowGoal() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
