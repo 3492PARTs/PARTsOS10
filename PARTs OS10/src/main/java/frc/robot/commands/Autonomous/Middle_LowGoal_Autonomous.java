@@ -19,7 +19,7 @@ public class Middle_LowGoal_Autonomous extends SequentialCommandGroup {
    * Creates a new Middle_LowGoal_Autonomous.
    */
   double length = 0;//TODO: set value
-  double distanceToGoal = 0;// TODO: set value
+  double distanceToGoal = 10;// 
   int degrees = 0;//TODO: set value
   public Middle_LowGoal_Autonomous() {
     // Add your commands in the super() call, e.g.

@@ -21,7 +21,6 @@ public class DriveCom extends CommandBase {
    */
   double distance;
   Encoders encoders = Encoders.getInstance();
-  private Direction direction;
   Drive drive = Drive.getInstance();
   static Gyro gyro = Gyro.getInstance();
   /**
