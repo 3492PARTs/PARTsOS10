@@ -18,7 +18,7 @@ public class Gyro {
      private static Gyro _staticGyro = new Gyro();
      public static Gyro getInstance(){
          return _staticGyro;
-     }
+    }
     public AnalogGyro gyro = new AnalogGyro(0);
 
 
