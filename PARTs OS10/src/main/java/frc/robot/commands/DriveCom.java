@@ -8,8 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Encoders;
+import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.Drive;
 
 
@@ -19,18 +21,16 @@ public class DriveCom extends CommandBase {
    */
   double distance;
   Encoders encoders = Encoders.getInstance();
-  private Direction direction;
   Drive drive = Drive.getInstance();
-
+  static Gyro gyro = Gyro.getInstance();
   /**
    * 
    * @param distance the distance it should move
    * @param dir the direction it should move
    */
-  public DriveCom(double distance, Direction dir) {
+  public DriveCom(double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.distance = distance;
-    this.direction = dir;
   }
 
   
@@ -42,7 +42,7 @@ public class DriveCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.move(.4, .4);
+    drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
     
   }
 
@@ -50,6 +50,7 @@ public class DriveCom extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drive.move(.0, .0);
+    gyro.zeroGyro();
   }
 
   // Returns true when the command should end.

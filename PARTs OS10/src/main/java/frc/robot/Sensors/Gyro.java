@@ -20,6 +20,13 @@ public class Gyro {
          return _staticGyro;
      }
     public AnalogGyro gyro = new AnalogGyro(0);
-    
 
+
+    public static double getAngle(){
+        return Gyro.getInstance().gyro.getAngle();
+    }
+
+    public static void zeroGyro() {
+        Gyro.getInstance().gyro.reset();        
+    }
 }
