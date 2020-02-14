@@ -22,15 +22,17 @@ public class DriveCom extends CommandBase {
   double distance;
   Encoders encoders = Encoders.getInstance();
   Drive drive = Drive.getInstance();
+  Direction dir;
   static Gyro gyro = Gyro.getInstance();
   /**
    * 
    * @param distance the distance it should move
    * @param dir the direction it should move
    */
-  public DriveCom(double distance) {
+  public DriveCom(double distance,Direction dir) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.distance = distance;
+    this.dir = dir;
   }
 
   
@@ -42,7 +44,12 @@ public class DriveCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
+    if(dir == Direction.forward){
+      drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
+    }
+    if(dir == Direction.reverse){
+      drive.move(-Constants.DRIVE_SPEED, -Constants.DRIVE_SPEED);
+    }
     
   }
 

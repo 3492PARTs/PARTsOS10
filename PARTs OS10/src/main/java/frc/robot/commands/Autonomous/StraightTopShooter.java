@@ -17,6 +17,7 @@ import frc.robot.commands.Shoot;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 
+
 public class StraightTopShooter extends SequentialCommandGroup {
   /**
    * Creates a new StraightTopShooter.
@@ -30,5 +31,4 @@ public class StraightTopShooter extends SequentialCommandGroup {
       //new Shoot(proximity.getDistance()),
       //new DriveCom(40, Direction.reverse));
   }
-  
 }

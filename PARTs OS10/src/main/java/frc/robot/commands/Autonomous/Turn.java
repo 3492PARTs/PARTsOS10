@@ -55,10 +55,10 @@ public class Turn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(degrees < 0){
+    if(degrees < 180){
       return degrees <= objDegrees;
     }
-    if(degrees > 0){
+    if(degrees > 180){
       return degrees >= objDegrees;
     }
     return false;
