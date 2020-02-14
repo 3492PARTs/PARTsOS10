@@ -18,7 +18,7 @@ public class StraightTopShooter extends SequentialCommandGroup {
   /**
    * Creates a new StraightTopShooter.
    */
-  public double distance = 0; //TODO: find distance
+  public double distance = 10; //TODO: find distance
   public StraightTopShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());

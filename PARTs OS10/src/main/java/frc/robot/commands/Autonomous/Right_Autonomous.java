@@ -9,6 +9,7 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveCom;
+import frc.robot.commands.Shoot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,16 +19,16 @@ public class Right_Autonomous extends SequentialCommandGroup {
    * Creates a new Right_Autonomous.
    */
 
-  double degrees = 0; //TODO: set values
+  int degrees = 125; //TODO: set values
   double distance = 0; //TODO: set values
   public Right_Autonomous() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-      new StraightTopShooter(),
-      new DriveCom(distance)
-    
+      new Turn(235.44),
+      new DriveCom(distance),
+      new Shoot(distance, degrees)
   
     );
   }
