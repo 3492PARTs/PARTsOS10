@@ -8,6 +8,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants.Direction;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
 
@@ -26,8 +27,8 @@ public class Middle_LowGoal_Autonomous extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands
-    (new DriveCom(length),
-    new Shoot(length, degrees)
+    (new DriveCom(length,Direction.forward),
+    new Shoot(length)
     );
   }
 }
