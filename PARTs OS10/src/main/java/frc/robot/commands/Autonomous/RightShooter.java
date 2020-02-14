@@ -15,14 +15,14 @@ import frc.robot.commands.Shoot;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Right_Autonomous extends SequentialCommandGroup {
+public class RightShooter extends SequentialCommandGroup {
   /**
    * Creates a new Right_Autonomous.
    */
 
   double degrees = 125; //TODO: set values
   double distance = 0; //TODO: set values
-  public Right_Autonomous() {
+  public RightShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
