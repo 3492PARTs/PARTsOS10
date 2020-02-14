@@ -27,7 +27,7 @@ public class Proximity {
       * 
       * @return in feet
       */
-     public static double getDistance(){
+     public double getDistance(){
          return ((proximitySensor.getVoltage() / 0.04883) * Constants.VOLTS_TO_DIST) / 30.48;
      }
 

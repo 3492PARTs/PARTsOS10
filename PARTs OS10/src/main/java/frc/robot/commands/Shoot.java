@@ -7,21 +7,24 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.time.StopWatch;
+import javax.lang.model.util.ElementScanner6;
 
+import com.ctre.phoenix.time.StopWatch;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Shooter;
 
 public class Shoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
   private double distance;
-  private int degrees;
   private int shootTime = 10000;
+  Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
-  public Shoot(double distance, int degrees) {
+  public Shoot(double distance) {
     this.distance = distance;
-    this.degrees = degrees;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -34,13 +37,21 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if((distance > 10))
+    {
+      shooter.toggleState(Constants.Direction.forward);
+    }
+    else
+    {
+      shooter.toggleState(Constants.Direction.forward, (distance * 0.1));
+    }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+
   }
 
   // Returns true when the command should end.

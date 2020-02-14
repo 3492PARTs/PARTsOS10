@@ -62,6 +62,31 @@ public class Shooter extends SubsystemBase {
     
    }
   }
+
+  public void toggleState(Direction dir, double adjust){
+    System.out.println("shoot");//TODO: test ramp up tweak values if it works
+    if(dir == Direction.forward){
+      System.out.println("fwd");
+      for(;counter<(90 * adjust); counter++){
+        speed += .01;
+        // end test rampup
+        shooterRight.set(ControlMode.PercentOutput, speed);
+        shooterLeft.set(ControlMode.PercentOutput, speed);
+      }
+   } 
+   else if(dir == Direction.reverse){
+    System.out.println("bak");
+    shooterRight.set(ControlMode.PercentOutput, 1 * adjust);
+    shooterLeft.set(ControlMode.PercentOutput, 1 * adjust);
+ } 
+   else{
+    System.out.println("off");
+    shooterRight.set(ControlMode.PercentOutput,0);
+    shooterLeft.set(ControlMode.PercentOutput, 0);
+    
+   }
+  }
+
   public static Shooter getInstance(){
     return _staticShooter;
   }

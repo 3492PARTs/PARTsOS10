@@ -9,7 +9,9 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
+import frc.robot.commands.Shoot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,14 +21,14 @@ public class StraightTopShooter extends SequentialCommandGroup {
   /**
    * Creates a new StraightTopShooter.
    */
-  public double distance = 0; //TODO: find distance
+  private final Proximity proximity = Proximity.getInstance();
   public StraightTopShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
-    addCommands(/* new shoot,*/ 
-    
-      new DriveCom(distance, Direction.reverse));
+    addCommands(
+      new Shoot(proximity.getDistance()),
+      new DriveCom(40, Direction.reverse));
   }
   
 }
