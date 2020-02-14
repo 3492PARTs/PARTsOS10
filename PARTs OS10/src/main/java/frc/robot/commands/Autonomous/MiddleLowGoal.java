@@ -9,6 +9,7 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
 
@@ -22,13 +23,14 @@ public class MiddleLowGoal extends SequentialCommandGroup {
   double length = 0;//TODO: set value
   double distanceToGoal = 10;// 
   int degrees = 0;//TODO: set value
+  Proximity proximity = Proximity.getInstance();
   public MiddleLowGoal() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands
     (new DriveCom(length,Direction.forward),
-    new Shoot(length)
+    new Shoot(proximity.getDistance())
     );
   }
 }

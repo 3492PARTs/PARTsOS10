@@ -9,6 +9,7 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
 
@@ -22,6 +23,7 @@ public class RightShooter extends SequentialCommandGroup {
 
   double degrees = 125; //TODO: set values
   double distance = 0; //TODO: set values
+  Proximity proximity = Proximity.getInstance();
   public RightShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
@@ -30,7 +32,7 @@ public class RightShooter extends SequentialCommandGroup {
       new Turn(235.44),
       new DriveCom(distance,Direction.forward),
       new Turn(degrees),
-      new Shoot(distance)
+      new Shoot(proximity.getDistance())
     );
   
   
