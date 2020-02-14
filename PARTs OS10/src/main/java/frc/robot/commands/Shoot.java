@@ -19,6 +19,11 @@ public class Shoot extends CommandBase {
   private int degrees;
   private int shootTime = 10000;
   private StopWatch timer = new StopWatch();
+  /**
+   * 
+   * @param distance distance from goal
+   * @param degrees the degrees from target
+   */
   public Shoot(double distance, int degrees) {
     this.distance = distance;
     this.degrees = degrees;

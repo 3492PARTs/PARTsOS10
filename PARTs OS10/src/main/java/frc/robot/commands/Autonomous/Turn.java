@@ -22,7 +22,6 @@ public class Turn extends CommandBase {
   private Drive drive = Drive.getInstance();
 /**
  * 
- * @param degrees the current degrees
  * @param objDegrees the degrees it should be
  */
   public Turn( double objDegrees) {

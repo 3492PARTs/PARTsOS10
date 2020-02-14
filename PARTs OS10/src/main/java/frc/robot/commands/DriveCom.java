@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Encoders;
+import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.Drive;
 
 
@@ -22,7 +23,7 @@ public class DriveCom extends CommandBase {
   Encoders encoders = Encoders.getInstance();
   private Direction direction;
   Drive drive = Drive.getInstance();
-
+  static Gyro gyro = Gyro.getInstance();
   /**
    * 
    * @param distance the distance it should move
@@ -51,6 +52,7 @@ public class DriveCom extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drive.move(.0, .0);
+    gyro.zeroGyro();
   }
 
   // Returns true when the command should end.
