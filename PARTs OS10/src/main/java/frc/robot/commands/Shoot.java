@@ -18,7 +18,7 @@ public class Shoot extends CommandBase {
    * Creates a new Shoot.
    */
   private double distance;
-  private int shootTime = 10000;
+  private int shootTime = 10000;//TODO: set values
   Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
   /**

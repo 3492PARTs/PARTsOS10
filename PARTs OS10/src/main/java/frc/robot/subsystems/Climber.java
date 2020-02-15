@@ -19,16 +19,16 @@ public class Climber extends SubsystemBase {
    */
   private static Climber _staticClimber = new Climber();
   private final TalonSRX climb;
-  private final TalonSRX Elevator;
-  private final TalonSRX climbPivot;
+  private final TalonSRX elevator;
+  private final TalonSRX elevatorPivot;
     int peakAmps = 25;
     int amps = 45;
     int timeoutMs = 0;
     double speed = .25;
   public Climber() {
   climb = new TalonSRX(6);
-  Elevator = new TalonSRX(11);
-  climbPivot = new TalonSRX(5);
+  elevator = new TalonSRX(11);
+  elevatorPivot = new TalonSRX(5);
 
 
     climb.configPeakCurrentDuration(100, 10); 
@@ -37,26 +37,26 @@ public class Climber extends SubsystemBase {
     climb.enableCurrentLimit(true); 
 
 
-    Elevator.configPeakCurrentDuration(100, 10); 
-    Elevator.configContinuousCurrentLimit(amps, timeoutMs); 
-    Elevator.configPeakCurrentLimit(peakAmps, timeoutMs);
-    Elevator.enableCurrentLimit(true);
+    elevator.configPeakCurrentDuration(100, 10); 
+    elevator.configContinuousCurrentLimit(amps, timeoutMs); 
+    elevator.configPeakCurrentLimit(peakAmps, timeoutMs);
+    elevator.enableCurrentLimit(true);
 
 
-    climbPivot.configPeakCurrentDuration(100, 10); 
-    climbPivot.configContinuousCurrentLimit(amps, timeoutMs); 
-    climbPivot.configPeakCurrentLimit(peakAmps, timeoutMs);
-    climbPivot.enableCurrentLimit(true); 
+    elevatorPivot.configPeakCurrentDuration(100, 10); 
+    elevatorPivot.configContinuousCurrentLimit(amps, timeoutMs); 
+    elevatorPivot.configPeakCurrentLimit(peakAmps, timeoutMs);
+    elevatorPivot.enableCurrentLimit(true); 
   }
 
   public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
-      climbPivot.set(ControlMode.PercentOutput, speed);
+      elevatorPivot.set(ControlMode.PercentOutput, speed);
   } 
    else if(dir == Direction.reverse){
-       climbPivot.set(ControlMode.PercentOutput, -speed);
+    elevatorPivot.set(ControlMode.PercentOutput, -speed);
   }
-   else climbPivot.set(ControlMode.PercentOutput, 0);
+   else elevatorPivot.set(ControlMode.PercentOutput, 0);
   }
 
   public static Climber getInstance(){
@@ -65,10 +65,10 @@ public class Climber extends SubsystemBase {
 
 
   public int pivotEncoder(){
-    return climbPivot.getSelectedSensorPosition();
+    return elevatorPivot.getSelectedSensorPosition();
   }
 
-  public void toggleState(Direction dir){
+  public void climbToggleState(Direction dir){
     if(dir == Direction.forward){
       climb.set(ControlMode.PercentOutput, speed);
   } 
@@ -78,14 +78,14 @@ public class Climber extends SubsystemBase {
    else climb.set(ControlMode.PercentOutput, 0);
   }
 
-  public void climbToggleState(Direction dir){
+  public void elevatorToggleState(Direction dir){
     if(dir == Direction.forward){
-      Elevator.set(ControlMode.PercentOutput, speed);
+      elevator.set(ControlMode.PercentOutput, speed);
    } 
    else if(dir == Direction.reverse){
-       Elevator.set(ControlMode.PercentOutput, -speed);
+       elevator.set(ControlMode.PercentOutput, -speed);
    }
-   else Elevator.set(ControlMode.PercentOutput, 0);
+   else elevator.set(ControlMode.PercentOutput, 0);
   }
 
 
