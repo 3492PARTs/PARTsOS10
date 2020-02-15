@@ -144,13 +144,13 @@ public class Robot extends TimedRobot {
 
     drive.move(limitedJS1, limitedJS2);
 
-    //intake front
+    //Drive inversion
     if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
     {
       drive.switchFront(false);
     }
 
-    //shooter front
+    //Drive inversion 2 electric boogaloo
     if(m_robotContainer.leftJoystick.getRawButton(4) || m_robotContainer.rightJoystick.getRawButton(4))
     {
       drive.switchFront(true);
@@ -163,8 +163,10 @@ public class Robot extends TimedRobot {
     // {
     //   climber.pivotToggleState(Constants.Direction.off);
     // }
-    // conveyor in
-    //conveyor out
+
+
+    /* conveyor in
+    conveyor out*/
     if(m_robotContainer.launchPad.getRawButton(1))
     {
       conveyor.toggleState(Constants.Direction.forward);
@@ -179,7 +181,7 @@ public class Robot extends TimedRobot {
     }
 
 
-
+    //intake on/off
     if(m_robotContainer.leftJoystick.getRawButton(1) ||  m_robotContainer.rightJoystick.getRawButton(1))
     {
       intake.wheelToggleState(Direction.forward);

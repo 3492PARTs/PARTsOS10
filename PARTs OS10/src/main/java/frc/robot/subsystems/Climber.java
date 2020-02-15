@@ -18,28 +18,29 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
   private static Climber _staticClimber = new Climber();
-  private final TalonSRX climbUp;
-  private final TalonSRX climbDown;
+  private final TalonSRX climb;
+  private final TalonSRX Elevator;
   private final TalonSRX climbPivot;
     int peakAmps = 25;
     int amps = 45;
     int timeoutMs = 0;
+    double speed = .25;
   public Climber() {
-  climbUp = new TalonSRX(6);
-  climbDown = new TalonSRX(11);
+  climb = new TalonSRX(6);
+  Elevator = new TalonSRX(11);
   climbPivot = new TalonSRX(5);
 
 
-    climbUp.configPeakCurrentDuration(100, 10); 
-    climbUp.configContinuousCurrentLimit(amps, timeoutMs); 
-    climbUp.configPeakCurrentLimit(peakAmps, timeoutMs);
-    climbUp.enableCurrentLimit(true); 
+    climb.configPeakCurrentDuration(100, 10); 
+    climb.configContinuousCurrentLimit(amps, timeoutMs); 
+    climb.configPeakCurrentLimit(peakAmps, timeoutMs);
+    climb.enableCurrentLimit(true); 
 
 
-    climbDown.configPeakCurrentDuration(100, 10); 
-    climbDown.configContinuousCurrentLimit(amps, timeoutMs); 
-    climbDown.configPeakCurrentLimit(peakAmps, timeoutMs);
-    climbDown.enableCurrentLimit(true);
+    Elevator.configPeakCurrentDuration(100, 10); 
+    Elevator.configContinuousCurrentLimit(amps, timeoutMs); 
+    Elevator.configPeakCurrentLimit(peakAmps, timeoutMs);
+    Elevator.enableCurrentLimit(true);
 
 
     climbPivot.configPeakCurrentDuration(100, 10); 
@@ -50,10 +51,10 @@ public class Climber extends SubsystemBase {
 
   public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
-      climbPivot.set(ControlMode.PercentOutput, .25);
+      climbPivot.set(ControlMode.PercentOutput, speed);
   } 
    else if(dir == Direction.reverse){
-       climbPivot.set(ControlMode.PercentOutput, -.25);
+       climbPivot.set(ControlMode.PercentOutput, -speed);
   }
    else climbPivot.set(ControlMode.PercentOutput, 0);
   }
@@ -69,22 +70,22 @@ public class Climber extends SubsystemBase {
 
   public void toggleState(Direction dir){
     if(dir == Direction.forward){
-      climbUp.set(ControlMode.PercentOutput, 1);
+      climb.set(ControlMode.PercentOutput, speed);
   } 
    else if(dir == Direction.reverse){
-       climbUp.set(ControlMode.PercentOutput, -1);
+       climb.set(ControlMode.PercentOutput, -speed);
   }
-   else climbUp.set(ControlMode.PercentOutput, 0);
+   else climb.set(ControlMode.PercentOutput, 0);
   }
 
   public void climbToggleState(Direction dir){
     if(dir == Direction.forward){
-      climbDown.set(ControlMode.PercentOutput, .3);
+      Elevator.set(ControlMode.PercentOutput, speed);
    } 
    else if(dir == Direction.reverse){
-       climbDown.set(ControlMode.PercentOutput, -1);
+       Elevator.set(ControlMode.PercentOutput, -speed);
    }
-   else climbDown.set(ControlMode.PercentOutput, 0);
+   else Elevator.set(ControlMode.PercentOutput, 0);
   }
 
 
