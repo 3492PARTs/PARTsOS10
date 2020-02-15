@@ -37,5 +37,4 @@ public class EncodersSparkMax {
         startPositionLeft = leftEncoder.getPosition();
         startPositionRight = rightEncoder.getPosition();
     }
-
 }
