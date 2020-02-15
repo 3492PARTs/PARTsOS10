@@ -13,42 +13,38 @@ import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.platform.DeviceType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Drive extends SubsystemBase {
+public class DriveSparkMax extends SubsystemBase {
   /**
    * Creates a new Drive.
    */
 private RobotContainer m_robotContainer;
-private final Drive drive = Drive.getInstance(); 
+private final Drive drive = Drive.getInstance();
 public  int Right1_port = 13;
 public  int Right2_port = 14;
 public  int Right3_port = 15;
-public  WPI_TalonSRX Right1 = new WPI_TalonSRX(Right1_port);
-public  WPI_TalonSRX Right2 = new WPI_TalonSRX(Right2_port);
-public  WPI_TalonSRX Right3 = new WPI_TalonSRX(Right3_port);
+public  CANSparkMax Right1 = new CANSparkMax(Right1_port, MotorType.kBrushless);
+public  CANSparkMax Right2 = new CANSparkMax(Right2_port, MotorType.kBrushless);
+public  CANSparkMax Right3 = new CANSparkMax(Right3_port, MotorType.kBrushless);
 
 public  int Left1_port = 2;
 public  int Left2_port = 1;
 public  int Left3_port = 0;
-public  WPI_TalonSRX Left1 = new WPI_TalonSRX(Left1_port);
-public  WPI_TalonSRX Left2 = new WPI_TalonSRX(Left2_port);
-public  WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
+public  CANSparkMax Left1 = new CANSparkMax(Left1_port, MotorType.kBrushless);
+public  CANSparkMax Left2 = new CANSparkMax(Left2_port, MotorType.kBrushless);
+public  CANSparkMax Left3 = new CANSparkMax(Left3_port, MotorType.kBrushless);
 
 public  SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
 public  SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
 public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
-
-// making the test motors
- public TalonSRX lefttest_1 = new TalonSRX(Left1_port);
- TalonSRX lefttest_2 = new TalonSRX(Left2_port);
- TalonSRX lefttest_3 = new TalonSRX(Left3_port);
- public TalonSRX righttest_1 = new TalonSRX(Right1_port);
- TalonSRX righttest_2 = new TalonSRX(Right2_port);
-  TalonSRX righttest_3 = new TalonSRX(Right3_port);
-
 
   int amps = 55;
   int timeoutMs = 0;
@@ -60,7 +56,7 @@ public static Drive getInstance(){
   return _staticDrive;
 }
 
-  public Drive() {
+  public DriveSparkMax() {
 //current limiting for drive
   lefttest_1.configPeakCurrentDuration(100, 10); 
   lefttest_1.configContinuousCurrentLimit(amps, timeoutMs); 
