@@ -35,8 +35,13 @@ public class Turn90 extends CommandBase {
   @Override
   public void execute() {
     degrees = gyro.gyro.getAngle();    
-    if(rotationTarget < 180){
+    if(rotationTarget < 91){
       drive.move(speed, -speed);
+    }
+    
+    if(rotationTarget > 269) {
+      drive.move(-speed, speed);
+      System.out.println("Dead code not dead");
     }
   }
     // else if(rotationTarget > 180){

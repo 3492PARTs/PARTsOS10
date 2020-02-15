@@ -9,7 +9,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Encoders;
 import frc.robot.subsystems.Climber;
+import frc.robot.Sensors.Gyro;
 
 public class Climber_Command extends CommandBase {
   /**
@@ -18,7 +20,8 @@ public class Climber_Command extends CommandBase {
   double rotations = 0;
   int encodervalue = 0;
   Climber climber = Climber.getInstance();
-  private static Climber_Command _staticClimber_Command = new Climber_Command();
+  private final Encoders encoders = Encoders.getInstance();
+  Gyro gyro = Gyro.getInstance();
   public Climber_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,7 +29,8 @@ public class Climber_Command extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  //TODO: reset encoder
+    encoders.resetEncoders();
+    Gyro.zeroGyro();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,7 +38,7 @@ public class Climber_Command extends CommandBase {
   @Override
   public void execute() {
   rotations = climber.pivotEncoder()/4096;
-  climber.toggleState(Direction.forward);
+  climber.elevatorToggleState(Direction.forward);
   }
 
 
@@ -42,7 +46,7 @@ public class Climber_Command extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.toggleState(Direction.off);
+    climber.elevatorToggleState(Direction.off);
   }
 
   // Returns true when the command should end.

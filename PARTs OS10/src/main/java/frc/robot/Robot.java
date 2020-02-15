@@ -144,63 +144,64 @@ public class Robot extends TimedRobot {
 
     drive.move(limitedJS1, limitedJS2);
 
-    //intake front
+    //Drive inversion
     if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
     {
       drive.switchFront(false);
     }
 
-    //shooter front
+    //Drive inversion 2 electric boogaloo
     if(m_robotContainer.leftJoystick.getRawButton(4) || m_robotContainer.rightJoystick.getRawButton(4))
     {
       drive.switchFront(true);
     }
-    // if(m_robotContainer.launchPad.getRawButton(9))
-    // {
-    //   climber.pivotToggleState(Constants.Direction.forward);
-    // }
-    // else
-    // {
-    //   climber.pivotToggleState(Constants.Direction.off);
-    // }
-    // conveyor in
-    //conveyor out
-    if(m_robotContainer.launchPad.getRawButton(1))
+   
+
+    
+    if(m_robotContainer.launchPad.getRawButton(1))//conveyor out
     {
       conveyor.toggleState(Constants.Direction.forward);
     }
-    else if(m_robotContainer.launchPad.getRawButton(3))
+    else if(m_robotContainer.launchPad.getRawButton(3))//conveyor in
     {
       conveyor.toggleState(Constants.Direction.reverse);
     }
-    if(m_robotContainer.launchPad.getRawButton(9))
+    else
     {
-      pivotCommand.execute();
+      conveyor.toggleState(Constants.Direction.off);
     }
+   
 
-
-
+    
     if(m_robotContainer.leftJoystick.getRawButton(1) ||  m_robotContainer.rightJoystick.getRawButton(1))
     {
-      intake.wheelToggleState(Direction.forward);
+      intake.wheelToggleState(Direction.forward); //intake in
+    }
+    else if(m_robotContainer.leftJoystick.getRawButton(7) ||  m_robotContainer.rightJoystick.getRawButton(7))
+    {
+      intake.wheelToggleState(Direction.reverse);//intake out
     }
     else
     { 
     intake.wheelToggleState(Direction.off);
     }
 
-    //elevator up
+   
   
-    if(m_robotContainer.launchPad.getRawButton(8))
+    if(m_robotContainer.launchPad.getRawButton(8)) //elevator up
     {
-      climber.toggleState(Constants.Direction.forward);
+      climber.elevatorToggleState(Constants.Direction.forward);
+    }
+    else if(m_robotContainer.launchPad.getRawButton(6))//elevator down
+    {
+      climber.elevatorToggleState(Constants.Direction.reverse);
     }
     else
     {
-      climber.toggleState(Constants.Direction.off);
+      climber.elevatorToggleState(Constants.Direction.off);
     }
 
-    //climber up
+ 
     if(m_robotContainer.launchPad.getRawButton(5))
     {
       climber.climbToggleState(Constants.Direction.forward);
@@ -210,37 +211,28 @@ public class Robot extends TimedRobot {
       climber.climbToggleState(Constants.Direction.off);
     }
 
-    //elevator pivot down
-    if(m_robotContainer.launchPad.getRawButton(7))
+   
+    if(m_robotContainer.launchPad.getRawButton(7))//pivot back
     {
       climber.pivotToggleState(Constants.Direction.reverse);
     }
-    else
+    else if(m_robotContainer.leftJoystick.getRawButton(8) ||  m_robotContainer.rightJoystick.getRawButton(8))
     {
-      climber.toggleState(Constants.Direction.off);
-    }
-
-    //elevator down
-    if(m_robotContainer.launchPad.getRawButton(6))
-    {
-      climber.toggleState(Constants.Direction.reverse);
+      climber.pivotToggleState(Constants.Direction.forward);
     }
     else
     {
-      climber.toggleState(Constants.Direction.off);
+      climber.pivotToggleState(Constants.Direction.off);
     }
 
 
-    //shooter out
-    //shooter in
-    if(m_robotContainer.launchPad.getRawButton(10))
+  
+    if(m_robotContainer.launchPad.getRawButton(10))//shooter in
     {
-      System.out.println("btn 10");
       shooter.toggleState(Constants.Direction.reverse);
     }
-    else if(m_robotContainer.launchPad.getRawButton(11))
+    else if(m_robotContainer.launchPad.getRawButton(11))//shooter out
     {
-      System.out.println("btn 11");
       shooter.toggleState(Constants.Direction.forward);
     }
     else
@@ -250,7 +242,7 @@ public class Robot extends TimedRobot {
 
 
   }
-    //trigger turns conveyor on
+ 
     
 
   @Override

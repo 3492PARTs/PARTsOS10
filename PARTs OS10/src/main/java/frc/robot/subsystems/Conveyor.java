@@ -14,7 +14,14 @@ public class Conveyor extends SubsystemBase {
   TalonSRX conveyor;
   int Conveyor_port = 4;
   int timeoutMs = 0;
-  private static Conveyor _staticConveyor = new Conveyor();
+  
+  // singleton
+  private static Conveyor _staticConveyor = new Conveyor();  
+
+
+  public static Conveyor getInstance(){
+    return _staticConveyor;
+  }
   public Conveyor() {
     conveyor = new TalonSRX(Conveyor_port);  
   conveyor.configPeakCurrentDuration(100, 10); 
@@ -35,9 +42,7 @@ public class Conveyor extends SubsystemBase {
     }
     else conveyor.set(ControlMode.PercentOutput, 0);
   }
-  public static Conveyor getInstance(){
-    return _staticConveyor;
-  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

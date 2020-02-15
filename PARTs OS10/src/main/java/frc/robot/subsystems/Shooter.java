@@ -23,7 +23,12 @@ public class Shooter extends SubsystemBase {
   // private static final Encoder rShooterEnc = new Encoder(0,1);
   // private static final Encoder lShooterEnc = new Encoder(2,3);
   int amps = 40;
-  int timeoutMs= 0;
+  int timeoutMs= 0;  
+  
+  //singleton
+  public static Shooter getInstance(){
+    return _staticShooter;
+  }
   public Shooter() {
     shooterLeft.configPeakCurrentDuration(100, 10); 
     shooterLeft.configContinuousCurrentLimit(55, timeoutMs);
@@ -43,7 +48,7 @@ public class Shooter extends SubsystemBase {
       System.out.println("fwd");
       for(;counter<90; counter++){
         speed += .01;
-        // end test rampup
+        // end test rampup TODO: see if this works
         shooterRight.set(ControlMode.PercentOutput, speed);
         shooterLeft.set(ControlMode.PercentOutput, speed);
       }
@@ -85,9 +90,7 @@ public class Shooter extends SubsystemBase {
    }
   }
 
-  public static Shooter getInstance(){
-    return _staticShooter;
-  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

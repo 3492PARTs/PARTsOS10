@@ -7,8 +7,6 @@
 
 package frc.robot.commands;
 
-import javax.lang.model.util.ElementScanner6;
-
 import com.ctre.phoenix.time.StopWatch;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Relay.Direction;
@@ -20,9 +18,13 @@ public class Shoot extends CommandBase {
    * Creates a new Shoot.
    */
   private double distance;
-  private int shootTime = 10000;
+  private int shootTime = 10000;//TODO: set values
   Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
+  /**
+   * 
+   * @param distance distance robot should move
+   */
   public Shoot(double distance) {
     this.distance = distance;
     // Use addRequirements() here to declare subsystem dependencies.
