@@ -7,23 +7,29 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class Delay extends CommandBase {
   /**
    * Creates a new Delay.
    */
   long start_Time;
+  String keyString = "Autonomous Shooting Delay Choice";
   int delayTime;
-  public Delay(int delayTime) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.delayTime = delayTime;
+  double choosenDelay;
+  public Delay() {
+    // Use addRequirements() here to declare subsystem dependencie
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
    start_Time = System.currentTimeMillis();
+  choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

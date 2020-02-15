@@ -45,7 +45,6 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
   private final Gyro gyro = Gyro.getInstance();
 
-  private String keyString;
   private double choosenDelay;
 
 NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -74,8 +73,7 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
     Constants.driveOrientation = true;
 
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
-    keyString = "Autonomous Shooting Delay Choice";
-    SmartDashboard.putNumber(keyString, 0.0);
+    SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
     SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
     m_chooser.setDefaultOption("MiddleTopShooter", new StraightTopShooter());
     m_chooser.addOption("Left starting positon", new LeftShooter());
@@ -125,8 +123,8 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     // schedule the autonomous command (example)
     if(m_autonomousCommand != null){m_autonomousCommand.schedule();}
-      choosenDelay = SmartDashboard.getNumber(keyString, 0.0);
-      System.out.println("Our choosen delat is " + choosenDelay);
+      choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
+      System.out.println("Our choosen delay is " + choosenDelay);
     
 
   }
