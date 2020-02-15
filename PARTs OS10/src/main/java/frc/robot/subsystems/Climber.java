@@ -50,10 +50,10 @@ public class Climber extends SubsystemBase {
 
   public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
-      climbPivot.set(ControlMode.PercentOutput, 1);
+      climbPivot.set(ControlMode.PercentOutput, .25);
   } 
    else if(dir == Direction.reverse){
-       climbPivot.set(ControlMode.PercentOutput, -1);
+       climbPivot.set(ControlMode.PercentOutput, -.25);
   }
    else climbPivot.set(ControlMode.PercentOutput, 0);
   }
