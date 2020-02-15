@@ -18,7 +18,8 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
 
-  private final TalonSRX climb;
+  private final TalonSRX climb1;
+  private final TalonSRX climb2;
   private final TalonSRX elevator;
   private final TalonSRX elevatorPivot;
     int peakAmps = 25;
@@ -31,16 +32,21 @@ private static Climber _staticClimber = new Climber();
     return _staticClimber;
   }
   public Climber() {
-  climb = new TalonSRX(6);
-  elevator = new TalonSRX(11);
-  elevatorPivot = new TalonSRX(5);
+    climb1 = new TalonSRX(7);
+    climb2 = new TalonSRX(11);
+    elevator = new TalonSRX(6);
+    elevatorPivot = new TalonSRX(5);
 
 
-    climb.configPeakCurrentDuration(100, 10); 
-    climb.configContinuousCurrentLimit(amps, timeoutMs); 
-    climb.configPeakCurrentLimit(peakAmps, timeoutMs);
-    climb.enableCurrentLimit(true); 
+    climb1.configPeakCurrentDuration(100, 10); 
+    climb1.configContinuousCurrentLimit(amps, timeoutMs); 
+    climb1.configPeakCurrentLimit(peakAmps, timeoutMs);
+    climb1.enableCurrentLimit(true); 
 
+    climb2.configPeakCurrentDuration(100, 10); 
+    climb2.configContinuousCurrentLimit(amps, timeoutMs); 
+    climb2.configPeakCurrentLimit(peakAmps, timeoutMs);
+    climb2.enableCurrentLimit(true); 
 
     elevator.configPeakCurrentDuration(100, 10); 
     elevator.configContinuousCurrentLimit(amps, timeoutMs); 
@@ -73,12 +79,18 @@ private static Climber _staticClimber = new Climber();
 
   public void climbToggleState(Direction dir){
     if(dir == Direction.forward){
-      climb.set(ControlMode.PercentOutput, speed);
+      climb1.set(ControlMode.PercentOutput, speed);
+      climb2.set(ControlMode.PercentOutput, speed);
   } 
    else if(dir == Direction.reverse){
-       climb.set(ControlMode.PercentOutput, -speed);
+       climb1.set(ControlMode.PercentOutput, -speed);
+       climb2.set(ControlMode.PercentOutput, -speed);
   }
-   else climb.set(ControlMode.PercentOutput, 0);
+   else 
+   {
+     climb1.set(ControlMode.PercentOutput, 0);
+     climb2.set(ControlMode.PercentOutput, 0);
+   }
   }
 
   public void elevatorToggleState(Direction dir){
