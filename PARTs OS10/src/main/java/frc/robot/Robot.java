@@ -234,7 +234,7 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
       climber.elevatorToggleState(Constants.Direction.off);
     }
 
- 
+    // climber
     if(m_robotContainer.launchPad.getRawButton(5))
     {
       climber.climbToggleState(Constants.Direction.forward);
@@ -260,11 +260,11 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
   
-    if(m_robotContainer.launchPad.getRawButton(10))//shooter in
+    if(m_robotContainer.launchPad.getRawButton(10))//shooter out
     {
       shooter.toggleState(Constants.Direction.reverse);
     }
-    else if(m_robotContainer.launchPad.getRawButton(11))//shooter out
+    else if(m_robotContainer.launchPad.getRawButton(11))//shooter in
     {
       shooter.toggleState(Constants.Direction.forward);
     }

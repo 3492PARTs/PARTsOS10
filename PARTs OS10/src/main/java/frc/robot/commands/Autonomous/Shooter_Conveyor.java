@@ -7,29 +7,20 @@
 
 package frc.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants.Direction;
-import frc.robot.Sensors.Proximity;
-import frc.robot.commands.DriveCom;
-import frc.robot.commands.Shoot;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.*;
+import frc.robot.commands.Autonomous.*;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class MiddleLowGoal extends SequentialCommandGroup {
+public class Shooter_Conveyor extends ParallelCommandGroup {
   /**
-   * Creates a new Middle_LowGoal_Autonomous.
+   * Creates a new Shooter_Conveyor.
    */
-  double length = 0;//TODO: set value
-  double distanceToGoal = 10;// 
-  int degrees = 0;//TODO: set value
-  Proximity proximity = Proximity.getInstance();
-  public MiddleLowGoal() {
+  public Shooter_Conveyor() {
     // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    super();
-    addCommands(new DriveCom(length,Direction.forward),
-   new Shooter_Conveyor()
-    );
+    // super(new FooCommand(), new BarCommand());super();
+    addCommands(new ConveyerCom(5),new Shoot(0.1)); //TODO: set the distancee as a variable
   }
 }
