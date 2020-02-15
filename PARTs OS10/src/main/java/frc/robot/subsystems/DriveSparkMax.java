@@ -11,16 +11,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.platform.DeviceType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class DriveSparkMax extends SubsystemBase {
   /**
@@ -58,41 +55,6 @@ public static Drive getInstance(){
 
   public DriveSparkMax() {
 //current limiting for drive
-  lefttest_1.configPeakCurrentDuration(100, 10); 
-  lefttest_1.configContinuousCurrentLimit(amps, timeoutMs); 
-  lefttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
-  lefttest_1.enableCurrentLimit(true); 
-  
-  
-  lefttest_2.configPeakCurrentDuration(100, 10); 
-  lefttest_2.configContinuousCurrentLimit(amps, timeoutMs);
-  lefttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
-  lefttest_2.enableCurrentLimit(true); 
-  
-  
-  lefttest_3.configPeakCurrentDuration(100, 10); 
-  lefttest_3.configContinuousCurrentLimit(amps, timeoutMs);
-  lefttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
-  lefttest_3.enableCurrentLimit(true); 
-  
-
-  righttest_1.configPeakCurrentDuration(100, 10); 
-  righttest_1.configContinuousCurrentLimit(amps, timeoutMs);
-  righttest_1.configPeakCurrentLimit(peakAmps, timeoutMs);
-  righttest_1.enableCurrentLimit(true);
-  
-
-  righttest_2.configPeakCurrentDuration(100, 10); 
-  righttest_2.configContinuousCurrentLimit(amps, timeoutMs);
-  righttest_2.configPeakCurrentLimit(peakAmps, timeoutMs);
-  righttest_2.enableCurrentLimit(true);
-  
-
-  righttest_3.configPeakCurrentDuration(100, 10); 
-  righttest_3.configContinuousCurrentLimit(amps, timeoutMs);
-  righttest_3.configPeakCurrentLimit(peakAmps, timeoutMs);
-  righttest_3.enableCurrentLimit(true); 
-  
   }
 /**
  * makes the robit move
@@ -113,19 +75,6 @@ public void move(Double Speed1,Double Speed2){
   System.out.println("drive");
   System.out.println(M_drive);
   M_drive.tankDrive(Speed1, Speed2);
-  SmartDashboard.putNumber("The Voltage of Left 1 is", lefttest_1.getBusVoltage());
-  SmartDashboard.putNumber("The Voltage of Left 2 is", lefttest_2.getBusVoltage());
-  SmartDashboard.putNumber("The Voltage of Left 3 is", lefttest_2.getBusVoltage());
-  SmartDashboard.putNumber("The Voltage of Right 1 is", righttest_1.getBusVoltage());
-  SmartDashboard.putNumber("The Voltage of Right 2 is", righttest_2.getBusVoltage());
-  SmartDashboard.putNumber("The Voltage of Right 3 is", righttest_3.getBusVoltage());
-
-  SmartDashboard.putNumber("Amps of left 1", lefttest_1.getSupplyCurrent());
-  SmartDashboard.putNumber("Amps of left 2", lefttest_2.getSupplyCurrent());
-  SmartDashboard.putNumber("Amps of left 3", lefttest_3.getSupplyCurrent());
-  SmartDashboard.putNumber("Amps of right 1", righttest_1.getSupplyCurrent());
-  SmartDashboard.putNumber("Amps of right 2", righttest_2.getSupplyCurrent());
-  SmartDashboard.putNumber("Amps of right 3", righttest_3.getSupplyCurrent());
 }
 
 public void switchFront(boolean orientation)
