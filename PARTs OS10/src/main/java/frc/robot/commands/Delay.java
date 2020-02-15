@@ -29,7 +29,7 @@ public class Delay extends CommandBase {
   @Override
   public void initialize() {
    start_Time = System.currentTimeMillis();
-  choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
+  choosenDelay = 1000*(SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
