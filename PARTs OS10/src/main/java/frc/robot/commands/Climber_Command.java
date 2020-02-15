@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.Climber;
 
 public class Climber_Command extends CommandBase {
@@ -18,7 +19,7 @@ public class Climber_Command extends CommandBase {
   double rotations = 0;
   int encodervalue = 0;
   Climber climber = Climber.getInstance();
-  private static Climber_Command _staticClimber_Command = new Climber_Command();
+  Gyro gyro = Gyro.getInstance();
   public Climber_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -27,6 +28,7 @@ public class Climber_Command extends CommandBase {
   @Override
   public void initialize() {
   //TODO: reset encoder
+  Gyro.zeroGyro();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

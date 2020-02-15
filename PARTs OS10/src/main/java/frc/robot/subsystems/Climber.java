@@ -17,14 +17,19 @@ public class Climber extends SubsystemBase {
   /**
    * Creates a new Climber.
    */
-  private static Climber _staticClimber = new Climber();
+
   private final TalonSRX climb;
   private final TalonSRX Elevator;
   private final TalonSRX climbPivot;
     int peakAmps = 25;
     int amps = 45;
     int timeoutMs = 0;
-    double speed = .25;
+    double speed = .25;  
+//Singleton  
+private static Climber _staticClimber = new Climber();
+    public static Climber getInstance(){
+    return _staticClimber;
+  }
   public Climber() {
   climb = new TalonSRX(6);
   Elevator = new TalonSRX(11);
@@ -59,9 +64,7 @@ public class Climber extends SubsystemBase {
    else climbPivot.set(ControlMode.PercentOutput, 0);
   }
 
-  public static Climber getInstance(){
-    return _staticClimber;
-  }
+
 
 
   public int pivotEncoder(){

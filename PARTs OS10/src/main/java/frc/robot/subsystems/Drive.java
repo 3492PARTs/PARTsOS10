@@ -42,7 +42,7 @@ public  WPI_TalonSRX Left3 = new WPI_TalonSRX(Left3_port);
 public  SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
 public  SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
 public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
-private static Drive _staticDrive = new Drive();
+
 // making the test motors
  public TalonSRX lefttest_1 = new TalonSRX(Left1_port);
  TalonSRX lefttest_2 = new TalonSRX(Left2_port);
@@ -55,6 +55,12 @@ private static Drive _staticDrive = new Drive();
   int amps = 55;
   int timeoutMs = 0;
   int peakAmps = 40;
+
+//singleton
+private static Drive _staticDrive = new Drive();
+public static Drive getInstance(){
+  return _staticDrive;
+}
 
   public Drive() {
 //current limiting for drive
@@ -101,9 +107,7 @@ private static Drive _staticDrive = new Drive();
  */
 
 
-public static Drive getInstance(){
-  return _staticDrive;
-}
+
 public void stop(){
   M_drive.tankDrive(0,0);
 }
