@@ -13,11 +13,11 @@ import frc.robot.subsystems.Drive;
 /**
  * Add your docs here.
  */
-public class encodersSparkMax {
-    private static Encoders _staticEncoders = new Encoders();
-    public static Encoders getInstance()
+public class EncodersSparkMax {
+    private static EncodersSparkMax _staticEncodersSparkMax = new EncodersSparkMax();
+    public static EncodersSparkMax getInstance()
     {
-        return _staticEncoders;
+        return _staticEncodersSparkMax;
     }
     Drive drive = Drive.getInstance();
     private static double startPositionRight = 0;
