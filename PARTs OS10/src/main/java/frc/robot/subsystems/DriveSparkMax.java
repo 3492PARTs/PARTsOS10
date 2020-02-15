@@ -48,9 +48,9 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   int peakAmps = 40;
 
 //singleton
-private static Drive _staticDrive = new Drive();
-public static Drive getInstance(){
-  return _staticDrive;
+private static DriveSparkMax _staticDriveSparkMax = new DriveSparkMax();
+public static DriveSparkMax getInstance(){
+  return _staticDriveSparkMax;
 }
 
   public DriveSparkMax() {
