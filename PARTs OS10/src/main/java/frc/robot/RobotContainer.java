@@ -46,7 +46,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    configureButtonBindings();
+    //configureButtonBindings();
   }
 
   /**
@@ -55,13 +55,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */    
-  public JoystickButton pivoter = new JoystickButton(launchPad, 9);
-  private void configureButtonBindings() {
-    //elevator pivot up
-
- 
-    
-  }
+  // public JoystickButton pivoter = new JoystickButton(launchPad, 9);
+  // private void configureButtonBindings() { 
+    //elevator pivot up } //TODO: test this command
 
 
   /**
