@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -14,11 +17,17 @@ import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Gyro;
 import frc.robot.commands.Climber_Command;
 import frc.robot.commands.DriveCom;
+import frc.robot.commands.Autonomous.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.*;
 import frc.robot.subsystems.Shooter;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,11 +45,23 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
   private final Gyro gyro = Gyro.getInstance();
 
+  private String keyString;
+  private double choosenDelay;
+
+NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+NetworkTableEntry tx = table.getEntry("tx");
+NetworkTableEntry ty = table.getEntry("ty");
+NetworkTableEntry ta = table.getEntry("ta");
+
+Command m_autonomousCommand;
+SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
   Climber_Command pivotCommand = new Climber_Command();
+
+  
 
   @Override
   public void robotInit() {
@@ -53,6 +74,13 @@ public class Robot extends TimedRobot {
     Constants.driveOrientation = true;
 
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
+    keyString = "Autonomous Shooting Delay Choice";
+    SmartDashboard.putNumber(keyString, 0.0);
+    SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
+    m_chooser.setDefaultOption("MiddleTopShooter", new StraightTopShooter());
+    m_chooser.addOption("Left starting positon", new LeftShooter());
+    m_chooser.addOption("Right Start Position", new RightShooter());
+    m_chooser.addOption("Middle Low Goal", new MiddleLowGoal());
   }
 
   /**
@@ -96,6 +124,10 @@ public class Robot extends TimedRobot {
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
+    if(m_autonomousCommand != null){m_autonomousCommand.schedule();}
+      choosenDelay = SmartDashboard.getNumber(keyString, 0.0);
+      System.out.println("Our choosen delat is " + choosenDelay);
+    
 
   }
 
@@ -109,6 +141,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     Constants.driveOrientation = false;
+    if(m_autonomousCommand != null){
+      m_autonomousCommand.cancel();
+    }
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
