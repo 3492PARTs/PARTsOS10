@@ -31,8 +31,8 @@ public class RightShooter extends SequentialCommandGroup {
     addCommands(
       new Turn(235.44),
       new DriveCom(distance,Direction.forward),
-      new Turn(degrees),
-      new Shoot(proximity.getDistance())
+      new Turn(degrees)//,
+      //new Shoot(proximity.getDistance())
     );
   
   

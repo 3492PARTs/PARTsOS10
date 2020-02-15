@@ -45,7 +45,8 @@ public class Shoot extends CommandBase {
     }
     else
     {
-      shooter.toggleState(Constants.Direction.forward, (distance * 0.1));
+      //shooter.toggleState(Constants.Direction.forward, (distance * 0.1));
+      shooter.toggleState(Constants.Direction.forward, .5);
     }
 
   }

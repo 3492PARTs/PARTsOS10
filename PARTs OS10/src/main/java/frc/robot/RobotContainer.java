@@ -30,7 +30,7 @@ import frc.robot.subsystems.Drive;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private static ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private static Command m_autoCommand;// = new ExampleCommand(m_exampleSubsystem);
   public static Climber climber = Climber.getInstance();
   public static  Conveyor conveyor = Conveyor.getInstance();
   public static Shooter shooter = Shooter.getInstance();
@@ -66,6 +66,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    m_autoCommand = Robot.m_chooser.getSelected();
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }

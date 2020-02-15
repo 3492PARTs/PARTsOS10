@@ -44,6 +44,7 @@ public class DriveCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("IN middle low goal");
     if(dir == Direction.forward){
       drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
     }
@@ -57,12 +58,13 @@ public class DriveCom extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drive.move(.0, .0);
-    gyro.zeroGyro();
+    gyro.zeroGyro(); 
+    System.out.println("I'm finish driving.");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return distance >= encoders.getDistanceMovedRight();
+    return distance <= encoders.getDistanceMovedRight();
   }
 }
