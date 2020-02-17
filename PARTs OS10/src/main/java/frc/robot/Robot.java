@@ -23,6 +23,7 @@ import frc.robot.commands.Autonomous.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.DriveSparkMax;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Shooter;
@@ -43,7 +44,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private final Conveyor conveyor = Conveyor.getInstance();
   private final Shooter shooter =  Shooter.getInstance();
-  private final Drive drive = Drive.getInstance();
+  private final DriveSparkMax drive = DriveSparkMax.getInstance();
   private final Intake intake = Intake.getInstance();
   private final Climber climber = Climber.getInstance();
   private final Proximity proximity = Proximity.getInstance();
@@ -152,6 +153,9 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     Constants.driveOrientation = false;
     if(m_autonomousCommand != null){
       m_autonomousCommand.cancel();
+      SmartDashboard.putNumber("Left Shooter RPM is", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
+      SmartDashboard.putNumber("Right Shooter RPM is", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
+
     }
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

@@ -19,6 +19,7 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+
 public class MiddleLowGoal extends SequentialCommandGroup {
   /**
    * Creates a new Middle_LowGoal_Autonomous.
@@ -37,4 +38,5 @@ public class MiddleLowGoal extends SequentialCommandGroup {
     );
   
   }
+
 }
