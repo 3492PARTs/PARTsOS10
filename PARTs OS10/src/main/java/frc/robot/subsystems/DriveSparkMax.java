@@ -34,7 +34,7 @@ public  CANSparkMax Right3 = new CANSparkMax(Right3_port, MotorType.kBrushless);
 
 public  int Left1_port = 2;
 public  int Left2_port = 1;
-public  int Left3_port = 0;
+public  int Left3_port = 8;
 public  CANSparkMax Left1 = new CANSparkMax(Left1_port, MotorType.kBrushless);
 public  CANSparkMax Left2 = new CANSparkMax(Left2_port, MotorType.kBrushless);
 public  CANSparkMax Left3 = new CANSparkMax(Left3_port, MotorType.kBrushless);
