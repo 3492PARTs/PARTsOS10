@@ -25,8 +25,9 @@ public class Shoot extends CommandBase {
    * 
    * @param distance distance robot should move
    */
-  public Shoot(double distance) {
+  public Shoot(double distance, int time) {
     this.distance = distance;
+    shootTime = time;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
