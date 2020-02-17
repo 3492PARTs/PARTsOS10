@@ -26,8 +26,11 @@ public final class Constants {
     public static final String SD_AUTO_DELAY =  "autoDelay";
 
 public static enum Direction {
-    forward, reverse, off, left, right
+    forward, reverse, off
 }
 
+public static enum shootSpeed {
+    full, half, quarter
+}
 
 }
