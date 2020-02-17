@@ -27,6 +27,7 @@ import frc.robot.subsystems.DriveSparkMax;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Shooter;
+import frc.robot.commands.Autonomous.ConveyerSpaceCom;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -193,6 +194,11 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     drive.move(limitedJS1, limitedJS2);
 
     //Drive inversion
+
+    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(1));
+    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(1));
+
+
     if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
     {
       drive.switchFront(false);
