@@ -33,8 +33,8 @@ public class MiddleLowGoal extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(new DriveCom(40,Direction.reverse),
-    new Shoot(.5),
-    new ParallelCommandGroup(new ConveyerCom(5000), new Shoot(5))
+    new Shoot(.5, 3000),
+    new ParallelCommandGroup(new ConveyerCom(5000), new Shoot(5, 5000))
     );
   }
 }
