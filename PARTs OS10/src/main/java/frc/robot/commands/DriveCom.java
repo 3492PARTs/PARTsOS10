@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Encoders;
+import frc.robot.Sensors.EncodersSparkMax;
 import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.Drive;
 
@@ -20,7 +21,7 @@ public class DriveCom extends CommandBase {
    * Creates a new Drive.
    */
   double distance;
-  Encoders encoders = Encoders.getInstance();
+  EncodersSparkMax encoders = EncodersSparkMax.getInstance();
   Drive drive = Drive.getInstance();
   Direction dir;
   static Gyro gyro = Gyro.getInstance();

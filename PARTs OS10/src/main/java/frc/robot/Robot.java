@@ -23,6 +23,7 @@ import frc.robot.commands.Autonomous.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.DriveSparkMax;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Shooter;
@@ -43,7 +44,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private final Conveyor conveyor = Conveyor.getInstance();
   private final Shooter shooter =  Shooter.getInstance();
-  private final Drive drive = Drive.getInstance();
+  private final DriveSparkMax drive = DriveSparkMax.getInstance();
   private final Intake intake = Intake.getInstance();
   private final Climber climber = Climber.getInstance();
   private final Proximity proximity = Proximity.getInstance();
