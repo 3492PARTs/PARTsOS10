@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
   private final Proximity proximity = Proximity.getInstance();
   private final Gyro gyro = Gyro.getInstance();
-  private final EncodersSparkMax encoders = EncodersSpakMax.getInstance();
+  private final EncodersSparkMax encoders = EncodersSparkMax.getInstance();
 
   private double choosenDelay;
 
