@@ -17,6 +17,7 @@ public class EncodersSparkMax {
     private final DriveSparkMax drive = DriveSparkMax.getInstance();
     private CANEncoder rightEncoder = drive.Right1.getEncoder();
     private CANEncoder leftEncoder = drive.Left1.getEncoder();
+    private CANEncoder fix1 = drive.Left2.getEncoder();
     private static EncodersSparkMax _staticEncodersSparkMax = new EncodersSparkMax();
     public static EncodersSparkMax getInstance()
     {
@@ -30,6 +31,9 @@ public class EncodersSparkMax {
     }
     public double getDistanceMovedRight(){
         return Math.abs(((rightEncoder.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
+    }
+    public double getDistanceFix(){
+        return Math.abs(((fix1.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
     }
     
 

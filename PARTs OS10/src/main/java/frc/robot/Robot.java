@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Encoders;
+import frc.robot.Sensors.EncodersSparkMax;
 import frc.robot.Sensors.Gyro;
 import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Climber_Command;
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
   private final Proximity proximity = Proximity.getInstance();
   private final Gyro gyro = Gyro.getInstance();
-  private final Encoders encoders = Encoders.getInstance();
+  private final EncodersSparkMax encoders = EncodersSpakMax.getInstance();
 
   private double choosenDelay;
 
@@ -174,7 +175,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   @Override
   public void teleopPeriodic() {
 
-    
+    SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
    //rampUp code
     final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());
     final double limit = .012;
