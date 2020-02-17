@@ -21,6 +21,6 @@ public class Shooter_Conveyor extends ParallelCommandGroup {
   public Shooter_Conveyor() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    addCommands(new ConveyerCom(5),new Shoot(0.1)); //TODO: set the distancee as a variable
+    addCommands(new ConveyerCom(5000),new Shoot(0.1)); //TODO: set the distancee as a variable
   }
 }
