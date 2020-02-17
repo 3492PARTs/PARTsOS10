@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
+import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Climber_Command;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Autonomous.*;
@@ -27,6 +29,7 @@ import frc.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.CameraServer;
 
 
 /**
@@ -43,7 +46,9 @@ public class Robot extends TimedRobot {
   private final Drive drive = Drive.getInstance();
   private final Intake intake = Intake.getInstance();
   private final Climber climber = Climber.getInstance();
+  private final Proximity proximity = Proximity.getInstance();
   private final Gyro gyro = Gyro.getInstance();
+  private final Encoders encoders = Encoders.getInstance();
 
   private double choosenDelay;
 
@@ -53,7 +58,7 @@ NetworkTableEntry ty = table.getEntry("ty");
 NetworkTableEntry ta = table.getEntry("ta");
 
 Command m_autonomousCommand;
-SendableChooser<Command> m_chooser = new SendableChooser<>();
+public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -67,12 +72,14 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
+    CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
 
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
+    System.out.println("auto options");
     SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
     SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
     m_chooser.setDefaultOption("MiddleTopShooter", new StraightTopShooter());
@@ -119,8 +126,10 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
    */
   @Override
   public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    
+     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
+     System.out.println("auto: " + m_autonomousCommand);
     // schedule the autonomous command (example)
     if(m_autonomousCommand != null){m_autonomousCommand.schedule();}
       choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
@@ -134,6 +143,8 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
    */
   @Override
   public void autonomousPeriodic() {
+    SmartDashboard.putNumber("Proximity Distance", proximity.getDistance());
+    SmartDashboard.putNumber("Encoder Distance", encoders.getDistanceMovedRight());
   }
 
   @Override
@@ -262,7 +273,7 @@ SendableChooser<Command> m_chooser = new SendableChooser<>();
   
     if(m_robotContainer.launchPad.getRawButton(10))//shooter out
     {
-      shooter.toggleState(Constants.Direction.reverse);
+      shooter.toggleState(Constants.Direction.reverse, .35);
     }
     else if(m_robotContainer.launchPad.getRawButton(11))//shooter in
     {
