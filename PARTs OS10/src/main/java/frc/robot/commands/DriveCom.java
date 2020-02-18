@@ -12,7 +12,6 @@ import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.EncodersSparkMax;
 import frc.robot.Sensors.Gyro;
-import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.DriveSparkMax;
 
 
@@ -25,11 +24,15 @@ public class DriveCom extends CommandBase {
   DriveSparkMax drive = DriveSparkMax.getInstance();
   Direction dir;
   static Gyro gyro = Gyro.getInstance();
+  
+  
   /**
    * 
    * @param distance the distance it should move
    * @param dir the direction it should move
    */
+
+
   public DriveCom(double distance,Direction dir) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.distance = distance;

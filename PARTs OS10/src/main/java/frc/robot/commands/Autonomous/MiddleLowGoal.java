@@ -7,7 +7,7 @@
 
 package frc.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
@@ -15,7 +15,6 @@ import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Autonomous.ConveyerCom;
-import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
