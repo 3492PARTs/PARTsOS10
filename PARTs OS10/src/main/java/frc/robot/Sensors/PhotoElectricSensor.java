@@ -7,8 +7,17 @@
 
 package frc.robot.Sensors;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 /**
  * Add your docs here.
  */
 public class PhotoElectricSensor {
+    private static PhotoElectricSensor _staticPESensor = new PhotoElectricSensor();
+    public AnalogInput PESensor = new AnalogInput(2);
+    public static PhotoElectricSensor getInstance()
+    {
+        return _staticPESensor;
+    }
+
 }

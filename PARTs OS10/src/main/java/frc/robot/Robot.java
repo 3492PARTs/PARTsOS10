@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.EncodersSparkMax;
 import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.PhotoElectricSensor;
 import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Climber_Command;
 import frc.robot.commands.Autonomous.*;
@@ -47,6 +48,7 @@ public class Robot extends TimedRobot {
   private final Proximity proximity = Proximity.getInstance();
   private final Gyro gyro = Gyro.getInstance();
   private final EncodersSparkMax encoders = EncodersSparkMax.getInstance();
+  private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
 
   private double choosenDelay;
 
@@ -72,8 +74,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // autonomous chooser on the dashboard.
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
-    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(16));
-    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(16));
+    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(1.5));
+    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(1.5));
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
@@ -173,7 +175,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   @Override
   public void teleopPeriodic() {
 
-
+    SmartDashboard.putNumber("PESensor", PESensor.PESensor.getValue());
     SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
     SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 

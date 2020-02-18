@@ -23,7 +23,7 @@ public class ConveyerSpaceCom extends CommandBase {
    * 
    * @param time in seconds
    */
-  public ConveyerSpaceCom(long duration) {
+  public ConveyerSpaceCom(double duration) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.duration = duration*1000;
   }
