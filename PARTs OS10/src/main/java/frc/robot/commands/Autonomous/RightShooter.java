@@ -10,6 +10,7 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
+import frc.robot.Constants.ShootSpeed;
 import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
@@ -31,8 +32,8 @@ public class RightShooter extends SequentialCommandGroup {
     super();
     addCommands(
       new Turn(235.44),
-      new Shoot(10, 3000),
-      new ParallelCommandGroup(new ConveyerCom(5000), new Shoot(10, 5000)),
+      new Shoot(ShootSpeed.full, 3000),
+      new ParallelCommandGroup(new ConveyerCom(5000), new Shoot(ShootSpeed.full, 5000)),
       new Turn(degrees)//,
       //new Shoot(proximity.getDistance())
     );

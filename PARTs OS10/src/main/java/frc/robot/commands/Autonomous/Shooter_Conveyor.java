@@ -8,6 +8,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants.ShootSpeed;
 import frc.robot.commands.*;
 import frc.robot.commands.Autonomous.*;
 
@@ -21,6 +22,6 @@ public class Shooter_Conveyor extends ParallelCommandGroup {
   public Shooter_Conveyor() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    addCommands(new ConveyerCom(5000),new Shoot(0.1, 1000)); //TODO: set the distancee as a variable
+    addCommands(new ConveyerCom(5000),new Shoot(ShootSpeed.quarter, 1000)); //TODO: set the distancee as a variable
   }
 }
