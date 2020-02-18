@@ -173,7 +173,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
     SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 
-    
+
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
    //rampUp code
     final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());
@@ -193,11 +193,12 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     drive.move(limitedJS1, limitedJS2);
 
+
+
+    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(16));
+    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(16));
+
     //Drive inversion
-
-    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(1));
-    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(1));
-
 
     if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
     {
