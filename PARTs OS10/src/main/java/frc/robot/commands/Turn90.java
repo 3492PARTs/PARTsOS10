@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.DriveSparkMax;
 
 public class Turn90 extends CommandBase {
   /**
@@ -19,7 +20,7 @@ public class Turn90 extends CommandBase {
   final double rotationTarget = 90.0;
   double speed;
   Gyro gyro = Gyro.getInstance();
-  Drive drive = Drive.getInstance();
+  DriveSparkMax drive = DriveSparkMax.getInstance();
   public Turn90(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.speed = speed;
