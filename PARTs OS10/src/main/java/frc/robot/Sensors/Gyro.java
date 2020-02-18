@@ -8,8 +8,7 @@
 package frc.robot.Sensors;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import frc.robot.Constants;
-import frc.robot.subsystems.Drive;
+
 
 /**
  * Add your docs here.

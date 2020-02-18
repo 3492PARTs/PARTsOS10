@@ -150,8 +150,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     Constants.driveOrientation = false;
     if(m_autonomousCommand != null){
       m_autonomousCommand.cancel();
-      SmartDashboard.putNumber("Left Shooter RPM is", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
-      SmartDashboard.putNumber("Right Shooter RPM is", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
+
 
     }
     // This makes sure that the autonomous stops running when
@@ -170,6 +169,11 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   @Override
   public void teleopPeriodic() {
 
+
+    SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
+    SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
+
+    
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
    //rampUp code
     final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());

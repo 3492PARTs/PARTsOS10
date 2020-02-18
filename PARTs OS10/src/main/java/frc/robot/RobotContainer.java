@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.DriveSparkMax;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -32,7 +33,7 @@ public class RobotContainer {
   public static  Conveyor conveyor = Conveyor.getInstance();
   public static Shooter shooter = Shooter.getInstance();
   public static Intake intake = Intake.getInstance();
-  public static Drive drive = Drive.getInstance();
+  public static DriveSparkMax drive = DriveSparkMax.getInstance();
   public static Climber_Command climberCommand = new Climber_Command();
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);

@@ -53,7 +53,7 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   int timeoutMs = 0;
   int peakAmps = 40;
 
-//singleton
+// singleton
 private static Drive _staticDrive = new Drive();
 public static Drive getInstance(){
   return _staticDrive;
