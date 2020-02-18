@@ -24,9 +24,9 @@ import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DriveSparkMax;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.commands.Autonomous.ConveyerSpaceCom;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.CameraServer;
 
 
@@ -72,6 +72,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // autonomous chooser on the dashboard.
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
+    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(16));
+    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(16));
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
@@ -152,6 +154,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
       m_autonomousCommand.cancel();
 
 
+
+
     }
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
@@ -195,8 +199,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
 
-    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(16));
-    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(16));
+
 
     //Drive inversion
 
