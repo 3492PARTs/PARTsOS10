@@ -29,7 +29,7 @@ public static enum Direction {
     forward, reverse, off
 }
 
-public static enum shootSpeed {
+public static enum ShootSpeed {
     full, half, quarter
 }
 

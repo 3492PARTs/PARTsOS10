@@ -9,6 +9,7 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
+import frc.robot.Constants.ShootSpeed;
 import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
@@ -28,7 +29,7 @@ public class StraightTopShooter extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-      new Shoot(10, 5000),
+      new Shoot(ShootSpeed.full, 5000),
       new DriveCom(40, Direction.reverse));
   }
 }

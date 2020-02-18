@@ -9,6 +9,8 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.time.StopWatch;
 import frc.robot.Constants;
+import frc.robot.Constants.ShootSpeed;
+import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
@@ -16,7 +18,7 @@ public class Shoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
-  private double distance;
+  private ShootSpeed speed;
   private int shootTime = 10000;//TODO: set values
   Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
@@ -24,8 +26,8 @@ public class Shoot extends CommandBase {
    * 
    * @param distance distance robot should move
    */
-  public Shoot(double distance, int time) {
-    this.distance = distance;
+  public Shoot(ShootSpeed speed , int time) {
+    this.speed = speed;
     shootTime = time;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -39,14 +41,14 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if((distance > 10))
-    {
+    if(speed == ShootSpeed.full){
       shooter.toggleState(Constants.Direction.forward);
     }
-    else
-    {
-      //shooter.toggleState(Constants.Direction.forward, (distance * 0.1));
+    else if(speed == ShootSpeed.half){
       shooter.toggleState(Constants.Direction.forward, .5);
+    }
+    else if(speed == ShootSpeed.quarter){
+      shooter.toggleState(Constants.Direction.forward, .25);
     }
 
   }
