@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.time.StopWatch;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
