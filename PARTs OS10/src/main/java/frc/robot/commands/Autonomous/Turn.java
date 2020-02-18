@@ -9,7 +9,7 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Sensors.Gyro;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.DriveSparkMax;
 
 public class Turn extends CommandBase {
   /**
@@ -19,7 +19,7 @@ public class Turn extends CommandBase {
   private double degrees;
   private double objDegrees;
   private final double Speed = .1; //TODO: test for safe turning speed
-  private Drive drive = Drive.getInstance();
+  private DriveSparkMax drive = DriveSparkMax.getInstance();
 /**
  * 
  * @param objDegrees the degrees it should be
