@@ -178,8 +178,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   public void teleopPeriodic() {
 
     SmartDashboard.putNumber("PESensor", PESensor.PESensor.getValue());
-    SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
-    SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
+    SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(((double)shooter.shooterLeft.getSelectedSensorVelocity())/4096.0));
+    SmartDashboard.putNumber("Right Shooter RPM is: ", 600*((double)shooter.shooterRight.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("climber pivot encoder", climber.pivotEncoder());
 
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
@@ -290,6 +290,10 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   
     if(m_robotContainer.launchPad.getRawButton(10))//shooter out
+    {
+      shooter.toggleState(Constants.Direction.reverse, 1);
+    }
+    else if(m_robotContainer.leftJoystick.getRawButton(15) || m_robotContainer.rightJoystick.getRawButton(15))//shooter out
     {
       shooter.toggleState(Constants.Direction.reverse, .35);
     }
