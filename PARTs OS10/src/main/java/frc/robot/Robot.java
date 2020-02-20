@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   private final Gyro gyro = Gyro.getInstance();
   private final EncodersSparkMax encoders = EncodersSparkMax.getInstance();
   private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
-
+  
   private double choosenDelay;
 
 NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -76,6 +76,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.conveyorSpace2.whenPressed(new ConveyerSpaceCom(1.5));
+    m_robotContainer.elevatorPivot.whenPressed(new Climber_Command());
+    m_robotContainer.elevatorPivot2.whenPressed(new Climber_Command());
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;

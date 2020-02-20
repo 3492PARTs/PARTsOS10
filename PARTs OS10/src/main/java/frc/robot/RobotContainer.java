@@ -41,7 +41,8 @@ public class RobotContainer {
   public Joystick launchPad = new Joystick(2);
   public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 9);
   public JoystickButton conveyorSpace2 = new JoystickButton(rightJoystick, 9);
-
+  public JoystickButton elevatorPivot = new JoystickButton(leftJoystick, 10);
+  public JoystickButton elevatorPivot2 = new JoystickButton(rightJoystick, 10);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
