@@ -13,19 +13,20 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 /**
  * Add your docs here.
  */
+
 public class Gyro {
     private static Gyro _staticGyro = new Gyro();
     public static Gyro getInstance(){
          return _staticGyro;
     }
-    public AnalogGyro gyro = new AnalogGyro(0);
+    public static AnalogGyro gyro = new AnalogGyro(0);
 
 
-    public static double getAngle(){
-        return Gyro.getInstance().gyro.getAngle();
+    public double getAngle(){
+        return gyro.getAngle();
     }
 
     public static void zeroGyro() {
-        Gyro.getInstance().gyro.reset();        
+        gyro.reset();        
     }
 }
