@@ -180,7 +180,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putNumber("PESensor", PESensor.PESensor.getValue());
     SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
     SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
-
+    SmartDashboard.putNumber("climber pivot encoder", climber.pivotEncoder());
 
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
    //rampUp code

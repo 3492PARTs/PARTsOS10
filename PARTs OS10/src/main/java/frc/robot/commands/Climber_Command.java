@@ -37,8 +37,8 @@ public class Climber_Command extends CommandBase {
   
   @Override
   public void execute() {
-  rotations = climber.pivotEncoder()/4096;
-  climber.elevatorToggleState(Direction.forward);
+  rotations = climber.pivotEncoder();
+  climber.pivotToggleState(Direction.forward);
   }
 
 
@@ -46,13 +46,13 @@ public class Climber_Command extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.elevatorToggleState(Direction.off);
+    climber.pivotToggleState(Direction.off);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
 
-    return rotations>=.275;
+    return rotations>=.231;
   }
 }
