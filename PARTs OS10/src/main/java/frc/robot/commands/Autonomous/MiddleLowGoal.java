@@ -15,7 +15,7 @@ import frc.robot.Constants.ShootSpeed;
 import frc.robot.Sensors.Proximity;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
-import frc.robot.commands.Autonomous.ConveyerCom;
+import frc.robot.commands.Autonomous.ConveyorCom;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -35,7 +35,7 @@ public class MiddleLowGoal extends SequentialCommandGroup {
     super();
     addCommands(new DriveCom(40,Direction.reverse),
     new Shoot(ShootSpeed.half, 3000),
-    new ParallelCommandGroup(new ConveyerCom(5000), new Shoot(ShootSpeed.half, 5000))
+    new ParallelCommandGroup(new ConveyorCom(5000), new Shoot(ShootSpeed.half, 5000))
     );
   }
 

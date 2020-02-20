@@ -12,15 +12,15 @@ import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Conveyor;
 
 
-public class ConveyerCom extends CommandBase {
+public class ConveyorCom extends CommandBase {
   /**
    * Creates a new ConveyerCom.
    */
   long time;
   long currentTime;
   long duration;
-  Conveyor conveyer = Conveyor.getInstance();
-  public ConveyerCom(long duration) {
+  Conveyor conveyor = Conveyor.getInstance();
+  public ConveyorCom(long duration) {
   this.duration = duration;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -36,13 +36,13 @@ public class ConveyerCom extends CommandBase {
   @Override
   public void execute() {
   currentTime = System.currentTimeMillis();
-  conveyer.toggleState(Direction.forward);
+  conveyor.toggleState(Direction.forward);
   }
   
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyer.toggleState(Direction.off);
+    conveyor.toggleState(Direction.off);
   }
 
   // Returns true when the command should end.
