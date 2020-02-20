@@ -32,7 +32,7 @@ public class RightShooter extends SequentialCommandGroup {
     addCommands(
       new Turn(235.44),
       new Shoot(ShootSpeed.full, 3000),
-      new ParallelCommandGroup(new ConveyerCom(5000), new Shoot(ShootSpeed.full, 5000)),
+      new ParallelCommandGroup(new ConveyorCom(5000), new Shoot(ShootSpeed.full, 5000)),
       new Turn(degrees)//,
       //new Shoot(proximity.getDistance())
     );

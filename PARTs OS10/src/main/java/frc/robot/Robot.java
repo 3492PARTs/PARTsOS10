@@ -74,8 +74,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // autonomous chooser on the dashboard.
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
-    m_robotContainer.leftButton_9.whenPressed(new ConveyerSpaceCom(1.5));
-    m_robotContainer.rightButton_9.whenPressed(new ConveyerSpaceCom(1.5));
+    m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
+    m_robotContainer.conveyorSpace2.whenPressed(new ConveyerSpaceCom(1.5));
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
