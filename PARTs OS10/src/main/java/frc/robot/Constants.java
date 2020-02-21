@@ -24,6 +24,7 @@ public final class Constants {
     public static int mult; // used to switch orientation of drive
     public static boolean driveOrientation; // true = shooter in front, false = intake is front
     public static final String SD_AUTO_DELAY =  "autoDelay";
+    public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
 
 public static enum Direction {
     forward, reverse, off

@@ -8,16 +8,27 @@
 package frc.robot.Sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import frc.robot.Constants;
 
 /**
  * Add your docs here.
  */
 public class PhotoElectricSensor {
-    private static PhotoElectricSensor _staticPESensor = new PhotoElectricSensor();
-    public AnalogInput PESensor = new AnalogInput(2);
+    private static PhotoElectricSensor _staticPhotoEye = new PhotoElectricSensor();
+    public AnalogInput photoEye = new AnalogInput(2);
     public static PhotoElectricSensor getInstance()
     {
-        return _staticPESensor;
+        return _staticPhotoEye;
+    }
+    public boolean photoEyeBreak(double range){
+        if(range >= Constants.PHOTO_EYE_RANGE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
