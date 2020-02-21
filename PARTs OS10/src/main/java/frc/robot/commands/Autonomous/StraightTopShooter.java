@@ -32,6 +32,7 @@ public class StraightTopShooter extends SequentialCommandGroup {
     addCommands(
       new Delay(),
       new DriveCom(13, Direction.reverse),
+      new DriveCom(22, Direction.forward),
       new Shoot(ShootSpeed.full, 5000),
       new DriveCom(40, Direction.reverse));
   }

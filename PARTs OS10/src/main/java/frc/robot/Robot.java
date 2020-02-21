@@ -179,7 +179,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   // SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
   // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 
-
+    SmartDashboard.putString("Drive Orientation", Constants.driveFront);
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
 
     boolean shooterStatus =  5350 <= 600*((double)shooter.shooterLeft.getSelectedSensorVelocity())/4096.0 && 5350 <= 600*((double)shooter.shooterRight.getSelectedSensorVelocity())/4096.0;
