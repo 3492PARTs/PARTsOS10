@@ -7,11 +7,13 @@
 
 package frc.robot.commands.Autonomous;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Delay;
 import frc.robot.commands.DriveCom;
+import frc.robot.commands.Shoot;
 
 
 
@@ -32,10 +34,10 @@ public class LeftShooter extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-     new Delay(),
-     new Turn(-235.44),
-     new DriveCom(distance, Direction.forward),
-     new Turn(degrees)//,
+    new Delay(),
+    new DriveCom(13, Direction.reverse),
+    new DriveCom(distance, Direction.forward),
+    new Shooter_Conveyor()
      //new Shoot(proximity.getDistance())
     );
     

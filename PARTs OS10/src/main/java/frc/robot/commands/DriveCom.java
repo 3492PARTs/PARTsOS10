@@ -28,7 +28,7 @@ public class DriveCom extends CommandBase {
   
   /**
    * 
-   * @param distance the distance it should move
+   * @param distance the distance it should move in inches
    * @param dir the direction it should move
    */
 

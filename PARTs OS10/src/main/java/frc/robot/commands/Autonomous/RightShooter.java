@@ -9,8 +9,11 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants.Direction;
 import frc.robot.Constants.ShootSpeed;
 import frc.robot.Sensors.Proximity;
+import frc.robot.commands.Delay;
+import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -29,10 +32,10 @@ public class RightShooter extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-      new Turn(235.44),
+      new Delay(),
+      new DriveCom(13, Direction.reverse),
       new Shoot(ShootSpeed.full, 3000),
-      new ParallelCommandGroup(new ConveyorCom(5000), new Shoot(ShootSpeed.full, 5000)),
-      new Turn(degrees)//,
+      new ParallelCommandGroup(new ConveyorCom(5000), new Shoot(ShootSpeed.full, 5000))
       //new Shoot(proximity.getDistance())
     );
   }
