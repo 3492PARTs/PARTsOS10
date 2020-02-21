@@ -27,7 +27,7 @@ public class PhotoElectricSensor {
         }
         else
         {
-            return false;
+            return false;   
         }
     }
 

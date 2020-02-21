@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   private final Gyro gyro = Gyro.getInstance();
   private final EncodersSparkMax encoders = EncodersSparkMax.getInstance();
   private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
-  
+
   private double choosenDelay;
 
 NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -76,8 +76,6 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.conveyorSpace2.whenPressed(new ConveyerSpaceCom(1.5));
-    m_robotContainer.elevatorPivot.whenPressed(new Climber_Command());
-    m_robotContainer.elevatorPivot2.whenPressed(new Climber_Command());
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
@@ -90,6 +88,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     m_chooser.addOption("Left starting positon", new LeftShooter());
     m_chooser.addOption("Right Start Position", new RightShooter());
     m_chooser.addOption("Middle Low Goal", new MiddleLowGoal());
+    // boolean box
+  
   }
 
   /**
@@ -178,11 +178,17 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   public void teleopPeriodic() {
 
     SmartDashboard.putNumber("PESensor", PESensor.photoEye.getValue());
-    SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(((double)shooter.shooterLeft.getSelectedSensorVelocity())/4096.0));
-    SmartDashboard.putNumber("Right Shooter RPM is: ", 600*((double)shooter.shooterRight.getSelectedSensorVelocity()));
-    SmartDashboard.putNumber("climber pivot encoder", climber.pivotEncoder());
+    // SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
+    // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
+
 
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
+
+    boolean shooterStatus =  5350 <= 600*((double)shooter.shooterLeft.getSelectedSensorVelocity())/4096.0 && 5350 <= 600*((double)shooter.shooterRight.getSelectedSensorVelocity())/4096.0;
+
+
+    SmartDashboard.putBoolean("Should shoot?", shooterStatus);
+
    //rampUp code
     final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());
     final double limit = .012;
@@ -201,8 +207,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     drive.move(limitedJS1, limitedJS2);
 
-
-
+    
 
 
     //Drive inversion
@@ -290,10 +295,6 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   
     if(m_robotContainer.launchPad.getRawButton(10))//shooter out
-    {
-      shooter.toggleState(Constants.Direction.reverse, 1);
-    }
-    else if(m_robotContainer.leftJoystick.getRawButton(15) || m_robotContainer.rightJoystick.getRawButton(15))//shooter out
     {
       shooter.toggleState(Constants.Direction.reverse, .35);
     }
