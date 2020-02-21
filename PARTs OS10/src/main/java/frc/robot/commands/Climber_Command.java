@@ -37,7 +37,6 @@ public class Climber_Command extends CommandBase {
   
   @Override
   public void execute() {
-  rotations = climber.pivotEncoder();
   climber.pivotToggleState(Direction.forward);
   }
 
@@ -53,6 +52,6 @@ public class Climber_Command extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return rotations>=.231;
+    return climber.pivotEncoder()>=.231;
   }
 }
