@@ -34,7 +34,8 @@ public class MiddleLowGoal extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
-    addCommands(new DriveCom(length,Direction.reverse),
+    addCommands(
+    new DriveCom(length,Direction.reverse),
     new Shoot(ShootSpeed.half, 3000),
     new ParallelCommandGroup(new ConveyorCom(duration), new Shoot(ShootSpeed.half, (int)duration))
     );
