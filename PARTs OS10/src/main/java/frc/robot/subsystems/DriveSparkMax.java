@@ -24,19 +24,14 @@ public class DriveSparkMax extends SubsystemBase {
    */
 private RobotContainer m_robotContainer;
 private final Drive drive = Drive.getInstance();
-public  int Right1_port = 13;
-public  int Right2_port = 14;
-public  int Right3_port = 15;
-public  CANSparkMax Right1 = new CANSparkMax(Right1_port, MotorType.kBrushless);
-public  CANSparkMax Right2 = new CANSparkMax(Right2_port, MotorType.kBrushless);
-public  CANSparkMax Right3 = new CANSparkMax(Right3_port, MotorType.kBrushless);
 
-public  int Left1_port = 2;
-public  int Left2_port = 1;
-public  int Left3_port = 8;
-public  CANSparkMax Left1 = new CANSparkMax(Left1_port, MotorType.kBrushless);
-public  CANSparkMax Left2 = new CANSparkMax(Left2_port, MotorType.kBrushless);
-public  CANSparkMax Left3 = new CANSparkMax(Left3_port, MotorType.kBrushless);
+public  CANSparkMax Right1 = new CANSparkMax(Constants.Right1_port, MotorType.kBrushless);
+public  CANSparkMax Right2 = new CANSparkMax(Constants.Right2_port, MotorType.kBrushless);
+public  CANSparkMax Right3 = new CANSparkMax(Constants.Right3_port, MotorType.kBrushless);
+
+public  CANSparkMax Left1 = new CANSparkMax(Constants.Left1_port, MotorType.kBrushless);
+public  CANSparkMax Left2 = new CANSparkMax(Constants.Left2_port, MotorType.kBrushless);
+public  CANSparkMax Left3 = new CANSparkMax(Constants.Left3_port, MotorType.kBrushless);
 
 public  SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
 public  SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);

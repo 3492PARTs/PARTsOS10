@@ -175,7 +175,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   @Override
   public void teleopPeriodic() {
 
-    SmartDashboard.putNumber("PESensor", PESensor.photoEye.getValue());
+    SmartDashboard.putNumber("PESensorShoot", PESensor.photoEyeShoot.getValue());
+    SmartDashboard.putBoolean("PESensorIntake", PESensor.photoEyeIntake.get());
   // SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
   // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 

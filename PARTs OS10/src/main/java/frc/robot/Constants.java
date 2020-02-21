@@ -27,6 +27,17 @@ public final class Constants {
     public static final String SD_AUTO_DELAY =  "autoDelay";
     public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
 
+    //drivetrain
+    public static final int Right1_port = 13;
+    public static final int Right2_port = 14;
+    public static final int Right3_port = 15;
+    public static final int Left1_port = 2;
+    public static final int Left2_port = 1;
+    public static final int Left3_port = 8;
+
+    public static final int Conveyor_port = 4;
+    
+
 public static enum Direction {
     forward, reverse, off
 }

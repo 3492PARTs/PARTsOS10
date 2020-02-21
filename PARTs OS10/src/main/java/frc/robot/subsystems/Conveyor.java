@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -12,7 +12,6 @@ public class Conveyor extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
   TalonSRX conveyor;
-  int Conveyor_port = 4;
   int timeoutMs = 0;
   
   // singleton
@@ -23,7 +22,7 @@ public class Conveyor extends SubsystemBase {
     return _staticConveyor;
   }
   public Conveyor() {
-    conveyor = new TalonSRX(Conveyor_port);  
+    conveyor = new TalonSRX(Constants.Conveyor_port);  
   conveyor.configPeakCurrentDuration(100, 10); 
   conveyor.configContinuousCurrentLimit(45, timeoutMs);
   conveyor.configPeakCurrentLimit(25, timeoutMs);
