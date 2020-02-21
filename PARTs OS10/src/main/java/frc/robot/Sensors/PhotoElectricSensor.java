@@ -8,6 +8,7 @@
 package frc.robot.Sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 
 /**
@@ -15,13 +16,20 @@ import frc.robot.Constants;
  */
 public class PhotoElectricSensor {
     private static PhotoElectricSensor _staticPhotoEye = new PhotoElectricSensor();
-    public AnalogInput photoEye = new AnalogInput(2);
+    public DigitalInput photoEyeIntake = new DigitalInput(3);
+    public AnalogInput photoEyeShoot = new AnalogInput(2);
     public static PhotoElectricSensor getInstance()
     {
         return _staticPhotoEye;
     }
-    public boolean photoEyeBreak(double range){
-        if(range >= Constants.PHOTO_EYE_RANGE)
+
+    /**
+     * 
+     * @param sensor = photoelectrc sensor reading
+     * @return true if ball is breaking plane, false if not
+     */
+    public boolean photoEyeBreak(double sensor){
+        if(sensor >= Constants.PHOTO_EYE_RANGE)
         {
             return true;
         }
@@ -29,6 +37,7 @@ public class PhotoElectricSensor {
         {
             return false;   
         }
+        
     }
 
 }
