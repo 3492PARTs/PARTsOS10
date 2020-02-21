@@ -99,16 +99,21 @@ public void moveLimited(Double joyY, Double JoyX){
 
 
 
-
+/**
+ * 
+ * @param orientation true = shooter is front, false = intake is front
+ */
 public void switchFront(boolean orientation)
 {
   if(orientation)
   {
     Constants.mult = 1;
+    Constants.driveFront = "Shoot";
   }
   else
   {
     Constants.mult = -1;
+    Constants.driveFront = "INTAKE";
   }
 }
 
