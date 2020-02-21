@@ -72,10 +72,14 @@ public void stop(){
 }
 
 
-
 //joystick limiter
 double limitedJS1 = 0;
 double limitedJS2 = 0;
+/**
+ * 
+ * @param joyY joystick left y axis
+ * @param JoyX joystick right y axis
+ */
 public void moveLimited(Double joyY, Double JoyX){
   double limit = .02;
   double change = joyY -limitedJS1;
@@ -90,6 +94,7 @@ public void moveLimited(Double joyY, Double JoyX){
   if (change>limit) change = limit;
   else if( change<=limit) change = -limit;
   limitedJS2 += change;
+  M_drive.tankDrive(limitedJS1, limitedJS2);
 }
 
 

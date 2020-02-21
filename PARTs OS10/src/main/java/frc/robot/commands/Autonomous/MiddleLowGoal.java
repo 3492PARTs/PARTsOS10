@@ -25,17 +25,18 @@ public class MiddleLowGoal extends SequentialCommandGroup {
   /**
    * Creates a new Middle_LowGoal_Autonomous.
    */
-  double length = 0;//TODO: set value
+  double length = 40;//TODO: set value
   double distanceToGoal = 10;// 
   int degrees = 0;//TODO: set value
+  long duration = 5000;
   Proximity proximity = Proximity.getInstance();
   public MiddleLowGoal() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
-    addCommands(new DriveCom(40,Direction.reverse),
+    addCommands(new DriveCom(length,Direction.reverse),
     new Shoot(ShootSpeed.half, 3000),
-    new ParallelCommandGroup(new ConveyorCom(5000), new Shoot(ShootSpeed.half, 5000))
+    new ParallelCommandGroup(new ConveyorCom(duration), new Shoot(ShootSpeed.half, (int)duration))
     );
   }
 
