@@ -21,6 +21,8 @@ public final class Constants {
     public static final double WHEEL_CIRCUMFERENCE = 6 * Math.PI;
     public static final double  VOLTS_TO_DIST = 5.0;
     public static final double DRIVE_SPEED = .4;
+    public static final int shooterRightPort = 12;
+    public static final int shooterLeftPort = 3;
     public static int mult; // used to switch orientation of drive
     public static boolean driveOrientation; // true = shooter in front, false = intake is front
     public static final String SD_AUTO_DELAY =  "autoDelay";

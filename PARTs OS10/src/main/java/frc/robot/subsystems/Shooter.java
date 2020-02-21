@@ -12,6 +12,7 @@ import javax.swing.Timer;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 
 
@@ -19,6 +20,10 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
+  int shooterRightPort = Constants.shooterRightPort;
+  int shooterLeftPort = Constants.shooterLeftPort;
+
+
   public static final TalonSRX shooterRight = new TalonSRX(12);
   public static final TalonSRX shooterLeft = new TalonSRX(3);
   private static Shooter _staticShooter = new Shooter();
