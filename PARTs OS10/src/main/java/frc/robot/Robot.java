@@ -171,8 +171,6 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
    * This function is called periodically during operator control.
    */
 
-  double limitedJS1 = 0;
-  double limitedJS2 = 0;
 
   @Override
   public void teleopPeriodic() {
@@ -189,23 +187,27 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     SmartDashboard.putBoolean("Should shoot?", shooterStatus);
 
+
    //rampUp code
+  // double limitedJS1 = 0;
+  // double limitedJS2 = 0;
+
     final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());
-    final double limit = .012;
-    double change = Joystick1y - limitedJS1;
-    if (change > limit)
-      change = limit;
-    else if (change <= limit)
-      change = -limit;
-    limitedJS1 += change;
+  //   final double limit = .012;
+  //   double change = Joystick1y - limitedJS1;
+  //   if (change > limit)
+  //     change = limit;
+  //   else if (change <= limit)
+  //     change = -limit;
+  //   limitedJS1 += change;
 
     final double Joystick2y = (Constants.mult)*(m_robotContainer.leftJoystick.getY());
-    change = Joystick2y - limitedJS2;
-    if (change>limit) change = limit;
-    else if( change<=limit) change = -limit;
-    limitedJS2 += change;
+  //   change = Joystick2y - limitedJS2;
+  //   if (change>limit) change = limit;
+  //   else if( change<=limit) change = -limit;
+  //   limitedJS2 += change;
 
-    drive.move(limitedJS1, limitedJS2);
+    drive.moveLimited(Joystick1y, Joystick2y);
 
     
 

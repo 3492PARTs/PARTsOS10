@@ -61,7 +61,11 @@ public static DriveSparkMax getInstance(){
  * @param Speed2 right drive train between 1,-1
  */
 
-
+public void move(Double Speed1,Double Speed2){
+  System.out.println("drive");
+  System.out.println(M_drive);
+  M_drive.tankDrive(Speed1, Speed2);
+}
 
 public void stop(){
   M_drive.tankDrive(0,0);
@@ -69,12 +73,27 @@ public void stop(){
 
 
 
+//joystick limiter
+double limitedJS1 = 0;
+double limitedJS2 = 0;
+public void moveLimited(Double joyY, Double JoyX){
+  double limit = .02;
+  double change = joyY -limitedJS1;
+  if(change>limit){
+    change = limit;
+  } else if (change <= limit){
+    change = - limit;
+  } 
+  limitedJS1 += change;
 
-public void move(Double Speed1,Double Speed2){
-  System.out.println("drive");
-  System.out.println(M_drive);
-  M_drive.tankDrive(Speed1, Speed2);
+  change = joyY - limitedJS2;
+  if (change>limit) change = limit;
+  else if( change<=limit) change = -limit;
+  limitedJS2 += change;
 }
+
+
+
 
 public void switchFront(boolean orientation)
 {
