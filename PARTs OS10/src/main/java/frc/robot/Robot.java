@@ -48,9 +48,11 @@ public class Robot extends TimedRobot {
   private final Gyro gyro = Gyro.getInstance();
   private final EncodersSparkMax encoders = EncodersSparkMax.getInstance();
   private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
+  public static boolean shooterStatusRight;
+  public static boolean shooterStatusLeft;
 
   private double choosenDelay;
-private boolean autoShoot = false;
+public static boolean autoShoot = false;
 NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 NetworkTableEntry tx = table.getEntry("tx");
 NetworkTableEntry ty = table.getEntry("ty");
@@ -116,6 +118,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
   }
 
   /**
@@ -143,6 +146,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     if(m_autonomousCommand != null){m_autonomousCommand.schedule();}
       choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
       System.out.println("Our choosen delay is " + choosenDelay);
+
     
 
   }
@@ -154,6 +158,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   public void autonomousPeriodic() {
     SmartDashboard.putNumber("Proximity Distance", proximity.getDistance());
     SmartDashboard.putNumber("Encoder Distance", encoders.getDistanceMovedRight());
+    shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
+    shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
   }
 
   @Override
@@ -189,8 +195,11 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putString("Drive Orientation", Constants.driveFront);
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
 
-    boolean shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
-    boolean shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
+
+    shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
+    shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
+
+
 
     SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
     SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
@@ -202,7 +211,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     }
 
     if(m_robotContainer.leftJoystick.getRawButton(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
-      autoShoot = !autoShoot;
+     autoShoot = !autoShoot;
     }
    //rampUp code
   // double limitedJS1 = 0;

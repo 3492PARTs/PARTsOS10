@@ -28,9 +28,13 @@ public class Climber extends SubsystemBase {
     double speed = .25;  
 //Singleton  
 private static Climber _staticClimber = new Climber();
-    public static Climber getInstance(){
+  
+
+public static Climber getInstance(){
     return _staticClimber;
   }
+  
+
   public Climber() {
     climb1 = new TalonSRX(7);
     climb2 = new TalonSRX(11);
@@ -95,10 +99,10 @@ private static Climber _staticClimber = new Climber();
 
   public void elevatorToggleState(Direction dir){
     if(dir == Direction.forward){
-      elevator.set(ControlMode.PercentOutput, -1);
+      elevator.set(ControlMode.PercentOutput, -.5);
    } 
    else if(dir == Direction.reverse){
-       elevator.set(ControlMode.PercentOutput, 1);
+       elevator.set(ControlMode.PercentOutput, .5);
    }
    else elevator.set(ControlMode.PercentOutput, 0);
   }
