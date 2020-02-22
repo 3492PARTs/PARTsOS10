@@ -95,10 +95,10 @@ private static Climber _staticClimber = new Climber();
 
   public void elevatorToggleState(Direction dir){
     if(dir == Direction.forward){
-      elevator.set(ControlMode.PercentOutput, -.5);
+      elevator.set(ControlMode.PercentOutput, -1);
    } 
    else if(dir == Direction.reverse){
-       elevator.set(ControlMode.PercentOutput, .5);
+       elevator.set(ControlMode.PercentOutput, 1);
    }
    else elevator.set(ControlMode.PercentOutput, 0);
   }

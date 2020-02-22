@@ -18,7 +18,6 @@ import frc.robot.Sensors.EncodersSparkMax;
 import frc.robot.Sensors.Gyro;
 import frc.robot.Sensors.PhotoElectricSensor;
 import frc.robot.Sensors.Proximity;
-import frc.robot.commands.Climber_Command;
 import frc.robot.commands.Autonomous.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
@@ -51,7 +50,7 @@ public class Robot extends TimedRobot {
   private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
 
   private double choosenDelay;
-
+private boolean autoShoot = false;
 NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 NetworkTableEntry tx = table.getEntry("tx");
 NetworkTableEntry ty = table.getEntry("ty");
@@ -75,14 +74,20 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
-    m_robotContainer.conveyorSpace2.whenPressed(new ConveyerSpaceCom(1.5));
+    m_robotContainer.elevatorPivot.whenPressed(new Climber_Command());
+    m_robotContainer.elevatorPivot2.whenPressed(new Climber_Command());
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
 
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
     System.out.println("auto options");
+    SmartDashboard.putString("Drive Orientation", Constants.driveFront);
     SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
+    SmartDashboard.putBoolean("Should shoot LEFT?", false);
+    SmartDashboard.putBoolean("Should shoot RIGHT?", false);
+    SmartDashboard.putBoolean("Should shoot?", false);
+    SmartDashboard.putBoolean("Autoshoot", autoShoot);
     SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
     m_chooser.setDefaultOption("MiddleTopShooter", new StraightTopShooter());
     m_chooser.addOption("Left starting positon", new LeftShooter());
@@ -174,21 +179,31 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void teleopPeriodic() {
-
+    SmartDashboard.putNumber("Pivot Encoder", climber.pivotEncoder());
     SmartDashboard.putNumber("PESensorShoot", PESensor.photoEyeShoot.getValue());
     SmartDashboard.putBoolean("PESensorIntake", PESensor.photoEyeIntake.get());
+    SmartDashboard.putNumber("Prox. Distance", proximity.getDistance());
   // SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
   // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 
     SmartDashboard.putString("Drive Orientation", Constants.driveFront);
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
 
-    boolean shooterStatus =  5350 <= 600*((double)shooter.shooterLeft.getSelectedSensorVelocity())/4096.0 && 5350 <= 600*((double)shooter.shooterRight.getSelectedSensorVelocity())/4096.0;
+    boolean shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
+    boolean shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
 
+    SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
+    SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
+    SmartDashboard.putBoolean("Should shoot?", shooterStatusLeft && shooterStatusRight);
+    SmartDashboard.putBoolean("Autoshoot", autoShoot);
+    
+    if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
+      new ConveyerSpaceCom(1.5).schedule();
+    }
 
-    SmartDashboard.putBoolean("Should shoot?", shooterStatus);
-
-
+    if(m_robotContainer.leftJoystick.getRawButton(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
+      autoShoot = !autoShoot;
+    }
    //rampUp code
   // double limitedJS1 = 0;
   // double limitedJS2 = 0;
@@ -243,13 +258,13 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
    
 
     
-    if(m_robotContainer.leftJoystick.getRawButton(1) ||  m_robotContainer.rightJoystick.getRawButton(1))
+    if(m_robotContainer.rightJoystick.getRawButton(1))
     {
-      intake.wheelToggleState(Direction.forward); //intake in
+      intake.wheelToggleState(Direction.reverse); //intake in
     }
     else if(m_robotContainer.leftJoystick.getRawButton(7) ||  m_robotContainer.rightJoystick.getRawButton(7))
     {
-      intake.wheelToggleState(Direction.reverse);//intake out
+      intake.wheelToggleState(Direction.forward);//intake out
     }
     else
     { 
@@ -299,11 +314,15 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   
     if(m_robotContainer.launchPad.getRawButton(10))//shooter out
     {
-      shooter.toggleState(Constants.Direction.reverse, .35);
+      shooter.toggleState(Constants.Direction.reverse, 1);
     }
     else if(m_robotContainer.launchPad.getRawButton(11))//shooter in
     {
       shooter.toggleState(Constants.Direction.forward);
+    }
+    else if(m_robotContainer.leftJoystick.getRawButton(13) ||  m_robotContainer.rightJoystick.getRawButton(13))
+    {
+      shooter.toggleState(Constants.Direction.reverse, .35); //shooter low out
     }
     else
     {

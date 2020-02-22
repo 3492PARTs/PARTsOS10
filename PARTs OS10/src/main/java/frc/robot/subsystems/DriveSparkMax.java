@@ -23,7 +23,6 @@ public class DriveSparkMax extends SubsystemBase {
    * Creates a new Drive.
    */
 private RobotContainer m_robotContainer;
-private final Drive drive = Drive.getInstance();
 
 public  CANSparkMax Right1 = new CANSparkMax(Constants.Right1_port, MotorType.kBrushless);
 public  CANSparkMax Right2 = new CANSparkMax(Constants.Right2_port, MotorType.kBrushless);
@@ -75,9 +74,9 @@ double limitedJS2 = 0;
  * @param joyY joystick left y axis
  * @param JoyX joystick right y axis
  */
-public void moveLimited(Double joyY, Double JoyX){
+public void moveLimited(Double joy1, Double joy2){
   double limit = .02;
-  double change = joyY -limitedJS1;
+  double change = joy1 -limitedJS1;
   if(change>limit){
     change = limit;
   } else if (change <= limit){
@@ -85,7 +84,7 @@ public void moveLimited(Double joyY, Double JoyX){
   } 
   limitedJS1 += change;
 
-  change = joyY - limitedJS2;
+  change = joy2 - limitedJS2;
   if (change>limit) change = limit;
   else if( change<=limit) change = -limit;
   limitedJS2 += change;

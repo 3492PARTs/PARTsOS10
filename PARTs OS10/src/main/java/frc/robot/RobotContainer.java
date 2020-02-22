@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.DriveSparkMax;
 
 /**
@@ -39,8 +38,7 @@ public class RobotContainer {
   public Joystick rightJoystick = new Joystick(0);
   public Joystick leftJoystick = new Joystick(1);
   public Joystick launchPad = new Joystick(2);
-  public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 9);
-  public JoystickButton conveyorSpace2 = new JoystickButton(rightJoystick, 9);
+  public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
   public JoystickButton elevatorPivot = new JoystickButton(leftJoystick, 10);
   public JoystickButton elevatorPivot2 = new JoystickButton(rightJoystick, 10);
 

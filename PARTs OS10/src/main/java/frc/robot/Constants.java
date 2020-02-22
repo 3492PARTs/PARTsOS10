@@ -17,13 +17,13 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static final double GEAR_RATIO = 8.01;
+    public static final double GEAR_RATIO = 8.01; //24/50
     public static final double WHEEL_CIRCUMFERENCE = 6 * Math.PI;
     public static final double  VOLTS_TO_DIST = 5.0;
     public static final double DRIVE_SPEED = .4;
     public static int mult; // used to switch orientation of drive
     public static boolean driveOrientation; // true = shooter in front, false = intake is front
-    public static String driveFront;
+    public static String driveFront = "";
     public static final String SD_AUTO_DELAY =  "autoDelay";
     public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
 

@@ -73,7 +73,7 @@ public class Shooter extends SubsystemBase {
     if(dir == Direction.forward){
       for(;counter<(90 * adjust); counter++){
         speed += .01;
-        // end test rampup
+       // end test rampup
         shooterRight.set(ControlMode.PercentOutput, speed);
         shooterLeft.set(ControlMode.PercentOutput, speed);
       }
@@ -89,6 +89,13 @@ public class Shooter extends SubsystemBase {
    }
   }
 
+  public double getRightRPM() {
+    return 600.0 * (double)shooterRight.getSelectedSensorVelocity() / 4096.0;
+  }
+
+  public double getLeftRPM() {
+    return 600.0 * (double)shooterLeft.getSelectedSensorVelocity() / 4096.0;
+  }
 
 
   @Override
