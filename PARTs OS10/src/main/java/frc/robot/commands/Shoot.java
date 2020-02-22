@@ -21,7 +21,7 @@ public class Shoot extends CommandBase {
    */
   private ShootSpeed speed;
   private int shootTime;
-  Shooter shooter = Shooter.getInstance();
+  private Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
   /**
    * 

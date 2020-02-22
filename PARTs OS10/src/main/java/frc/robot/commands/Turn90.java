@@ -15,11 +15,11 @@ public class Turn90 extends CommandBase {
   /**
    * Creates a new Turn90.
    */
-  double degrees;
-  final double rotationTarget = 90.0;
-  double speed;
-  Gyro gyro = Gyro.getInstance();
-  DriveSparkMax drive = DriveSparkMax.getInstance();
+  private double degrees;
+  private final double rotationTarget = 90.0;
+  private double speed;
+  private Gyro gyro = Gyro.getInstance();
+  private DriveSparkMax drive = DriveSparkMax.getInstance();
   public Turn90(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.speed = speed;

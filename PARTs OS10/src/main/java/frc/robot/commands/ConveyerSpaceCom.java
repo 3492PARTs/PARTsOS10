@@ -17,9 +17,9 @@ public class ConveyerSpaceCom extends CommandBase {
   /**
    * Creates a new ConveyerSpaceCom.
    */
-  long time;
-  double duration;
-  Conveyor conveyor = Conveyor.getInstance();
+  private long time;
+  private double duration;
+  private Conveyor conveyor = Conveyor.getInstance();
   /**
    * 
    * @param time in seconds
