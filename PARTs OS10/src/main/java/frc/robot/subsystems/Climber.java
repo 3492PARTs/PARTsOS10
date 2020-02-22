@@ -18,9 +18,9 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
 
-  private final TalonSRX climb1;
-  private final TalonSRX climb2;
-  private final TalonSRX elevator;
+  public final TalonSRX climb1;
+  public final TalonSRX climb2;
+  public final TalonSRX elevator;
   public final TalonSRX elevatorPivot;
     int peakAmps = 25;
     int amps = 45;
@@ -76,10 +76,6 @@ public static Climber getInstance(){
 
 
 
-
-  public double pivotEncoder(){
-    return ((double)elevatorPivot.getSelectedSensorPosition())/4096.0;
-  }
 
   public void climbToggleState(Direction dir){
     if(dir == Direction.forward){

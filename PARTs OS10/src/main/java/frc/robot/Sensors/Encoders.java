@@ -10,18 +10,21 @@ package frc.robot.Sensors;
 import frc.robot.Constants;
 
 import com.revrobotics.CANEncoder;
+
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveSparkMax;
 
 
-public class EncodersSparkMax {
+public class Encoders {
     private final DriveSparkMax drive = DriveSparkMax.getInstance();
+    private final Climber climber = Climber.getInstance();
     private CANEncoder rightEncoder = drive.Right1.getEncoder();
     private CANEncoder leftEncoder = drive.Left1.getEncoder();
-    private CANEncoder fix1 = drive.Left2.getEncoder();
-    private static EncodersSparkMax _staticEncodersSparkMax = new EncodersSparkMax();
-    public static EncodersSparkMax getInstance()
+    
+    private static Encoders _staticEncoders = new Encoders();
+    public static Encoders getInstance()
     {
-        return _staticEncodersSparkMax;
+        return _staticEncoders;
     }
     private static double startPositionRight = 0;
     private static double startPositionLeft = 0;
@@ -32,9 +35,24 @@ public class EncodersSparkMax {
     public double getDistanceMovedRight(){
         return Math.abs(((rightEncoder.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
     }
-    public double getDistanceFix(){
-        return Math.abs(((fix1.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
-    }
+    
+    
+  public double pivotElevatorEncoder(){
+    return ((double)climber.elevatorPivot.getSelectedSensorPosition())/4096.0;
+  }
+
+  public double elevatorEncoder(){
+    return ((double)climber.elevator.getSelectedSensorPosition())/4096.0;
+  }
+
+  public double armPivotEncoder(){
+      return ((double)climber.elevator.getSelectedSensorPosition())/4096.0;
+  }
+
+
+
+
+
     
 
     public void resetEncoders(){

@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
-import frc.robot.Sensors.EncodersSparkMax;
+import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
 import frc.robot.Sensors.PhotoElectricSensor;
 import frc.robot.Sensors.Proximity;
@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
   private final Proximity proximity = Proximity.getInstance();
   private final Gyro gyro = Gyro.getInstance();
-  private final EncodersSparkMax encoders = EncodersSparkMax.getInstance();
+  private final Encoders encoders = Encoders.getInstance();
   private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
   public static boolean shooterStatusRight;
   public static boolean shooterStatusLeft;
@@ -191,7 +191,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Pivot Encoder", climber.pivotEncoder());
+    SmartDashboard.putNumber("Pivot Encoder", encoders.pivotElevatorEncoder());
     SmartDashboard.putNumber("PESensorShoot", PESensor.photoEyeShoot.getValue());
     SmartDashboard.putBoolean("PESensorIntake", PESensor.photoEyeIntake.get());
     SmartDashboard.putNumber("Prox. Distance", proximity.getDistance());
@@ -199,7 +199,6 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 
     SmartDashboard.putString("Drive Orientation", Constants.driveFront);
-    SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
 
 
 
