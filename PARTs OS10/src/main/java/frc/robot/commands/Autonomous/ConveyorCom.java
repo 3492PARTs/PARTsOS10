@@ -8,7 +8,6 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Conveyor;
 
@@ -17,10 +16,10 @@ public class ConveyorCom extends CommandBase {
   /**
    * Creates a new ConveyerCom.
    */
-  long time;
-  long currentTime;
-  long duration;
-  Conveyor conveyor = Conveyor.getInstance();
+  private long time;
+  private long currentTime;
+  private long duration;
+  private Conveyor conveyor = Conveyor.getInstance();
   public ConveyorCom(long duration) {
   this.duration = duration;
     // Use addRequirements() here to declare subsystem dependencies.

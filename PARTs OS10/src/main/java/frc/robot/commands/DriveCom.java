@@ -20,6 +20,10 @@ public class DriveCom extends CommandBase {
    * Creates a new Drive.
    */
   private double distance;
+<<<<<<< HEAD
+=======
+  private Encoders encoders;
+>>>>>>> ec7fedf93aed3e6baa6636f989daab53dbe3b8bd
   private DriveSparkMax drive;
   private Direction dir;
   private Gyro gyro;
@@ -43,7 +47,7 @@ public class DriveCom extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   
+    encoders = Encoders.getInstance();
     drive = DriveSparkMax.getInstance();
     gyro = Gyro.getInstance();
 

@@ -26,10 +26,10 @@ public class MiddleLowGoal extends SequentialCommandGroup {
   /**
    * Creates a new Middle_LowGoal_Autonomous.
    */
-  double length = 40;//TODO: set value
-  double distanceToGoal = 10;// 
-  int degrees = 0;//TODO: set value
-  long duration = 5000;
+  private double length = 40;//TODO: set value
+  private double distanceToGoal = 10;// 
+  private int degrees = 0;//TODO: set value
+  private long duration = 5000;
   Proximity proximity = Proximity.getInstance();
   public MiddleLowGoal() {
     // Add your commands in the super() call, e.g.

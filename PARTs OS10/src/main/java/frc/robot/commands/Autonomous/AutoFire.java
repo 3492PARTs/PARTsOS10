@@ -7,9 +7,7 @@
 
 package frc.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ShootSpeed;
 import frc.robot.commands.ConveyerSpaceCom;
 import frc.robot.subsystems.Shooter;
 import frc.robot.Constants;

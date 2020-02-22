@@ -16,9 +16,8 @@ public class Delay extends CommandBase {
   /**
    * Creates a new Delay.
    */
-  long start_Time;
-  String keyString = "Autonomous Shooting Delay Choice";
-  double choosenDelay;
+  private long start_Time;
+  private double choosenDelay;
   public Delay() {
     // Use addRequirements() here to declare subsystem dependencie
 

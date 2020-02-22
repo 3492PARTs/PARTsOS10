@@ -9,9 +9,7 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.time.StopWatch;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.Constants.ShootSpeed;
-import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
@@ -21,7 +19,7 @@ public class Shoot extends CommandBase {
    */
   private ShootSpeed speed;
   private int shootTime;
-  Shooter shooter = Shooter.getInstance();
+  private Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
   /**
    * 

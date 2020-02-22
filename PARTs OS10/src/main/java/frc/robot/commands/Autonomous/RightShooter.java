@@ -24,9 +24,9 @@ public class RightShooter extends SequentialCommandGroup {
    * Creates a new Right_Autonomous.
    */
 
-  double degrees = 125; //TODO: set values
-  double distance = 0; //TODO: set values
-  Proximity proximity = Proximity.getInstance();
+  private double degrees = 125; //TODO: set values
+  private double distance = 0; //TODO: set values
+  private Proximity proximity = Proximity.getInstance();
   public RightShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
