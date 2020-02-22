@@ -56,8 +56,6 @@ public static DriveSparkMax getInstance(){
  */
 
 public void move(Double Speed1,Double Speed2){
-  System.out.println("drive");
-  System.out.println(M_drive);
   M_drive.tankDrive(Speed1, Speed2);
 }
 

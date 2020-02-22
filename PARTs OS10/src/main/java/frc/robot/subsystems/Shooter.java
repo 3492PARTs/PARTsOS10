@@ -50,23 +50,19 @@ public class Shooter extends SubsystemBase {
   double speed = .1;
   int counter = 0;
   public void toggleState(Direction dir){
-    System.out.println("shoot");//TODO: test ramp up tweak values if it works
     if(dir == Direction.forward){
-      System.out.println("fwd");
-      for(;counter<90; counter++){
-        speed += .01;
+      for(;counter<900; counter++){
+        speed += .001;
         // end test rampup TODO: see if this works
         shooterRight.set(ControlMode.PercentOutput, speed);
         shooterLeft.set(ControlMode.PercentOutput, speed);
       }
    } 
    else if(dir == Direction.reverse){
-    System.out.println("bak");
     shooterRight.set(ControlMode.PercentOutput, 1);
     shooterLeft.set(ControlMode.PercentOutput, 1);
  } 
    else{
-    System.out.println("off");
     shooterRight.set(ControlMode.PercentOutput,0);
     shooterLeft.set(ControlMode.PercentOutput, 0);
     

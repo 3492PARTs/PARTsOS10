@@ -19,11 +19,11 @@ public class DriveCom extends CommandBase {
   /**
    * Creates a new Drive.
    */
-  double distance;
-  EncodersSparkMax encoders = EncodersSparkMax.getInstance();
-  DriveSparkMax drive = DriveSparkMax.getInstance();
-  Direction dir;
-  static Gyro gyro = Gyro.getInstance();
+  private double distance;
+  private EncodersSparkMax encoders;
+  private DriveSparkMax drive;
+  private Direction dir;
+  private Gyro gyro;
   
   
   /**
@@ -43,12 +43,16 @@ public class DriveCom extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    encoders = EncodersSparkMax.getInstance();
+    drive = DriveSparkMax.getInstance();
+    gyro = Gyro.getInstance();
+
+    encoders.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("IN middle low goal");
     if(dir == Direction.forward){
       drive.move(-Constants.DRIVE_SPEED, -Constants.DRIVE_SPEED);
     }
@@ -63,7 +67,7 @@ public class DriveCom extends CommandBase {
   public void end(boolean interrupted) {
     drive.move(.0, .0);
     gyro.zeroGyro(); 
-    System.out.println("I'm finish driving.");
+    encoders.resetEncoders();
   }
 
   // Returns true when the command should end.

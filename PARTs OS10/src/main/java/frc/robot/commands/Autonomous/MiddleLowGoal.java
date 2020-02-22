@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
 import frc.robot.Constants.ShootSpeed;
 import frc.robot.Sensors.Proximity;
+import frc.robot.commands.Delay;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Autonomous.ConveyorCom;
@@ -35,9 +36,9 @@ public class MiddleLowGoal extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-    new DriveCom(length,Direction.reverse),
-    new Shoot(ShootSpeed.half, 3000),
-    new ParallelCommandGroup(new ConveyorCom(duration), new Shoot(ShootSpeed.half, (int)duration))
+    new Delay(),
+    new DriveCom(90,Direction.forward),
+    new ParallelCommandGroup(new ConveyorCom(duration), new Shoot(ShootSpeed.quarter, (int)duration))
     );
   }
 

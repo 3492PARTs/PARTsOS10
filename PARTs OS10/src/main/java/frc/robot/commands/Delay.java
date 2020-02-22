@@ -18,7 +18,6 @@ public class Delay extends CommandBase {
    */
   long start_Time;
   String keyString = "Autonomous Shooting Delay Choice";
-  int delayTime;
   double choosenDelay;
   public Delay() {
     // Use addRequirements() here to declare subsystem dependencie
@@ -28,8 +27,8 @@ public class Delay extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   start_Time = System.currentTimeMillis();
-  choosenDelay = 1000*(SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0));
+    start_Time = System.currentTimeMillis();
+    choosenDelay = 1000*(SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,6 +44,6 @@ public class Delay extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return System.currentTimeMillis() - start_Time >= delayTime;
+    return System.currentTimeMillis() - start_Time >= choosenDelay;
   }
 }

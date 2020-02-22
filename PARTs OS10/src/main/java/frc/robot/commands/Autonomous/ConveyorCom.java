@@ -36,10 +36,9 @@ public class ConveyorCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  currentTime = System.currentTimeMillis();
-  if(Robot.shooterStatusRight){
-  conveyor.toggleState(Direction.forward);
-  }
+    currentTime = System.currentTimeMillis();
+    conveyor.toggleState(Direction.forward);
+    
   }
   
   // Called once the command ends or is interrupted.
