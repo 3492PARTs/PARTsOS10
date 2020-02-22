@@ -20,11 +20,11 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  int shooterRightPort = Constants.shooterRightPort;
-  int shooterLeftPort = Constants.shooterLeftPort;
+  int shooterRightPort = Constants.SHOOTER_RIGHT_PORT;
+  int shooterLeftPort = Constants.SHOOTER_LEFT_PORT;
 
 
-  public static final TalonSRX shooterRight = new TalonSRX(12);
+  public final TalonSRX shooterRight = new TalonSRX(shooterRightPort);
   public static final TalonSRX shooterLeft = new TalonSRX(3);
   private static Shooter _staticShooter = new Shooter();
   // private static final Encoder rShooterEnc = new Encoder(0,1);
