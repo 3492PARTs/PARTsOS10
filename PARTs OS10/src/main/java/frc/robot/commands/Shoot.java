@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.time.StopWatch;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.Constants.ShootSpeed;
 import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -41,7 +42,7 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(speed == ShootSpeed.full){
+    if(speed == ShootSpeed.full && Robot.shooterStatusRight){
       shooter.toggleState(Constants.Direction.forward);
     }
     else if(speed == ShootSpeed.half){
@@ -62,6 +63,6 @@ public class Shoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.getDurationMs() > shootTime;
+    return timer.getDurationMs() >= shootTime;
   }
 }
