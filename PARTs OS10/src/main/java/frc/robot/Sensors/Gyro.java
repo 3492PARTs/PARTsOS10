@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 
 public class Gyro {
     private static Gyro _staticGyro = new Gyro();
+
     public static Gyro getInstance(){
          return _staticGyro;
     }

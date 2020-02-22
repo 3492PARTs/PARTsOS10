@@ -8,7 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.Climber_Command;
+import frc.robot.commands.Pivot_Command;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -33,7 +33,7 @@ public class RobotContainer {
   public static Shooter shooter = Shooter.getInstance();
   public static Intake intake = Intake.getInstance();
   public static DriveSparkMax drive = DriveSparkMax.getInstance();
-  public static Climber_Command climberCommand = new Climber_Command();
+  public static Pivot_Command climberCommand = new Pivot_Command();
 // The two joysticks
   public Joystick rightJoystick = new Joystick(0);
   public Joystick leftJoystick = new Joystick(1);
