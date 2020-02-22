@@ -9,10 +9,6 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Sensors.Encoders;
-import frc.robot.Sensors.Gyro;
-import frc.robot.Sensors.PhotoElectricSensor;
-import frc.robot.Sensors.Proximity;
 import frc.robot.Sensors.*;
 
 
