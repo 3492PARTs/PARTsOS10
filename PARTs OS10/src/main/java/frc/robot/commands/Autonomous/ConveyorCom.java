@@ -8,6 +8,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Conveyor;
 
@@ -36,7 +37,9 @@ public class ConveyorCom extends CommandBase {
   @Override
   public void execute() {
   currentTime = System.currentTimeMillis();
+  if(Robot.shooterStatusRight){
   conveyor.toggleState(Direction.forward);
+  }
   }
   
   // Called once the command ends or is interrupted.

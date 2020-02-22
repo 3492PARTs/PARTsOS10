@@ -42,7 +42,7 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(speed == ShootSpeed.full && Robot.shooterStatusRight){
+    if(speed == ShootSpeed.full){
       shooter.toggleState(Constants.Direction.forward);
     }
     else if(speed == ShootSpeed.half){

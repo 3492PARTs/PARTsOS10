@@ -119,6 +119,9 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
+    shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
+    shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
+
   }
 
   /**
@@ -158,8 +161,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   public void autonomousPeriodic() {
     SmartDashboard.putNumber("Proximity Distance", proximity.getDistance());
     SmartDashboard.putNumber("Encoder Distance", encoders.getDistanceMovedRight());
-    shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
-    shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
+
   }
 
   @Override
@@ -195,9 +197,6 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putString("Drive Orientation", Constants.driveFront);
     SmartDashboard.putNumber("fixing encoder 1", encoders.getDistanceFix());
 
-
-    shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
-    shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
 
 
 
