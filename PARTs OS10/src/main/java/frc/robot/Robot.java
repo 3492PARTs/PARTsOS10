@@ -121,6 +121,10 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
     shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
+    
+    SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
+    SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
+    SmartDashboard.putBoolean("Should shoot?", shooterStatusLeft && shooterStatusRight);
 
   }
 
@@ -200,9 +204,6 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
 
-    SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
-    SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
-    SmartDashboard.putBoolean("Should shoot?", shooterStatusLeft && shooterStatusRight);
     SmartDashboard.putBoolean("Autoshoot", autoShoot);
 
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {

@@ -5,55 +5,52 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Autonomous;
 
-
+import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ShootSpeed;
+import frc.robot.commands.ConveyerSpaceCom;
+import frc.robot.subsystems.Shooter;
 import frc.robot.Constants;
-import frc.robot.Constants.Direction;
-import frc.robot.subsystems.Conveyor;
+import frc.robot.Robot;
 
-public class ConveyerSpaceCom extends CommandBase {
+public class AutoFire extends CommandBase {
   /**
-   * Creates a new ConveyerSpaceCom.
+   * Creates a new AutoFire.
    */
-  long time;
-  double duration;
-  Conveyor conveyor = Conveyor.getInstance();
-  /**
-   * 
-   * @param time in seconds
-   */
-  public ConveyerSpaceCom(double duration) {
+  private Shooter shooter;
+  public AutoFire() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.duration = duration*1000;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time = System.currentTimeMillis();
-    Constants.autoFireLock = true;
-    
+    shooter = Shooter.getInstance();
+    Constants.autoFireCounter = 0;
   }
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.toggleState(Direction.forward);
+    shooter.toggleState(Constants.Direction.forward);
+    if((Robot.shooterStatusRight || Robot.shooterStatusLeft) && !Constants.autoFireLock)
+    {
+      new ConveyerSpaceCom(1.5).schedule();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyor.toggleState(Direction.off);
-    Constants.autoFireCounter++;
-    Constants.autoFireLock = false;
+    shooter.toggleState(Constants.Direction.off);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  return duration <= System.currentTimeMillis()-time;
+    return Constants.autoFireCounter > 3;
   }
 }

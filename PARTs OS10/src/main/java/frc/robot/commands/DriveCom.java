@@ -50,10 +50,10 @@ public class DriveCom extends CommandBase {
   public void execute() {
     System.out.println("IN middle low goal");
     if(dir == Direction.forward){
-      drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
+      drive.move(-Constants.DRIVE_SPEED, -Constants.DRIVE_SPEED);
     }
     if(dir == Direction.reverse){
-      drive.move(-Constants.DRIVE_SPEED, -Constants.DRIVE_SPEED);
+      drive.move(Constants.DRIVE_SPEED, Constants.DRIVE_SPEED);
     }
     
   }

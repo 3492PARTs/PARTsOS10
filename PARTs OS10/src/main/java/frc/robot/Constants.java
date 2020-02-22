@@ -32,7 +32,8 @@ public final class Constants {
     public static String driveFront = "";
     public static final String SD_AUTO_DELAY =  "autoDelay";
     public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
-
+    public static int autoFireCounter = 0;
+    public static boolean autoFireLock = false;
     //drivetrain
     public static final int Left1_port = 2;
     public static final int Left2_port = 1;
