@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Climber;
+import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
 
 public class Pivot_Command extends CommandBase {
@@ -20,6 +21,7 @@ public class Pivot_Command extends CommandBase {
   int encodervalue = 0;
   Climber climber = Climber.getInstance();
   Gyro gyro = Gyro.getInstance();
+  Encoders encoders = Encoders.getInstance();
   public Pivot_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -49,6 +51,6 @@ public class Pivot_Command extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return climber.pivotEncoder()>=.241;
+    return encoders.pivotElevatorEncoder()>=.241;
   }
 }

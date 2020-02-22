@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
-import frc.robot.Sensors.EncodersSparkMax;
+import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
 import frc.robot.subsystems.DriveSparkMax;
 
@@ -20,10 +20,10 @@ public class DriveCom extends CommandBase {
    * Creates a new Drive.
    */
   private double distance;
-  private EncodersSparkMax encoders;
   private DriveSparkMax drive;
   private Direction dir;
   private Gyro gyro;
+  Encoders encoders = Encoders.getInstance();
   
   
   /**
@@ -43,7 +43,7 @@ public class DriveCom extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    encoders = EncodersSparkMax.getInstance();
+   
     drive = DriveSparkMax.getInstance();
     gyro = Gyro.getInstance();
 

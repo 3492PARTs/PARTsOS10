@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Sensors.EncodersSparkMax;
+import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
 import frc.robot.Sensors.PhotoElectricSensor;
 import frc.robot.Sensors.Proximity;
@@ -24,14 +24,14 @@ public class SensorReset extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  EncodersSparkMax encoders;
+  Encoders encoders;
   Gyro gyro;
 
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    encoders = EncodersSparkMax.getInstance();
+    encoders = Encoders.getInstance();
     gyro = Gyro.getInstance();
   }
 
