@@ -12,7 +12,7 @@ import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Climber;
 import frc.robot.Sensors.Gyro;
 
-public class Climber_Command extends CommandBase {
+public class Pivot_Command extends CommandBase {
   /**
    * Creates a new Climber_Command.
    */
@@ -20,7 +20,7 @@ public class Climber_Command extends CommandBase {
   int encodervalue = 0;
   Climber climber = Climber.getInstance();
   Gyro gyro = Gyro.getInstance();
-  public Climber_Command() {
+  public Pivot_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

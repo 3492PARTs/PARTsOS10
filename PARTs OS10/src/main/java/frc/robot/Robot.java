@@ -64,7 +64,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
-  Climber_Command pivotCommand = new Climber_Command();
+  Pivot_Command pivotCommand = new Pivot_Command();
 
   
 
@@ -76,8 +76,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
-    m_robotContainer.elevatorPivot.whenPressed(new Climber_Command());
-    m_robotContainer.elevatorPivot2.whenPressed(new Climber_Command());
+    m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
+    m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
