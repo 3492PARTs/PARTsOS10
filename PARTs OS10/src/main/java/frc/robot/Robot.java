@@ -196,7 +196,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
     SmartDashboard.putBoolean("Should shoot?", shooterStatusLeft && shooterStatusRight);
     SmartDashboard.putBoolean("Autoshoot", autoShoot);
-    
+
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
       new ConveyerSpaceCom(1.5).schedule();
     }

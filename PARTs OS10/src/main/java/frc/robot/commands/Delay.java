@@ -45,6 +45,6 @@ public class Delay extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return System.currentTimeMillis() - start_Time > delayTime;
+    return System.currentTimeMillis() - start_Time >= delayTime;
   }
 }
