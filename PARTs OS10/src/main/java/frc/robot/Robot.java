@@ -210,7 +210,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
       new ConveyerSpaceCom(1.5).schedule();
     }
 
-    if(m_robotContainer.leftJoystick.getRawButton(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
+    if(m_robotContainer.leftJoystick.getRawButtonPressed(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
      autoShoot = !autoShoot;
     }
    //rampUp code

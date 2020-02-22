@@ -33,9 +33,8 @@ public class RightShooter extends SequentialCommandGroup {
     super();
     addCommands(
       new Delay(),
-      new DriveCom(13, Direction.reverse),
-      new Shoot(ShootSpeed.full, 3000),
-      new ParallelCommandGroup(new ConveyorCom(5000), new Shoot(ShootSpeed.full, 5000))
+      new DriveCom(10, Direction.reverse),
+      new AutoFire()
       //new Shoot(proximity.getDistance())
     );
   }

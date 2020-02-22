@@ -35,9 +35,8 @@ public class LeftShooter extends SequentialCommandGroup {
     super();
     addCommands(
     new Delay(),
-    new DriveCom(13, Direction.reverse),
-    new DriveCom(distance, Direction.forward),
-    new Shooter_Conveyor()
+    new DriveCom(10, Direction.reverse),
+    new AutoFire()
      //new Shoot(proximity.getDistance())
     );
     
