@@ -7,41 +7,30 @@
 
 package frc.robot.Sensors;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-
+import edu.wpi.cscore.HttpCamera;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 /**
  * Add your docs here.
  */
+public class LimeLight {
 
-
-public class Gyro {
-    static Gyro _staticGyro = new Gyro();
-    AnalogGyro gyro;
     //=====================================================================================
     // Define Singleton Pattern
     //=====================================================================================
-   public Gyro(){
-        gyro = new AnalogGyro(0);
+    private LimeLight _staticLimeLight = new LimeLight();
+
+    public LimeLight getInstance() {
+        return _staticLimeLight;
     }
 
-    public AnalogGyro getGyro(){
-    return gyro;   
-    }
-
-
-    public static Gyro getInstance(){
-         
-        return _staticGyro;    
-    }
-
-
-
-    public double getAngle(){
-        return gyro.getAngle();
-    }
-
-    public void zeroGyro() {
-        gyro.reset();        
+    LimeLight() {
+        ShuffleboardTab currentTab = Shuffleboard.getTab("dash");
+        HttpCamera limeLight = new HttpCamera("LimeLight", "http://10.34.92.46:5800/stream.mpeg");
+        UsbCamera feed = CameraServer.getInstance().startAutomaticCapture(0);
+        feed.setConnectVerbose(1);
     }
 }

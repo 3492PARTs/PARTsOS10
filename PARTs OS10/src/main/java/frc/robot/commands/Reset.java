@@ -36,7 +36,7 @@ public class Reset extends CommandBase {
   @Override
   public void execute() {
     encoders.resetEncoders(Constants.Encoder.all);
-    Gyro.zeroGyro();
+    gyro.zeroGyro();
     
   }
 

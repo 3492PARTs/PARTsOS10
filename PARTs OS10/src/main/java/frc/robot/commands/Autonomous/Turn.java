@@ -38,7 +38,7 @@ public class Turn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    degrees = gyro.gyro.getAngle();
+    degrees = gyro.getGyro().getAngle();
     if(degrees < 180){
       drive.move(Speed, -Speed);
     }

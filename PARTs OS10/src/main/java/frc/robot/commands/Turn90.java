@@ -28,13 +28,13 @@ public class Turn90 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    gyro.gyro.reset();
+    gyro.getGyro().reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    degrees = gyro.gyro.getAngle();    
+    degrees = gyro.getGyro().getAngle();    
     if(rotationTarget < 91){
       drive.move(speed, -speed);
     }

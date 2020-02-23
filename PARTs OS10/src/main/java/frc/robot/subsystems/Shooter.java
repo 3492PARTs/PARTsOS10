@@ -46,7 +46,12 @@ public class Shooter extends SubsystemBase {
   }
   double speed = .1;
   int counter = 0;
+
+
   public void toggleState(Direction dir){
+  /* 
+  counter counts up to a number. This number when multiplied by the += speed, and then added to the original speed should equal 1. this creates a ramping effect
+  */
     if(dir == Direction.forward){
       for(;counter<900; counter++){
         speed += .001;
