@@ -50,7 +50,7 @@ public class Intake extends SubsystemBase {
     wheelIntake.enableCurrentLimit(true);
   }
 
-  public void wheelToggleState(final Direction dir) {
+  public void wheelToggleState(Direction dir) {
     if (dir == Direction.forward) {
       wheelIntake.set(ControlMode.PercentOutput, .5);
     } else if (dir == Direction.reverse) {
@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
     }
   }
 
-  public void pivotToggleState(final Direction dir){
+  public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
       pivotIntake.set(ControlMode.PercentOutput,.3);
     }
@@ -70,6 +70,11 @@ public class Intake extends SubsystemBase {
     else{
       pivotIntake.set(ControlMode.PercentOutput, 0);
     }
+  }
+
+  public void stop(){
+    wheelToggleState(Direction.off);
+    pivotToggleState(Direction.off);
   }
 
 

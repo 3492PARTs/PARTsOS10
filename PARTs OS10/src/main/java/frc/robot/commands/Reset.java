@@ -13,11 +13,11 @@ import frc.robot.Sensors.*;
 import frc.robot.*;
 
 
-public class SensorReset extends CommandBase {
+public class Reset extends CommandBase {
   /**
    * Creates a new SensorReset.
    */
-  public SensorReset() {
+  public Reset() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

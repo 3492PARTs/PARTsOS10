@@ -18,12 +18,9 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  int shooterRightPort = Constants.SHOOTER_RIGHT_PORT;
-  int shooterLeftPort = Constants.SHOOTER_LEFT_PORT;
 
-
-  public final TalonSRX shooterRight = new TalonSRX(shooterRightPort);
-  public static final TalonSRX shooterLeft = new TalonSRX(3);
+  public final TalonSRX shooterRight = new TalonSRX(Constants.SHOOTER_RIGHT_PORT);
+  public static final TalonSRX shooterLeft = new TalonSRX(Constants.SHOOTER_LEFT_PORT);
   private static Shooter _staticShooter = new Shooter();
   // private static final Encoder rShooterEnc = new Encoder(0,1);
   // private static final Encoder lShooterEnc = new Encoder(2,3);
@@ -72,6 +69,11 @@ public class Shooter extends SubsystemBase {
     
    }
   }
+  /**
+   * 
+   * @param dir output direction
+   * @param adjust multiplies ramp up rate by decimal to decrease speed
+   */
 
   public void toggleState(Direction dir, double adjust){
     
@@ -100,6 +102,10 @@ public class Shooter extends SubsystemBase {
 
   public double getLeftRPM() {
     return 600.0 * (double)shooterLeft.getSelectedSensorVelocity() / 4096.0;
+  }
+
+  public void stop() {
+    toggleState(Direction.off);
   }
 
 

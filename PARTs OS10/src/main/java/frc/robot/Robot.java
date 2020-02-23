@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    new SensorReset().schedule();
+    new Reset().schedule();
   }
 
   @Override

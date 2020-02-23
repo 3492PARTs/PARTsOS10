@@ -48,7 +48,7 @@ public class SmartDashBoard {
 
     public void teleopPeriodicUpdate(){
         SmartDashboard.putNumber("Pivot Encoder", m_robotContainer.encoders.getPivotElevatorEncoderRot());
-        SmartDashboard.putNumber("PESensorShoot", m_robotContainer.PESensor.photoEyeShoot.getValue());
+        SmartDashboard.putBoolean("PESensorShoot", m_robotContainer.PESensor.photoEyeShoot.get());
         SmartDashboard.putBoolean("PESensorIntake", m_robotContainer.PESensor.photoEyeIntake.get());
         SmartDashboard.putNumber("Prox. Distance", m_robotContainer.proximity.getDistance());
         SmartDashboard.putNumber("Climb encoder", m_robotContainer.encoders.getElevatorEncoderRot());
