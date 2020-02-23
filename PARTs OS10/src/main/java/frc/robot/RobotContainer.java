@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 import frc.robot.Sensors.*;
+import frc.robot.commands.*;
+import frc.robot.commands.Autonomous.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -41,6 +43,8 @@ public class RobotContainer {
   public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
   public JoystickButton elevatorPivot = new JoystickButton(leftJoystick, 10);
   public JoystickButton elevatorPivot2 = new JoystickButton(rightJoystick, 10);
+  public JoystickButton elevatorup = new JoystickButton(leftJoystick, 12);
+  public JoystickButton elevatorup2 = new JoystickButton(rightJoystick, 12);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -52,6 +56,8 @@ public class RobotContainer {
     conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     elevatorPivot.whenPressed(new Pivot_Command());
     elevatorPivot2.whenPressed(new Pivot_Command());
+    elevatorup.whenPressed(new ClimbCom());
+    elevatorup2.whenPressed(new ClimbCom());
 
   }
 

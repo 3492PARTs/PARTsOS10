@@ -108,7 +108,11 @@ public class Climber extends SubsystemBase {
    else elevator.set(ControlMode.PercentOutput, 0);
   }
 
-
+  public void stop(){
+    elevatorToggleState(Direction.off);
+    climbToggleState(Direction.off);
+    pivotToggleState(Direction.off);
+  }
   
 
   @Override

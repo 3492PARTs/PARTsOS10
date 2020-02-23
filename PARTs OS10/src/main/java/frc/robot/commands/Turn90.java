@@ -39,15 +39,11 @@ public class Turn90 extends CommandBase {
       drive.move(speed, -speed);
     }
     
-    if(rotationTarget > 269) {
+    else if(rotationTarget > 269) {
       drive.move(-speed, speed);
       System.out.println("Dead code not dead");
     }
   }
-    // else if(rotationTarget > 180){
-    //   drive.move(-speed, speed);
-    //   }
-    // } TODO: FIX
 
   // Called once the command ends or is interrupted.
   @Override
