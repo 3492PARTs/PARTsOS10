@@ -85,7 +85,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     // m_robotContainer.pivoter.whenPressed(new Climber_Command());
     System.out.println("auto options");
-    SmartDashboard.putString("Drive Orientation", Constants.driveFront);
+    SmartDashboard.putString("Drive Orientation", drive.driveFront);
     SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
     SmartDashboard.putBoolean("Should shoot LEFT?", false);
     SmartDashboard.putBoolean("Should shoot RIGHT?", false);
@@ -197,14 +197,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putBoolean("PESensorIntake", PESensor.photoEyeIntake.get());
     SmartDashboard.putNumber("Prox. Distance", proximity.getDistance());
     SmartDashboard.putNumber("Climb encoder", encoders.elevatorEncoder());
-  // SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
-  // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
-
-    SmartDashboard.putString("Drive Orientation", Constants.driveFront);
-
-
-
-
+    SmartDashboard.putString("Drive Orientation", drive.driveFront);
     SmartDashboard.putBoolean("Autoshoot", autoShoot);
 
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
@@ -218,7 +211,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   // double limitedJS1 = 0;
   // double limitedJS2 = 0;
 
-    final double Joystick1y = (Constants.mult)*(m_robotContainer.rightJoystick.getY());
+    final double Joystick1y = (drive.mult)*(m_robotContainer.rightJoystick.getY());
   //   final double limit = .012;
   //   double change = Joystick1y - limitedJS1;
   //   if (change > limit)
@@ -227,7 +220,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   //     change = -limit;
   //   limitedJS1 += change;
 
-    final double Joystick2y = (Constants.mult)*(m_robotContainer.leftJoystick.getY());
+    final double Joystick2y = (drive.mult)*(m_robotContainer.leftJoystick.getY());
   //   change = Joystick2y - limitedJS2;
   //   if (change>limit) change = limit;
   //   else if( change<=limit) change = -limit;

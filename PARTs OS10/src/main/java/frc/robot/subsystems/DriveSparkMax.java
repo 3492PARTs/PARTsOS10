@@ -39,7 +39,8 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   int amps = 55;
   int timeoutMs = 0;
   int peakAmps = 40;
-
+public static int mult = 1;
+public static String driveFront = "";
 //=====================================================================================
 // Define Singleton Pattern
 //=====================================================================================
@@ -101,13 +102,13 @@ public void switchFront(boolean orientation)
 {
   if(orientation)
   {
-    Constants.mult = 1;
-    Constants.driveFront = "Shoot";
+    mult = 1;
+    driveFront = "Shoot";
   }
   else
   {
-    Constants.mult = -1;
-    Constants.driveFront = "INTAKE";
+    mult = -1;
+    driveFront = "INTAKE";
   }
 }
 
