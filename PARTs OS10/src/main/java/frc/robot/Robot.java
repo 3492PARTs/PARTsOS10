@@ -180,7 +180,13 @@ public class Robot extends TimedRobot {
     final double Joystick2y = (m_robotContainer.drive.mult)*(m_robotContainer.leftJoystick.getY());
     m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
 
-    
+    // counter
+    if(pes.photoEyeIntake.get()){
+      pes.counterIncrease();
+    }
+    if(pes.photoEyeShoot.get()){
+      pes.counterDecrease();
+    }
 
 
     //Drive inversion

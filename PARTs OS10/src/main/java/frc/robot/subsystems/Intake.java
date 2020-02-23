@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
     }
   }
 
-  public void pivotToggleState(Direction dir){
+  public void pivotToggleState(Direction dir){// put in halts
     if(dir == Direction.forward){
       pivotIntake.set(ControlMode.PercentOutput,.3);
     }
