@@ -22,7 +22,9 @@ public class Encoders {
     private final Intake intake = Intake.getInstance();
     private CANEncoder rightEncoder = drive.Right1.getEncoder();
     private CANEncoder leftEncoder = drive.Left1.getEncoder();
-    
+        //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
     private static Encoders _staticEncoders = new Encoders();
     public static Encoders getInstance()
     {

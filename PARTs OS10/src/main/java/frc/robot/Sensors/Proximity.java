@@ -14,9 +14,14 @@ import edu.wpi.first.wpilibj.AnalogInput;
  * Add your docs here.
  */
 public class Proximity {
-     private static Proximity _staticProximity = new Proximity();
+
      public static AnalogInput proximitySensor = new AnalogInput(1);
-    
+
+
+    //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
+         private static Proximity _staticProximity = new Proximity();
      public static Proximity getInstance(){
          return _staticProximity;
      }

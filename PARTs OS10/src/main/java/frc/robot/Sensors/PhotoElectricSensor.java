@@ -15,9 +15,13 @@ import frc.robot.Constants;
  * Add your docs here.
  */
 public class PhotoElectricSensor {
-    private static PhotoElectricSensor _staticPhotoEye = new PhotoElectricSensor();
+
     public DigitalInput photoEyeIntake = new DigitalInput(9);
     public AnalogInput photoEyeShoot = new AnalogInput(2);
+    //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
+    private static PhotoElectricSensor _staticPhotoEye = new PhotoElectricSensor();
     public static PhotoElectricSensor getInstance()
     {
         return _staticPhotoEye;

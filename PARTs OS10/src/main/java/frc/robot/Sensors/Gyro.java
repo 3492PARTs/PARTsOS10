@@ -15,6 +15,10 @@ import edu.wpi.first.wpilibj.AnalogGyro;
  */
 
 public class Gyro {
+
+        //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
     private static Gyro _staticGyro = new Gyro();
 
     public static Gyro getInstance(){

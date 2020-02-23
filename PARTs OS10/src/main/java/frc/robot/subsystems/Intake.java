@@ -24,7 +24,9 @@ public class Intake extends SubsystemBase {
   private final TalonSRX wheelIntake;
   public final TalonSRX pivotIntake;
 
-  //singleton
+    //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
   private static Intake _staticIntake = new Intake();
   public static Intake getInstance(){
     return _staticIntake;

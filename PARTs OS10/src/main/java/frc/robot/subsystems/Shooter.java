@@ -30,7 +30,9 @@ public class Shooter extends SubsystemBase {
   int amps = 40;
   int timeoutMs= 0;  
   
-  //singleton
+    //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
   public static Shooter getInstance(){
     return _staticShooter;
   }

@@ -32,11 +32,13 @@ public class Climber extends SubsystemBase {
     // Define Singleton Pattern
     //=====================================================================================
   private static Climber _staticClimber = new Climber();
+
+
   public static Climber getInstance(){
       return _staticClimber;
     }
   
-
+                                    
   public Climber() {
     climb1 = new TalonSRX(Constants.CLIMB_1_PORT);
     climb2 = new TalonSRX(Constants.CLIMB_2_PORT);
