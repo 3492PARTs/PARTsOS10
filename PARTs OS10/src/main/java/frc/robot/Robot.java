@@ -42,7 +42,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static boolean shooterStatusRight;
   public static boolean shooterStatusLeft;
-  DigitalInput pes;
   private double choosenDelay;
   public static boolean autoShoot = false;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -69,7 +68,7 @@ public class Robot extends TimedRobot {
     m_robotContainer.gyro.gyro.initGyro();
     m_robotContainer.gyro.gyro.calibrate();
     Constants.driveOrientation = true;
-     pes = new DigitalInput(9);
+    
     
     System.out.println("auto options");
     SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
@@ -112,8 +111,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
     SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
     SmartDashboard.putBoolean("Should shoot?", shooterStatusLeft && shooterStatusRight);
-
-    SmartDashboard.putBoolean("Photo eye camera", pes.get());
+    SmartDashboard.putBoolean("Photo eye camera", PhotoElectricSensor.getInstance().photoEyeIntake.get());
 
   }
 

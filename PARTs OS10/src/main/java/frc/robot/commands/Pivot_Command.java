@@ -18,8 +18,6 @@ public class Pivot_Command extends CommandBase {
   /**
    * Creates a new Climber_Command.
    */
-  private double rotations = 0;
-  private int encodervalue = 0;
   private Climber climber = Climber.getInstance();
   private Gyro gyro = Gyro.getInstance();
   private Encoders encoders = Encoders.getInstance();

@@ -23,11 +23,7 @@ public class LeftShooter extends SequentialCommandGroup {
   /**
    * Creates a new Left_Autonomous.
    */
-
-  private double degrees = -125; //TODO: set values
-  private double distance = 0; //TODO: set values
-  private Proximity proximity = Proximity.getInstance();
-  private long delay;
+  
   public LeftShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());

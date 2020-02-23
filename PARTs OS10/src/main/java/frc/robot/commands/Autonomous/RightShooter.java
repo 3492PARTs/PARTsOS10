@@ -9,12 +9,9 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants.Direction;
-import frc.robot.Constants.ShootSpeed;
-import frc.robot.Sensors.Proximity;
-import frc.robot.commands.Delay;
-import frc.robot.commands.DriveCom;
-import frc.robot.commands.Shoot;
+import frc.robot.Constants.*;
+import frc.robot.Sensors.*;
+import frc.robot.commands.*;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -24,9 +21,6 @@ public class RightShooter extends SequentialCommandGroup {
    * Creates a new Right_Autonomous.
    */
 
-  private double degrees = 125; //TODO: set values
-  private double distance = 0; //TODO: set values
-  private Proximity proximity = Proximity.getInstance();
   public RightShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());

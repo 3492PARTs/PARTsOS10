@@ -8,7 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.Direction;
+import frc.robot.Constants.Encoder;
 import frc.robot.Sensors.Encoders;
+import frc.robot.subsystems.Climber;
 
 public class ClimbCom extends CommandBase {
   /**
@@ -16,6 +19,7 @@ public class ClimbCom extends CommandBase {
    */
   private Encoders encoders;
   private double distance = 0; // TODO: what distance needs to traverse
+  private Climber climber = Climber.getInstance();
   public ClimbCom() {
     // Use addRequirements() here to declare subsystem dependencies.
 
@@ -25,6 +29,7 @@ public class ClimbCom extends CommandBase {
   @Override
   public void initialize() {
     encoders.getInstance();
+    encoders.resetEncoders(Encoder.elevator);
 
     
   }
@@ -32,16 +37,18 @@ public class ClimbCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    climber.elevatorToggleState(Direction.forward);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    climber.elevatorToggleState(Direction.reverse);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false; //-8.730225
+    return encoders.getElevatorEncoderRot() >= 40; //-8.730225
   }
 }
