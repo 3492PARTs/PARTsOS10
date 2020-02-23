@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase {
   private final double forwardHalt = 0.0; //TODO: set value
   private final double reverseHalt = 0.0;
   private final TalonSRX wheelIntake;
-  private final TalonSRX pivotIntake;
+  public final TalonSRX pivotIntake;
 
   //singleton
   private static Intake _staticIntake = new Intake();
