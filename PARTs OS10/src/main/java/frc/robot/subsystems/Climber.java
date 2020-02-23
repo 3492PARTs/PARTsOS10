@@ -26,13 +26,14 @@ public class Climber extends SubsystemBase {
     int amps = 45;
     int timeoutMs = 0;
     double speed = .25;  
-//Singleton  
-private static Climber _staticClimber = new Climber();
-  
-
-public static Climber getInstance(){
-    return _staticClimber;
-  }
+   
+    //=====================================================================================
+    // Define Singleton Pattern
+    //=====================================================================================
+  private static Climber _staticClimber = new Climber();
+  public static Climber getInstance(){
+      return _staticClimber;
+    }
   
 
   public Climber() {
@@ -95,10 +96,10 @@ public static Climber getInstance(){
 
   public void elevatorToggleState(Direction dir){
     if(dir == Direction.forward){
-      elevator.set(ControlMode.PercentOutput, -.5);
+      elevator.set(ControlMode.PercentOutput, -1);
    } 
    else if(dir == Direction.reverse){
-       elevator.set(ControlMode.PercentOutput, .5);
+       elevator.set(ControlMode.PercentOutput, 1);
    }
    else elevator.set(ControlMode.PercentOutput, 0);
   }

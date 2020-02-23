@@ -74,6 +74,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // and put our
     // autonomous chooser on the dashboard.
     CameraServer.getInstance().startAutomaticCapture();
+    
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
@@ -165,7 +166,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   public void autonomousPeriodic() {
     SmartDashboard.putNumber("Proximity Distance", proximity.getDistance());
     SmartDashboard.putNumber("Encoder Distance", encoders.getDistanceMovedRight());
-
+   
   }
 
   @Override
@@ -195,6 +196,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     SmartDashboard.putNumber("PESensorShoot", PESensor.photoEyeShoot.getValue());
     SmartDashboard.putBoolean("PESensorIntake", PESensor.photoEyeIntake.get());
     SmartDashboard.putNumber("Prox. Distance", proximity.getDistance());
+    SmartDashboard.putNumber("Climb encoder", encoders.elevatorEncoder());
   // SmartDashboard.putNumber("Left Shooter RPM is: ", 600*(shooter.shooterLeft.getSelectedSensorVelocity()/4096));
   // SmartDashboard.putNumber("Right Shooter RPM is: ", 600*(shooter.shooterRight.getSelectedSensorVelocity()/4096));
 
@@ -335,6 +337,19 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     else
     {
       shooter.toggleState(Constants.Direction.off);
+    }
+
+    if(m_robotContainer.leftJoystick.getRawButton(11) ||  m_robotContainer.rightJoystick.getRawButton(11))
+    {
+      intake.pivotToggleState(Constants.Direction.forward); //pivot up
+    }
+    else if(m_robotContainer.leftJoystick.getRawButton(5) ||  m_robotContainer.rightJoystick.getRawButton(5))
+    {
+      intake.pivotToggleState(Constants.Direction.reverse); //pivot down
+    }
+    else
+    {
+      intake.pivotToggleState(Constants.Direction.off);
     }
 
 

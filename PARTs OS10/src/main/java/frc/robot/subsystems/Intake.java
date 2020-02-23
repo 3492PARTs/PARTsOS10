@@ -59,16 +59,10 @@ public class Intake extends SubsystemBase {
 
   public void pivotToggleState(final Direction dir){
     if(dir == Direction.forward){
-      while(pivotIntake.getSelectedSensorPosition() < forwardHalt){
       pivotIntake.set(ControlMode.PercentOutput,.3);
-      }
-      pivotIntake.set(ControlMode.PercentOutput, 0);
     }
     else if(dir == Direction.reverse){
-      while(pivotIntake.getSelectedSensorPosition() < reverseHalt){
         pivotIntake.set(ControlMode.PercentOutput, -.3);
-      }
-      pivotIntake.set(ControlMode.PercentOutput, 0);
     }
     else{
       pivotIntake.set(ControlMode.PercentOutput, 0);

@@ -40,7 +40,9 @@ public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
   int timeoutMs = 0;
   int peakAmps = 40;
 
-//singleton
+//=====================================================================================
+// Define Singleton Pattern
+//=====================================================================================
 private static DriveSparkMax _staticDriveSparkMax = new DriveSparkMax();
 public static DriveSparkMax getInstance(){
   return _staticDriveSparkMax;

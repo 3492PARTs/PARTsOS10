@@ -14,9 +14,10 @@ public class Conveyor extends SubsystemBase {
   TalonSRX conveyor;
   int timeoutMs = 0;
   
-  // singleton
+  //=====================================================================================
+  // Define Singleton Pattern
+  //=====================================================================================
   private static Conveyor _staticConveyor = new Conveyor();  
-
 
   public static Conveyor getInstance(){
     return _staticConveyor;
