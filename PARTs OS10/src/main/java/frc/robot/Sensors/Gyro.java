@@ -15,14 +15,18 @@ import edu.wpi.first.wpilibj.AnalogGyro;
  */
 
 public class Gyro {
-
-        //=====================================================================================
+    static Gyro _staticGyro = new Gyro();
+    //=====================================================================================
     // Define Singleton Pattern
     //=====================================================================================
-    private static Gyro _staticGyro = new Gyro();
+   public Gyro(){
+    }
+
+
 
     public static Gyro getInstance(){
-         return _staticGyro;
+         
+        return _staticGyro;    
     }
     public static AnalogGyro gyro = new AnalogGyro(0);
 
