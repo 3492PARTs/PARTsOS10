@@ -9,8 +9,7 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Sensors.Encoders;
-import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.*;
 
 
 public class SensorReset extends CommandBase {
