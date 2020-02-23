@@ -24,6 +24,7 @@ public class Shoot extends CommandBase {
   /**
    * 
    * @param distance distance robot should move
+   * @param speed shoot speed enum full, half, quarter
    */
   public Shoot(ShootSpeed speed , int time) {
     this.speed = speed;

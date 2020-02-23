@@ -76,9 +76,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     CameraServer.getInstance().startAutomaticCapture();
     
     m_robotContainer = new RobotContainer();
-    m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
-    m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
-    m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
+
     gyro.gyro.initGyro();
     gyro.gyro.calibrate();
     Constants.driveOrientation = true;
@@ -207,25 +205,10 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     if(m_robotContainer.leftJoystick.getRawButtonPressed(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
      autoShoot = !autoShoot;
     }
-   //rampUp code
-  // double limitedJS1 = 0;
-  // double limitedJS2 = 0;
+
 
     final double Joystick1y = (drive.mult)*(m_robotContainer.rightJoystick.getY());
-  //   final double limit = .012;
-  //   double change = Joystick1y - limitedJS1;
-  //   if (change > limit)
-  //     change = limit;
-  //   else if (change <= limit)
-  //     change = -limit;
-  //   limitedJS1 += change;
-
     final double Joystick2y = (drive.mult)*(m_robotContainer.leftJoystick.getY());
-  //   change = Joystick2y - limitedJS2;
-  //   if (change>limit) change = limit;
-  //   else if( change<=limit) change = -limit;
-  //   limitedJS2 += change;
-
     drive.moveLimited(Joystick1y, Joystick2y);
 
     

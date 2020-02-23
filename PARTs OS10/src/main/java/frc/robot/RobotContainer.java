@@ -8,15 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.Pivot_Command;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.DriveSparkMax;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -48,6 +43,11 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     //configureButtonBindings();
+    
+    conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
+    elevatorPivot.whenPressed(new Pivot_Command());
+    elevatorPivot2.whenPressed(new Pivot_Command());
+
   }
 
   /**
