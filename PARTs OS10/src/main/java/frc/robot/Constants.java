@@ -43,6 +43,15 @@ public final class Constants {
     public static final int Conveyor_port = 4;
     
 
+    public static final int INTAKE_WHEEL_PORT = 10;
+    public static final int PIVOT_INTAKE_PORT = 9;
+
+    // climber motor ports
+    public static final int CLIMB_1_PORT = 7;
+    public static final int CLIMB_2_PORT = 11;
+    public static final int ELEVATOR_PORT = 6;
+    public static final int ELEVATOR_PIVOT_PORT = 5;
+
 public static enum Direction {
     forward, reverse, off
 }

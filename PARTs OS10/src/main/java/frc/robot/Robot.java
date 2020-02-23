@@ -14,21 +14,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
-import frc.robot.Sensors.Encoders;
-import frc.robot.Sensors.Gyro;
 import frc.robot.Sensors.PhotoElectricSensor;
-import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Autonomous.*;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.DriveSparkMax;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 
 /**
@@ -49,6 +40,7 @@ public class Robot extends TimedRobot {
   NetworkTableEntry ty = table.getEntry("ty");
   NetworkTableEntry ta = table.getEntry("ta");
   Command m_autonomousCommand;
+  
   public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used

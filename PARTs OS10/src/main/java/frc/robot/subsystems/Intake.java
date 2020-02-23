@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 
 
@@ -34,8 +35,8 @@ public class Intake extends SubsystemBase {
   public Intake() {
   
   
-    wheelIntake = new TalonSRX(10);
-    pivotIntake = new TalonSRX(9);
+    wheelIntake = new TalonSRX(Constants.INTAKE_WHEEL_PORT);
+    pivotIntake = new TalonSRX(Constants.PIVOT_INTAKE_PORT);
     wheelIntake.configPeakCurrentDuration(100, 10); 
     wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
     wheelIntake.configPeakCurrentLimit(amps, timeoutMs);

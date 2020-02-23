@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -37,10 +38,10 @@ public class Climber extends SubsystemBase {
   
 
   public Climber() {
-    climb1 = new TalonSRX(7);
-    climb2 = new TalonSRX(11);
-    elevator = new TalonSRX(6);
-    elevatorPivot = new TalonSRX(5);
+    climb1 = new TalonSRX(Constants.CLIMB_1_PORT);
+    climb2 = new TalonSRX(Constants.CLIMB_2_PORT);
+    elevator = new TalonSRX(Constants.ELEVATOR_PORT);
+    elevatorPivot = new TalonSRX(Constants.ELEVATOR_PIVOT_PORT);
 
 
     climb1.configPeakCurrentDuration(100, 10); 

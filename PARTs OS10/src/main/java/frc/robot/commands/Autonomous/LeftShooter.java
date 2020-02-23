@@ -10,7 +10,6 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
-import frc.robot.Sensors.Proximity;
 import frc.robot.commands.*;
 
 
@@ -23,7 +22,7 @@ public class LeftShooter extends SequentialCommandGroup {
   /**
    * Creates a new Left_Autonomous.
    */
-  
+
   public LeftShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
