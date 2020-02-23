@@ -47,7 +47,7 @@ public class DriveCom extends CommandBase {
     drive = DriveSparkMax.getInstance();
     gyro = Gyro.getInstance();
 
-    encoders.resetEncoders();
+    encoders.resetDriveEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -67,7 +67,7 @@ public class DriveCom extends CommandBase {
   public void end(boolean interrupted) {
     drive.move(.0, .0);
     gyro.zeroGyro(); 
-    encoders.resetEncoders();
+    encoders.resetDriveEncoders();
   }
 
   // Returns true when the command should end.

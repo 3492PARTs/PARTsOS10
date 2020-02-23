@@ -52,6 +52,6 @@ public class Pivot_Command extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return encoders.pivotElevatorEncoder()>=.241;
+    return encoders.getPivotElevatorEncoderRot()>=.241;
   }
 }

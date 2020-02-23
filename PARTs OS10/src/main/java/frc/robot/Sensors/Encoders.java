@@ -8,6 +8,7 @@
 package frc.robot.Sensors;
 
 import frc.robot.Constants;
+import frc.robot.Constants.StartPos;
 
 import com.revrobotics.CANEncoder;
 
@@ -36,26 +37,27 @@ public class Encoders {
         return Math.abs(((rightEncoder.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
     }
     
-    
-  public double pivotElevatorEncoder(){
-    return ((double)climber.elevatorPivot.getSelectedSensorPosition())/4096.0;
-  }
+    /**
+     * 
+     * @return in rotations
+     */
+    public double getPivotElevatorEncoderRot(){
+        return ((double)climber.elevatorPivot.getSelectedSensorPosition())/4096.0;
+    }
 
-  public double elevatorEncoder(){
-    return ((double)climber.elevator.getSelectedSensorPosition())/4096.0;
-  }
+    public double getElevatorEncoderRot(){
+        return ((double)climber.elevator.getSelectedSensorPosition())/4096.0;
+    }
 
-  public double armPivotEncoder(){
-      return ((double)climber.elevator.getSelectedSensorPosition())/4096.0;
-  }
+    public double getArmPivotEncoderRot(){
+        return ((double)climber.elevator.getSelectedSensorPosition())/4096.0;
+    }
 
+    public void startPosEncoders(StartPos pos){
 
+    }
 
-
-
-    
-
-    public void resetEncoders(){
+    public void resetDriveEncoders(){
         startPositionLeft = leftEncoder.getPosition();
         startPositionRight = rightEncoder.getPosition();
     }

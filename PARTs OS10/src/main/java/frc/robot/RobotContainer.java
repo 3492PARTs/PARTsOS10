@@ -8,8 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.Sensors.Encoders;
+import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.PhotoElectricSensor;
+import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Pivot_Command;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,18 +29,21 @@ import frc.robot.subsystems.DriveSparkMax;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private static ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private static Command m_autoCommand;// = new ExampleCommand(m_exampleSubsystem);
-  public static Climber climber = Climber.getInstance();
-  public static  Conveyor conveyor = Conveyor.getInstance();
-  public static Shooter shooter = Shooter.getInstance();
-  public static Intake intake = Intake.getInstance();
-  public static DriveSparkMax drive = DriveSparkMax.getInstance();
+  private static Command m_autoCommand;
+  public final Conveyor conveyor = Conveyor.getInstance();
+  public final Shooter shooter =  Shooter.getInstance();
+  public final DriveSparkMax drive = DriveSparkMax.getInstance();
+  public final Intake intake = Intake.getInstance();
+  public final Climber climber = Climber.getInstance();
+  public final Proximity proximity = Proximity.getInstance();
+  public final Gyro gyro = Gyro.getInstance();
+  public final Encoders encoders = Encoders.getInstance();
+  public final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
   public static Pivot_Command climberCommand = new Pivot_Command();
 // The two joysticks
-  public Joystick rightJoystick = new Joystick(0);
-  public Joystick leftJoystick = new Joystick(1);
-  public Joystick launchPad = new Joystick(2);
+  public static Joystick rightJoystick = new Joystick(0);
+  public static Joystick leftJoystick = new Joystick(1);
+  public static Joystick launchPad = new Joystick(2);
   public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
   public JoystickButton elevatorPivot = new JoystickButton(leftJoystick, 10);
   public JoystickButton elevatorPivot2 = new JoystickButton(rightJoystick, 10);

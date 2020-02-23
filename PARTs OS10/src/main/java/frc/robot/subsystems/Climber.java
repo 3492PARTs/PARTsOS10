@@ -65,6 +65,10 @@ public class Climber extends SubsystemBase {
     elevatorPivot.enableCurrentLimit(true); 
   }
 
+  /**
+   * 
+   * @param dir forward, reverse, off
+   */
   public void pivotToggleState(Direction dir){
     if(dir == Direction.forward){
       elevatorPivot.set(ControlMode.PercentOutput, speed);
@@ -74,9 +78,6 @@ public class Climber extends SubsystemBase {
   }
    else elevatorPivot.set(ControlMode.PercentOutput, 0);
   }
-
-
-
 
   public void climbToggleState(Direction dir){
     if(dir == Direction.forward){

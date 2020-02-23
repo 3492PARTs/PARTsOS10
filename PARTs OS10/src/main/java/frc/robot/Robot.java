@@ -39,34 +39,20 @@ import edu.wpi.first.wpilibj.CameraServer;
  */
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
-  private final Conveyor conveyor = Conveyor.getInstance();
-  private final Shooter shooter =  Shooter.getInstance();
-  private final DriveSparkMax drive = DriveSparkMax.getInstance();
-  private final Intake intake = Intake.getInstance();
-  private final Climber climber = Climber.getInstance();
-  private final Proximity proximity = Proximity.getInstance();
-  private final Gyro gyro = Gyro.getInstance();
-  private final Encoders encoders = Encoders.getInstance();
-  private final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
   public static boolean shooterStatusRight;
   public static boolean shooterStatusLeft;
-
   private double choosenDelay;
-public static boolean autoShoot = false;
-NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-NetworkTableEntry tx = table.getEntry("tx");
-NetworkTableEntry ty = table.getEntry("ty");
-NetworkTableEntry ta = table.getEntry("ta");
-
-Command m_autonomousCommand;
-public static SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public static boolean autoShoot = false;
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+  Command m_autonomousCommand;
+  public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
-  Pivot_Command pivotCommand = new Pivot_Command();
-
-  
 
   @Override
   public void robotInit() {
@@ -74,18 +60,16 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // and put our
     // autonomous chooser on the dashboard.
     CameraServer.getInstance().startAutomaticCapture();
-    
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
     m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
-    gyro.gyro.initGyro();
-    gyro.gyro.calibrate();
+    m_robotContainer.gyro.gyro.initGyro();
+    m_robotContainer.gyro.gyro.calibrate();
     Constants.driveOrientation = true;
-
-    // m_robotContainer.pivoter.whenPressed(new Climber_Command());
+    
     System.out.println("auto options");
-    SmartDashboard.putString("Drive Orientation", drive.driveFront);
+    SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
     SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
     SmartDashboard.putBoolean("Should shoot LEFT?", false);
     SmartDashboard.putBoolean("Should shoot RIGHT?", false);
@@ -96,8 +80,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     m_chooser.addOption("Left starting positon", new LeftShooter());
     m_chooser.addOption("Right Start Position", new RightShooter());
     m_chooser.addOption("Middle Low Goal", new MiddleLowGoal());
-    // boolean box
-  
+
   }
 
   /**
@@ -120,8 +103,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    shooterStatusLeft =  Math.abs(shooter.getLeftRPM()) >= 4000.0; 
-    shooterStatusRight =  Math.abs(shooter.getRightRPM()) >= 4000.0; 
+    shooterStatusLeft =  Math.abs(m_robotContainer.shooter.getLeftRPM()) >= 4000.0; 
+    shooterStatusRight =  Math.abs(m_robotContainer.shooter.getRightRPM()) >= 4000.0; 
     
     SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
     SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
@@ -164,8 +147,8 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("Proximity Distance", proximity.getDistance());
-    SmartDashboard.putNumber("Encoder Distance", encoders.getDistanceMovedRight());
+    SmartDashboard.putNumber("Proximity Distance", m_robotContainer.proximity.getDistance());
+    SmartDashboard.putNumber("Encoder Distance", m_robotContainer.encoders.getDistanceMovedRight());
    
   }
 
@@ -192,12 +175,12 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Pivot Encoder", encoders.pivotElevatorEncoder());
-    SmartDashboard.putNumber("PESensorShoot", PESensor.photoEyeShoot.getValue());
-    SmartDashboard.putBoolean("PESensorIntake", PESensor.photoEyeIntake.get());
-    SmartDashboard.putNumber("Prox. Distance", proximity.getDistance());
-    SmartDashboard.putNumber("Climb encoder", encoders.elevatorEncoder());
-    SmartDashboard.putString("Drive Orientation", drive.driveFront);
+    SmartDashboard.putNumber("Pivot Encoder", m_robotContainer.encoders.getPivotElevatorEncoderRot());
+    SmartDashboard.putNumber("PESensorShoot", m_robotContainer.PESensor.photoEyeShoot.getValue());
+    SmartDashboard.putBoolean("PESensorIntake", m_robotContainer.PESensor.photoEyeIntake.get());
+    SmartDashboard.putNumber("Prox. Distance", m_robotContainer.proximity.getDistance());
+    SmartDashboard.putNumber("Climb encoder", m_robotContainer.encoders.getElevatorEncoderRot());
+    SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
     SmartDashboard.putBoolean("Autoshoot", autoShoot);
 
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
@@ -211,7 +194,7 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   // double limitedJS1 = 0;
   // double limitedJS2 = 0;
 
-    final double Joystick1y = (drive.mult)*(m_robotContainer.rightJoystick.getY());
+    final double Joystick1y = (m_robotContainer.drive.mult)*(m_robotContainer.rightJoystick.getY());
   //   final double limit = .012;
   //   double change = Joystick1y - limitedJS1;
   //   if (change > limit)
@@ -220,13 +203,13 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   //     change = -limit;
   //   limitedJS1 += change;
 
-    final double Joystick2y = (drive.mult)*(m_robotContainer.leftJoystick.getY());
+    final double Joystick2y = (m_robotContainer.drive.mult)*(m_robotContainer.leftJoystick.getY());
   //   change = Joystick2y - limitedJS2;
   //   if (change>limit) change = limit;
   //   else if( change<=limit) change = -limit;
   //   limitedJS2 += change;
 
-    drive.moveLimited(Joystick1y, Joystick2y);
+  m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
 
     
 
@@ -235,114 +218,114 @@ public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
     {
-      drive.switchFront(false);
+      m_robotContainer.drive.switchFront(false);
     }
 
     //Drive inversion 2 electric boogaloo
     if(m_robotContainer.leftJoystick.getRawButton(4) || m_robotContainer.rightJoystick.getRawButton(4))
     {
-      drive.switchFront(true);
+      m_robotContainer.drive.switchFront(true);
     }
    
 
     
     if(m_robotContainer.launchPad.getRawButton(1))//conveyor out
     {
-      conveyor.toggleState(Constants.Direction.forward);
+      m_robotContainer.conveyor.toggleState(Constants.Direction.forward);
     }
     else if(m_robotContainer.launchPad.getRawButton(3))//conveyor in
     {
-      conveyor.toggleState(Constants.Direction.reverse);
+      m_robotContainer.conveyor.toggleState(Constants.Direction.reverse);
     }
     else
     {
-      conveyor.toggleState(Constants.Direction.off);
+      m_robotContainer.conveyor.toggleState(Constants.Direction.off);
     }
    
 
     
     if(m_robotContainer.rightJoystick.getRawButton(1))
     {
-      intake.wheelToggleState(Direction.reverse); //intake in
+      m_robotContainer.intake.wheelToggleState(Direction.reverse); //intake in
     }
     else if(m_robotContainer.leftJoystick.getRawButton(7) ||  m_robotContainer.rightJoystick.getRawButton(7))
     {
-      intake.wheelToggleState(Direction.forward);//intake out
+      m_robotContainer.intake.wheelToggleState(Direction.forward);//intake out
     }
     else
     { 
-    intake.wheelToggleState(Direction.off);
+      m_robotContainer.intake.wheelToggleState(Direction.off);
     }
 
    
   
     if(m_robotContainer.launchPad.getRawButton(8)) //elevator up
     {
-      climber.elevatorToggleState(Constants.Direction.forward);
+      m_robotContainer.climber.elevatorToggleState(Constants.Direction.forward);
     }
     else if(m_robotContainer.launchPad.getRawButton(6))//elevator down
     {
-      climber.elevatorToggleState(Constants.Direction.reverse);
+      m_robotContainer.climber.elevatorToggleState(Constants.Direction.reverse);
     }
     else
     {
-      climber.elevatorToggleState(Constants.Direction.off);
+      m_robotContainer.climber.elevatorToggleState(Constants.Direction.off);
     }
 
     // climber
     if(m_robotContainer.launchPad.getRawButton(5))
     {
-      climber.climbToggleState(Constants.Direction.forward);
+      m_robotContainer.climber.climbToggleState(Constants.Direction.forward);
     }
     else
     {
-      climber.climbToggleState(Constants.Direction.off);
+      m_robotContainer.climber.climbToggleState(Constants.Direction.off);
     }
 
    
     if(m_robotContainer.launchPad.getRawButton(7))//pivot back
     {
-      climber.pivotToggleState(Constants.Direction.reverse);
+      m_robotContainer.climber.pivotToggleState(Constants.Direction.reverse);
     }
     else if(m_robotContainer.leftJoystick.getRawButton(8) ||  m_robotContainer.rightJoystick.getRawButton(8))
     {
-      climber.pivotToggleState(Constants.Direction.forward);
+      m_robotContainer.climber.pivotToggleState(Constants.Direction.forward);
     }
     else
     {
-      climber.pivotToggleState(Constants.Direction.off);
+      m_robotContainer.climber.pivotToggleState(Constants.Direction.off);
     }
 
 
   
     if(m_robotContainer.launchPad.getRawButton(10))//shooter out
     {
-      shooter.toggleState(Constants.Direction.reverse, 1);
+      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, 1);
     }
     else if(m_robotContainer.launchPad.getRawButton(11))//shooter in
     {
-      shooter.toggleState(Constants.Direction.forward);
+      m_robotContainer.shooter.toggleState(Constants.Direction.forward);
     }
     else if(m_robotContainer.leftJoystick.getRawButton(13) ||  m_robotContainer.rightJoystick.getRawButton(13))
     {
-      shooter.toggleState(Constants.Direction.reverse, .35); //shooter low out
+      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .35); //shooter low out
     }
     else
     {
-      shooter.toggleState(Constants.Direction.off);
+      m_robotContainer.shooter.toggleState(Constants.Direction.off);
     }
 
     if(m_robotContainer.leftJoystick.getRawButton(11) ||  m_robotContainer.rightJoystick.getRawButton(11))
     {
-      intake.pivotToggleState(Constants.Direction.forward); //pivot up
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); //pivot up
     }
     else if(m_robotContainer.leftJoystick.getRawButton(5) ||  m_robotContainer.rightJoystick.getRawButton(5))
     {
-      intake.pivotToggleState(Constants.Direction.reverse); //pivot down
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); //pivot down
     }
     else
     {
-      intake.pivotToggleState(Constants.Direction.off);
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.off);
     }
 
 

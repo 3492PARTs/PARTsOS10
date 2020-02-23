@@ -51,7 +51,6 @@ public class Shooter extends SubsystemBase {
     if(dir == Direction.forward){
       for(;counter<900; counter++){
         speed += .001;
-        // end test rampup TODO: see if this works
         shooterRight.set(ControlMode.PercentOutput, speed);
         shooterLeft.set(ControlMode.PercentOutput, speed);
       }

@@ -48,7 +48,11 @@ public static enum Direction {
 }
 
 public static enum ShootSpeed {
-    full, half, quarter
+    full, half, quarter, eighth
+}
+
+public static enum StartPos {
+    drive, pivotElevator, elevator, armPivot
 }
 
 }

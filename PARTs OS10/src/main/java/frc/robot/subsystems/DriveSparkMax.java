@@ -50,14 +50,13 @@ public static DriveSparkMax getInstance(){
 }
 
   public DriveSparkMax() {
-//current limiting for drive
+    
   }
 /**
  * makes the robit move
  * @param Speed left between 1, -1
  * @param Speed2 right drive train between 1,-1
  */
-
 public void move(Double Speed1,Double Speed2){
   M_drive.tankDrive(Speed1, Speed2);
 }
