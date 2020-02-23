@@ -21,16 +21,10 @@ public final class Constants {
     public static final double WHEEL_CIRCUMFERENCE = 6 * Math.PI;
     public static final double  VOLTS_TO_DIST = 5.0;
     public static final double DRIVE_SPEED = .4;
+    
+    //shooter motor ports
     public static final int SHOOTER_RIGHT_PORT = 12;
     public static final int SHOOTER_LEFT_PORT = 3;
-    public static final int climb1port = 7;
-
-
-//mutable but used in multiple files
-    public static final String SD_AUTO_DELAY =  "autoDelay";
-    public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
-    public static int autoFireCounter = 0;
-    public static boolean autoFireLock = false;
     //drivetrain
     public static final int Left1_port = 2;
     public static final int Left2_port = 1;
@@ -50,7 +44,16 @@ public final class Constants {
     public static final int CLIMB_2_PORT = 11;
     public static final int ELEVATOR_PORT = 6;
     public static final int ELEVATOR_PIVOT_PORT = 5;
+  
 
+
+//mutable but used in multiple files
+    public static final String SD_AUTO_DELAY =  "autoDelay";
+    public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
+    public static int autoFireCounter = 0;
+    public static boolean autoFireLock = false;
+    
+ //enums   
 public static enum Direction {
     forward, reverse, off
 }
@@ -61,6 +64,10 @@ public static enum ShootSpeed {
 
 public static enum Encoder {
     drive, pivotElevator, elevator, armPivot, all
+}
+
+public static enum Motor{
+    drive, climber, elevator, elevatorPivot, intakeWheel, intakePivot, conveyor, shooter
 }
 
 }

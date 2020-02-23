@@ -17,7 +17,7 @@ import frc.robot.Constants;
 public class PhotoElectricSensor {
 
     public DigitalInput photoEyeIntake = new DigitalInput(9);
-    public AnalogInput photoEyeShoot = new AnalogInput(2);
+    public DigitalInput photoEyeShoot = new DigitalInput(2);
     //=====================================================================================
     // Define Singleton Pattern
     //=====================================================================================
@@ -32,15 +32,8 @@ public class PhotoElectricSensor {
      * @param sensor = photoelectrc sensor reading
      * @return true if ball is breaking plane, false if not
      */
-    public boolean photoEyeBreak(double sensor){
-        if(sensor >= Constants.PHOTO_EYE_RANGE)
-        {
-            return true;
-        }
-        else
-        {
-            return false;   
-        }
+    public boolean photoEyeBreak(boolean sensor){
+        return sensor;
         
     }
 
