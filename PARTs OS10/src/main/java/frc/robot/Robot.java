@@ -59,8 +59,8 @@ public class Robot extends TimedRobot {
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
     m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
-    m_robotContainer.gyro.gyro.initGyro();
-    m_robotContainer.gyro.gyro.calibrate();
+    m_robotContainer.gyro.getGyro().initGyro();
+    m_robotContainer.gyro.getGyro().calibrate();
     driveOrientation = true;
     m_robotContainer.smartDashBoard.robotInitUpdate();
     SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
