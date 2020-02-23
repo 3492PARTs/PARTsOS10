@@ -23,6 +23,7 @@ import frc.robot.Sensors.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static Command m_autoCommand;
+  public final SmartDashBoard smartDashBoard = SmartDashBoard.getInstance();
   public final Conveyor conveyor = Conveyor.getInstance();
   public final Shooter shooter =  Shooter.getInstance();
   public final DriveSparkMax drive = DriveSparkMax.getInstance();

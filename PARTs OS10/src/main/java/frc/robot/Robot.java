@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 
 /**
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
   public static boolean shooterStatusRight;
   public static boolean shooterStatusLeft;
   private double choosenDelay;
+  public static boolean driveOrientation;
   public static boolean autoShoot = false;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
@@ -59,16 +61,8 @@ public class Robot extends TimedRobot {
     m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
     m_robotContainer.gyro.gyro.initGyro();
     m_robotContainer.gyro.gyro.calibrate();
-    Constants.driveOrientation = true;
-    
-    
-    System.out.println("auto options");
-    SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
-    SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
-    SmartDashboard.putBoolean("Should shoot LEFT?", false);
-    SmartDashboard.putBoolean("Should shoot RIGHT?", false);
-    SmartDashboard.putBoolean("Should shoot?", false);
-    SmartDashboard.putBoolean("Autoshoot", autoShoot);
+    driveOrientation = true;
+    m_robotContainer.smartDashBoard.robotInitUpdate();
     SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
     m_chooser.setDefaultOption("MiddleTopShooter", new StraightTopShooter());
     m_chooser.addOption("Left starting positon", new LeftShooter());
@@ -99,11 +93,7 @@ public class Robot extends TimedRobot {
 
     shooterStatusLeft =  Math.abs(m_robotContainer.shooter.getLeftRPM()) >= 4000.0; 
     shooterStatusRight =  Math.abs(m_robotContainer.shooter.getRightRPM()) >= 4000.0; 
-    
-    SmartDashboard.putBoolean("Should shoot LEFT?", shooterStatusLeft);
-    SmartDashboard.putBoolean("Should shoot RIGHT?", shooterStatusRight);
-    SmartDashboard.putBoolean("Should shoot?", shooterStatusLeft && shooterStatusRight);
-    SmartDashboard.putBoolean("Photo eye camera", PhotoElectricSensor.getInstance().photoEyeIntake.get());
+    m_robotContainer.smartDashBoard.robotPeriodicUpdate();
 
   }
 
@@ -126,16 +116,15 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     
-     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-     System.out.println("auto: " + m_autonomousCommand);
+    System.out.println("auto: " + m_autonomousCommand);
     // schedule the autonomous command (example)
-    if(m_autonomousCommand != null){m_autonomousCommand.schedule();}
-      choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
-      System.out.println("Our choosen delay is " + choosenDelay);
-
-    
-
+    if(m_autonomousCommand != null){
+      m_autonomousCommand.schedule();
+    }
+    choosenDelay = SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0);
+    System.out.println("Our choosen delay is " + choosenDelay);
   }
 
   /**
@@ -143,20 +132,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("Proximity Distance", m_robotContainer.proximity.getDistance());
-    SmartDashboard.putNumber("Encoder Distance", m_robotContainer.encoders.getDistanceMovedRight());
-   
+   m_robotContainer.smartDashBoard.autoPeriodicUpdate();
   }
 
   @Override
   public void teleopInit() {
-    Constants.driveOrientation = false;
+    driveOrientation = false;
     if(m_autonomousCommand != null){
       m_autonomousCommand.cancel();
-
-
-
-
     }
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
@@ -171,13 +154,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Pivot Encoder", m_robotContainer.encoders.getPivotElevatorEncoderRot());
-    SmartDashboard.putNumber("PESensorShoot", m_robotContainer.PESensor.photoEyeShoot.getValue());
-    SmartDashboard.putBoolean("PESensorIntake", m_robotContainer.PESensor.photoEyeIntake.get());
-    SmartDashboard.putNumber("Prox. Distance", m_robotContainer.proximity.getDistance());
-    SmartDashboard.putNumber("Climb encoder", m_robotContainer.encoders.getElevatorEncoderRot());
-    SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
-    SmartDashboard.putBoolean("Autoshoot", autoShoot);
+
+    m_robotContainer.smartDashBoard.teleopPeriodicUpdate();
 
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
       new ConveyerSpaceCom(1.5).schedule();
