@@ -166,7 +166,7 @@ public class Robot extends TimedRobot {
       new ConveyerSpaceCom(1.5).schedule();
     }
 
-    if(autoShoot && pes.photoEyeShoot.get()){
+    if(autoShoot && pes.photoEyeShoot.get() && !AutoFireReverseLock){
     
       new ConveyerSpaceCom(-.2);
     }
