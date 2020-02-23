@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+<<<<<<< HEAD
 import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
 import frc.robot.Sensors.PhotoElectricSensor;
@@ -15,11 +16,12 @@ import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Pivot_Command;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+=======
+import frc.robot.commands.*;
+>>>>>>> bcea8a583a4e8d67b23cc22ea4239fad407956d2
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.DriveSparkMax;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -54,6 +56,11 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     //configureButtonBindings();
+    
+    conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
+    elevatorPivot.whenPressed(new Pivot_Command());
+    elevatorPivot2.whenPressed(new Pivot_Command());
+
   }
 
   /**

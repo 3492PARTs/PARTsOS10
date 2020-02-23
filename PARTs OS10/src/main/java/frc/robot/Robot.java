@@ -61,11 +61,17 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
+<<<<<<< HEAD
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
     m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
     m_robotContainer.gyro.gyro.initGyro();
     m_robotContainer.gyro.gyro.calibrate();
+=======
+
+    gyro.gyro.initGyro();
+    gyro.gyro.calibrate();
+>>>>>>> bcea8a583a4e8d67b23cc22ea4239fad407956d2
     Constants.driveOrientation = true;
     
     System.out.println("auto options");
@@ -190,10 +196,8 @@ public class Robot extends TimedRobot {
     if(m_robotContainer.leftJoystick.getRawButtonPressed(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
      autoShoot = !autoShoot;
     }
-   //rampUp code
-  // double limitedJS1 = 0;
-  // double limitedJS2 = 0;
 
+<<<<<<< HEAD
     final double Joystick1y = (m_robotContainer.drive.mult)*(m_robotContainer.rightJoystick.getY());
   //   final double limit = .012;
   //   double change = Joystick1y - limitedJS1;
@@ -210,6 +214,12 @@ public class Robot extends TimedRobot {
   //   limitedJS2 += change;
 
   m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
+=======
+
+    final double Joystick1y = (drive.mult)*(m_robotContainer.rightJoystick.getY());
+    final double Joystick2y = (drive.mult)*(m_robotContainer.leftJoystick.getY());
+    drive.moveLimited(Joystick1y, Joystick2y);
+>>>>>>> bcea8a583a4e8d67b23cc22ea4239fad407956d2
 
     
 
