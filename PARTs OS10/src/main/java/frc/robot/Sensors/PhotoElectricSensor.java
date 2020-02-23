@@ -47,4 +47,7 @@ public class PhotoElectricSensor {
     public void counterReset(){
         counter = 0;
     }
+    public int getCounter(){
+        return counter;
+    }
 }

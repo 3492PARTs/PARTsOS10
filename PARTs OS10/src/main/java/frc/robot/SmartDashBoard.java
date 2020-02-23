@@ -53,5 +53,6 @@ public class SmartDashBoard {
         SmartDashboard.putNumber("Climb encoder", m_robotContainer.encoders.getElevatorEncoderRot());
         SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
         SmartDashboard.putBoolean("Autoshoot", Robot.autoShoot);
+        SmartDashBoard.putNumber("the number of balls", PhotoElectricSensor.getInstance().getCounter());
     }
 }
