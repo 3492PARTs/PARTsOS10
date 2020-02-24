@@ -17,7 +17,7 @@ import frc.robot.Constants;
 public class PhotoElectricSensor {
 
     public DigitalInput photoEyeIntake = new DigitalInput(9);
-    public DigitalInput photoEyeShoot = new DigitalInput(2);
+    public DigitalInput photoEyeShoot = new DigitalInput(8);
     //=====================================================================================
     // Define Singleton Pattern
     //=====================================================================================

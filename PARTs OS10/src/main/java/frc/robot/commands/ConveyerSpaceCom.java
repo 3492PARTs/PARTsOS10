@@ -22,7 +22,8 @@ public class ConveyerSpaceCom extends CommandBase {
   private Conveyor conveyor = Conveyor.getInstance();
   /**
    * 
-   * @param time in seconds
+   * @param time in seconds 
+   * if time is positive direction will be forward, if time is negative direction will be reversed
    */
   public ConveyerSpaceCom(double duration) {
     // Use addRequirements() here to declare subsystem dependencies.

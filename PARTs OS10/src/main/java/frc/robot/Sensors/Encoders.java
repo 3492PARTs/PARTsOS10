@@ -56,7 +56,7 @@ public class Encoders {
     }
 
     public double getArmPivotEncoderRot(){
-        return (((double)intake.pivotIntake.getSelectedSensorPosition()) - startPosArmPivot)/4096.0;
+        return (((double)intake.pivotIntake.getSelectedSensorPosition()) - startPosArmPivot);
     }
 
 

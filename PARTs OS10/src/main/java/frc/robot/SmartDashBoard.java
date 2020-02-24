@@ -47,12 +47,14 @@ public class SmartDashBoard {
     }
 
     public void teleopPeriodicUpdate(){
-        SmartDashboard.putNumber("Pivot Encoder", m_robotContainer.encoders.getPivotElevatorEncoderRot());
+        SmartDashboard.putNumber("Pivot EL Encoder", m_robotContainer.encoders.getPivotElevatorEncoderRot());
         SmartDashboard.putBoolean("PESensorShoot", m_robotContainer.PESensor.photoEyeShoot.get());
         SmartDashboard.putBoolean("PESensorIntake", m_robotContainer.PESensor.photoEyeIntake.get());
         SmartDashboard.putNumber("Prox. Distance", m_robotContainer.proximity.getDistance());
         SmartDashboard.putNumber("Climb encoder", m_robotContainer.encoders.getElevatorEncoderRot());
         SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
         SmartDashboard.putBoolean("Autoshoot", Robot.autoShoot);
+        
+        
     }
 }

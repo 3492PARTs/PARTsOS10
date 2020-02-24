@@ -8,47 +8,38 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.Direction;
-import frc.robot.Constants.Encoder;
-import frc.robot.Sensors.Encoders;
-import frc.robot.subsystems.Climber;
+import frc.robot.RobotContainer;
 
-public class ClimbCom extends CommandBase {
+public class SwitchFront extends CommandBase {
   /**
-   * Creates a new ClimbCom.
+   * Creates a new SwitchFront.
    */
-  private Encoders encoders;
-  private double distance = 0; // TODO: what distance needs to traverse
-  private Climber climber = Climber.getInstance();
-  public ClimbCom() {
+  RobotContainer m_robotContainer = new RobotContainer();
+  boolean front;
+  public SwitchFront(boolean front) {
+    this.front = front;
     // Use addRequirements() here to declare subsystem dependencies.
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    encoders.getInstance();
-    encoders.resetEncoders(Encoder.elevator);
-
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.elevatorToggleState(Direction.forward);
+    m_robotContainer.drive.switchFront(front);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.elevatorToggleState(Direction.reverse);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return encoders.getElevatorEncoderRot() >= -8.730225; 
+    return false;
   }
 }

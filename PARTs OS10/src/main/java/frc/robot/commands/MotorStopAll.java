@@ -8,11 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.DriveSparkMax;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 public class MotorStopAll extends CommandBase {
   /**
    * Creates a new MotorStop.
    */
+  Intake intake = Intake.getInstance();
+  Shooter shooter = Shooter.getInstance();
+  Climber climber = Climber.getInstance();
+  Conveyor conveyor = Conveyor.getInstance();
+  DriveSparkMax drive = DriveSparkMax.getInstance();
+    
   public MotorStopAll() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -25,7 +36,11 @@ public class MotorStopAll extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    intake.stop();
+    shooter.stop();
+    //climber.stop();
+
+
   }
 
   // Called once the command ends or is interrupted.

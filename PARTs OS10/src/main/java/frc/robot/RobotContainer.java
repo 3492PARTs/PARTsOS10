@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.*;
 import frc.robot.Sensors.*;
 
@@ -23,6 +24,7 @@ import frc.robot.Sensors.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static Command m_autoCommand;
+  public final LimeLight limeLight = LimeLight.getInstance();
   public final SmartDashBoard smartDashBoard = SmartDashBoard.getInstance();
   public final Conveyor conveyor = Conveyor.getInstance();
   public final Shooter shooter =  Shooter.getInstance();
@@ -34,6 +36,7 @@ public class RobotContainer {
   public final Encoders encoders = Encoders.getInstance();
   public final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
   public static Pivot_Command climberCommand = new Pivot_Command();
+  public static ClimbCom climb = new ClimbCom();
 // The two joysticks
   public static Joystick rightJoystick = new Joystick(0);
   public static Joystick leftJoystick = new Joystick(1);
@@ -41,7 +44,21 @@ public class RobotContainer {
   public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
   public JoystickButton elevatorPivot = new JoystickButton(leftJoystick, 10);
   public JoystickButton elevatorPivot2 = new JoystickButton(rightJoystick, 10);
+  public JoystickButton climbUp = new JoystickButton(rightJoystick, 12);
+  
+  //intake front
+  public POVButton orientIntake1 = new POVButton(rightJoystick, 1);
+  public POVButton orientIntake2 = new POVButton(rightJoystick, 2);
+  public POVButton orientIntake3 = new POVButton(rightJoystick, 3);
 
+  //shooter front 
+  public POVButton orientShoot1 = new POVButton(rightJoystick, 5);
+  public POVButton orientShoot2 = new POVButton(rightJoystick, 6);
+  public POVButton orientShoot3 = new POVButton(rightJoystick, 7);
+
+  public POVButton[] intakeFrontGroup;
+  //intakeFrontGroup = {orientShoot1, orientShoot2, orientShoot3};
+  
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -52,7 +69,8 @@ public class RobotContainer {
     conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     elevatorPivot.whenPressed(new Pivot_Command());
     elevatorPivot2.whenPressed(new Pivot_Command());
-
+    climbUp.whenPressed(new ClimbCom());
+   // orientIntake1.whenPressed(new SwitchFront(false));
   }
 
   /**

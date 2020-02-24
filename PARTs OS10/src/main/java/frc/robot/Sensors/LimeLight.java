@@ -21,14 +21,14 @@ public class LimeLight {
     //=====================================================================================
     // Define Singleton Pattern
     //=====================================================================================
-    private LimeLight _staticLimeLight = new LimeLight();
+    private static LimeLight _staticLimeLight = new LimeLight();
 
-    public LimeLight getInstance() {
+    public static LimeLight getInstance() {
         return _staticLimeLight;
     }
 
     LimeLight() {
-        ShuffleboardTab currentTab = Shuffleboard.getTab("dash");
+        ShuffleboardTab currentTab = Shuffleboard.getTab("SmartDashboard");
         HttpCamera limeLight = new HttpCamera("LimeLight", "http://10.34.92.46:5800/stream.mpeg");
         UsbCamera feed = CameraServer.getInstance().startAutomaticCapture(0);
         feed.setConnectVerbose(1);

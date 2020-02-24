@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.HttpCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -48,12 +49,15 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
+  private HttpCamera limelightFeed;
 
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
+    limelightFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg");
+    //driverShuffleboardTab.add("LL", limelightFeed).withPosition(0,0).withSize(15,8).withProperties(Map.of("Show Crosshair", true, "Show Controls", false));
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
@@ -154,7 +158,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
+    
     m_robotContainer.smartDashBoard.teleopPeriodicUpdate();
 
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
@@ -173,6 +177,8 @@ public class Robot extends TimedRobot {
     
 
 
+    
+
     //Drive inversion
 
     if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
@@ -185,7 +191,7 @@ public class Robot extends TimedRobot {
     {
       m_robotContainer.drive.switchFront(true);
     }
-   
+
 
     
     if(m_robotContainer.launchPad.getRawButton(1))//conveyor out
@@ -259,7 +265,7 @@ public class Robot extends TimedRobot {
   
     if(m_robotContainer.launchPad.getRawButton(10))//shooter out
     {
-      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, 1);
+      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .7);
     }
     else if(m_robotContainer.launchPad.getRawButton(11))//shooter in
     {
@@ -276,11 +282,11 @@ public class Robot extends TimedRobot {
 
     if(m_robotContainer.leftJoystick.getRawButton(11) ||  m_robotContainer.rightJoystick.getRawButton(11))
     {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); //pivot up
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); //arm pivot up
     }
     else if(m_robotContainer.leftJoystick.getRawButton(5) ||  m_robotContainer.rightJoystick.getRawButton(5))
     {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); //pivot down
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); //arm pivot down
     }
     else
     {
