@@ -61,9 +61,7 @@ public void move(Double Speed1,Double Speed2){
   M_drive.tankDrive(Speed1, Speed2);
 }
 
-public void stop(){
-  M_drive.tankDrive(0,0);
-}
+
 
 
 //joystick limiter
@@ -110,8 +108,11 @@ public void switchFront(boolean orientation)
     driveFront = "INTAKE";
   }
 }
+// stops all motors
+public void stop(){
+  move(0.0, 0.0);
 
-
+}
 
   @Override
   public void periodic() {

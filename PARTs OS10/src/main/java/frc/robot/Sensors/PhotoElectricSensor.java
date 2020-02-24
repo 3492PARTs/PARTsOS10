@@ -14,8 +14,9 @@ import frc.robot.Constants;
 /**
  * Add your docs here.
  */
-public class PhotoElectricSensor {
 
+public class PhotoElectricSensor {
+    int counter = 0;
     public DigitalInput photoEyeIntake = new DigitalInput(9);
     public DigitalInput photoEyeShoot = new DigitalInput(8);
     //=====================================================================================
@@ -37,4 +38,16 @@ public class PhotoElectricSensor {
         
     }
 
+    public void counterIncrease(){
+        counter++;
+    }
+    public void counterDecrease(){
+        counter--;
+    }
+    public void counterReset(){
+        counter = 0;
+    }
+    public int getCounter(){
+        return counter;
+    }
 }

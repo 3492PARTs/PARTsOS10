@@ -10,6 +10,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Conveyor;
 
@@ -41,7 +42,12 @@ public class ConveyerSpaceCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(duration>0){
     conveyor.toggleState(Direction.forward);
+  }
+  if(duration<0){
+    conveyor.toggleState(Direction.reverse);
+  }
   }
 
   // Called once the command ends or is interrupted.
@@ -50,6 +56,7 @@ public class ConveyerSpaceCom extends CommandBase {
     conveyor.toggleState(Direction.off);
     Constants.autoFireCounter++;
     Constants.autoFireLock = false;
+    Robot.AutoFireReverseLock = true;
   }
 
   // Returns true when the command should end.

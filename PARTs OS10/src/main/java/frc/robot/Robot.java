@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.PhotoElectricSensor;
 import frc.robot.commands.Autonomous.*;
+import frc.robot.subsystems.Conveyor;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
@@ -35,14 +36,17 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static boolean shooterStatusRight;
   public static boolean shooterStatusLeft;
-  private double choosenDelay;
+  public static Conveyor conveyor = Conveyor.getInstance(); 
+    private double choosenDelay;
   public static boolean driveOrientation;
+  public static PhotoElectricSensor pes = PhotoElectricSensor.getInstance();
   public static boolean autoShoot = false;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
   NetworkTableEntry ta = table.getEntry("ta");
   Command m_autonomousCommand;
+  public static boolean AutoFireReverseLock;
   
   public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
@@ -162,7 +166,13 @@ public class Robot extends TimedRobot {
     m_robotContainer.smartDashBoard.teleopPeriodicUpdate();
 
     if ((shooterStatusLeft || shooterStatusRight) && autoShoot) {
+      AutoFireReverseLock = false;
       new ConveyerSpaceCom(1.5).schedule();
+    }
+
+    if(autoShoot && pes.photoEyeShoot.get() && !AutoFireReverseLock){
+    
+      new ConveyerSpaceCom(-.2);
     }
 
     if(m_robotContainer.leftJoystick.getRawButtonPressed(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
@@ -174,7 +184,13 @@ public class Robot extends TimedRobot {
     final double Joystick2y = (m_robotContainer.drive.mult)*(m_robotContainer.leftJoystick.getY());
     m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
 
-    
+    // counter
+    if(pes.photoEyeIntake.get()){
+      pes.counterIncrease();
+    }
+    if(pes.photoEyeShoot.get()){
+      pes.counterDecrease();
+    }
 
 
     
