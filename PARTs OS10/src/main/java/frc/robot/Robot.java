@@ -189,10 +189,12 @@ public class Robot extends TimedRobot {
     if(pes.photoEyeIntake.get() && !photolockback){
       photolockback = true;
       pes.counterIncrease();
+      pes.lockTimer();
     }
     if(pes.photoEyeShoot.get() && !photolockfront){
       photolockfront = true;
       pes.counterDecrease();
+      pes.lockTimer();
     }
 
 
