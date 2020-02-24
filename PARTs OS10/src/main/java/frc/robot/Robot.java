@@ -47,8 +47,8 @@ public class Robot extends TimedRobot {
   NetworkTableEntry ta = table.getEntry("ta");
   Command m_autonomousCommand;
   public static boolean AutoFireReverseLock;
-  boolean photolockfront;
-  boolean photolockback;
+  public static boolean photolockfront;
+  public static boolean photolockback;
   public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used
