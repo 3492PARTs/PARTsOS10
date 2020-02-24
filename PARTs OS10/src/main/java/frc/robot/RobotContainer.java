@@ -69,11 +69,7 @@ public class RobotContainer {
     // Configure the button bindings
     //configureButtonBindings();
     
-    conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
-    elevatorPivot.whenPressed(new Pivot_Command());
-    elevatorPivot2.whenPressed(new Pivot_Command());
-    elevatorup.whenPressed(new ClimbCom());
-    elevatorup2.whenPressed(new ClimbCom());
+
 
   }
 

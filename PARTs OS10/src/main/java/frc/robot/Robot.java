@@ -47,7 +47,8 @@ public class Robot extends TimedRobot {
   NetworkTableEntry ta = table.getEntry("ta");
   Command m_autonomousCommand;
   public static boolean AutoFireReverseLock;
-  
+  boolean photolockfront;
+  boolean photolockback;
   public static SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used
@@ -185,15 +186,21 @@ public class Robot extends TimedRobot {
     m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
 
     // counter
-    if(pes.photoEyeIntake.get()){
+    if(pes.photoEyeIntake.get() && !photolockback){
+      photolockback = true;
       pes.counterIncrease();
     }
-    if(pes.photoEyeShoot.get()){
+    if(pes.photoEyeShoot.get() && !photolockfront){
+      photolockfront = true;
       pes.counterDecrease();
     }
 
 
-    
+  m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
+  m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
+  m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
+  m_robotContainer.elevatorup.whenPressed(new ClimbCom());
+  m_robotContainer.elevatorup2.whenPressed(new ClimbCom());
 
     //Drive inversion
 
