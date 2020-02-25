@@ -20,7 +20,8 @@ public class PhotoElectricSensor {
     int counter = 0;
     public DigitalInput photoEyeIntake = new DigitalInput(9);
     public DigitalInput photoEyeShoot = new DigitalInput(8);
-    private long timeAtCall;
+    private static long timeAtCallFront;
+    private static long timeAtCallBack;
     //=====================================================================================
     // Define Singleton Pattern
     //=====================================================================================
@@ -36,14 +37,14 @@ public class PhotoElectricSensor {
      * @return true if ball is breaking plane, false if not
      */
     public void counterIncrease(){
-        if(timeAtCall + 200 < System.currentTimeMillis()){
+        if(timeAtCallFront + 300 < System.currentTimeMillis()){
         counter++;
         Robot.photolockback = false;
     }
         else;
     }
     public void counterDecrease(){
-        if(timeAtCall + 100 < System.currentTimeMillis()){
+        if(timeAtCallBack + 100 < System.currentTimeMillis()){
         counter--;
         Robot.photolockfront = true;
 
@@ -51,8 +52,11 @@ public class PhotoElectricSensor {
         else;
     }
 
-    public void lockTimer(){
-       timeAtCall = System.currentTimeMillis();
+    public void lockTimerFront(){
+       timeAtCallFront = System.currentTimeMillis();
+    }
+    public void lockTimerBack(){
+        timeAtCallBack = System.currentTimeMillis();
     }
     public void counterReset(){
         counter = 0;

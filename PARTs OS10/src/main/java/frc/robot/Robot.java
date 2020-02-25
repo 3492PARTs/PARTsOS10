@@ -190,13 +190,15 @@ public class Robot extends TimedRobot {
     // counter
     if(pes.photoEyeIntake.get() && !photolockback){
       photolockback = true;
+      pes.lockTimerBack();
       pes.counterIncrease();
-      pes.lockTimer();
+      
     }
     if(pes.photoEyeShoot.get() && !photolockfront){
       photolockfront = true;
+      pes.lockTimerFront();
       pes.counterDecrease();
-      pes.lockTimer();
+     
     }
     if(m_robotContainer.drive.mult > 0){
     m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
