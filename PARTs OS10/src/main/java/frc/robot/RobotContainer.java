@@ -51,8 +51,6 @@ public class RobotContainer {
   public POVButton orientIntake1 = new POVButton(rightJoystick, 1);
   public POVButton orientIntake2 = new POVButton(rightJoystick, 2);
   public POVButton orientIntake3 = new POVButton(rightJoystick, 3);
-  public JoystickButton elevatorup = new JoystickButton(leftJoystick, 12);
-  public JoystickButton elevatorup2 = new JoystickButton(rightJoystick, 12);
 
   //shooter front 
   public POVButton orientShoot1 = new POVButton(rightJoystick, 5);

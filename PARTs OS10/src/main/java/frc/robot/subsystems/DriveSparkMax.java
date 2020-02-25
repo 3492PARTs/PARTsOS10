@@ -86,7 +86,7 @@ public void moveLimited(Double joy1, Double joy2){
   if (change>limit) change = limit;
   else if( change<=limit) change = -limit;
   limitedJS2 += change;
-  M_drive.tankDrive(limitedJS1, limitedJS2);
+    M_drive.tankDrive((mult) * limitedJS1, (mult)* limitedJS2);
 }
 
 

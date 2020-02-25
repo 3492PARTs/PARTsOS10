@@ -49,7 +49,6 @@ public final class Constants {
 
 //mutable but used in multiple files
     public static final String SD_AUTO_DELAY =  "autoDelay";
-    public static final double PHOTO_EYE_RANGE = 0; //TODO: set value
     public static int autoFireCounter = 0;
     public static boolean autoFireLock = false;
     

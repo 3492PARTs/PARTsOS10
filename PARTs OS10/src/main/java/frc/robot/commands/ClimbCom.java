@@ -49,6 +49,6 @@ public class ClimbCom extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return encoders.getElevatorEncoderRot() >= -8.730225; 
+    return encoders.getElevatorEncoderRot() >= 8.730225; 
   }
 }

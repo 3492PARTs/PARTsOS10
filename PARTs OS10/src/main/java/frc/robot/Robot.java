@@ -66,8 +66,10 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
+    m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
     m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
+    m_robotContainer.climbUp.whenPressed(new ClimbCom());
     m_robotContainer.gyro.getGyro().initGyro();
     m_robotContainer.gyro.getGyro().calibrate();
     driveOrientation = true;
@@ -176,14 +178,14 @@ public class Robot extends TimedRobot {
       new ConveyerSpaceCom(-.2);
     }
 
-    if(m_robotContainer.leftJoystick.getRawButtonPressed(14) || m_robotContainer.rightJoystick.getRawButton(14)) {
+    if(m_robotContainer.launchPad.getRawButton(1)) {
      autoShoot = !autoShoot;
-    }
+    }  
 
 
-    final double Joystick1y = (m_robotContainer.drive.mult)*(m_robotContainer.rightJoystick.getY());
-    final double Joystick2y = (m_robotContainer.drive.mult)*(m_robotContainer.leftJoystick.getY());
-    m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
+    final double Joystick1y = (m_robotContainer.rightJoystick.getY());
+    final double Joystick2y = (m_robotContainer.leftJoystick.getY());
+    //m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
 
     // counter
     if(pes.photoEyeIntake.get() && !photolockback){
@@ -196,13 +198,12 @@ public class Robot extends TimedRobot {
       pes.counterDecrease();
       pes.lockTimer();
     }
-
-
-  m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
-  m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
-  m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
-  m_robotContainer.elevatorup.whenPressed(new ClimbCom());
-  m_robotContainer.elevatorup2.whenPressed(new ClimbCom());
+    if(m_robotContainer.drive.mult > 0){
+    m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
+    }
+    else if(m_robotContainer.drive.mult < 0){
+      m_robotContainer.drive.moveLimited(Joystick2y, Joystick1y);
+    }
 
     //Drive inversion
 
@@ -265,7 +266,7 @@ public class Robot extends TimedRobot {
     // climber
     if(m_robotContainer.launchPad.getRawButton(5))
     {
-      m_robotContainer.climber.climbToggleState(Constants.Direction.forward);
+      m_robotContainer.climber.climbToggleState(Constants.Direction.reverse);
     }
     else
     {
