@@ -8,27 +8,39 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.*;
 import frc.robot.Sensors.*;
 import frc.robot.commands.*;
+import frc.robot.commands.Autonomous.*;
 
 /**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a "declarative" paradigm, very little robot logic should
+ * actually be handled in the {@link Robot} periodic methods (other than the
+ * scheduler calls). Instead, the structure of the robot (including subsystems,
+ * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private static Command m_autoCommand;
+  // =====================================================================================
+  // Auto
+  // =====================================================================================
+  private Command m_autoCommand;
+  private SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  // =====================================================================================
+  // Subsystems & Sensors
+  // =====================================================================================
   public final LimeLight limeLight = LimeLight.getInstance();
   public final SmartDashBoard smartDashBoard = SmartDashBoard.getInstance();
   public final Conveyor conveyor = Conveyor.getInstance();
-  public final Shooter shooter =  Shooter.getInstance();
+  public final Shooter shooter = Shooter.getInstance();
   public final DriveSparkMax drive = DriveSparkMax.getInstance();
   public final Intake intake = Intake.getInstance();
   public final Climber climber = Climber.getInstance();
@@ -36,37 +48,50 @@ public class RobotContainer {
   public final Gyro gyro = Gyro.getInstance();
   public final Encoders encoders = Encoders.getInstance();
   public final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
-  public static Pivot_Command climberCommand = new Pivot_Command();
-  public static ClimbCom climb = new ClimbCom();
-// The two joysticks
-  public static Joystick rightJoystick = new Joystick(0);
-  public static Joystick leftJoystick = new Joystick(1);
-  public static Joystick launchPad = new Joystick(2);
-  public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
-  public JoystickButton elevatorPivot = new JoystickButton(launchPad, 5);
-  
-  
+  public Pivot_Command climberCommand = new Pivot_Command();
+  public ClimbCom climb = new ClimbCom();
+
+  // =====================================================================================
+  // Joysticks
+  // =====================================================================================
+  public Joystick rightJoystick = new Joystick(0);
+  public Joystick leftJoystick = new Joystick(1);
+  public Joystick launchPad = new Joystick(2);
+
   /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
+   * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
-    //configureButtonBindings();
-    
+    configureButtonBindings();
 
+    // Add options for AUTO to SD
+    SmartDashboard.putData("Choose Autonomous Mode", m_chooser);
+    m_chooser.setDefaultOption("MiddleTopShooter", new StraightTopShooter());
+    m_chooser.addOption("Left starting positon", new LeftShooter());
+    m_chooser.addOption("Right Start Position", new RightShooter());
+    m_chooser.addOption("Middle Low Goal", new MiddleLowGoal());
 
   }
 
   /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */    
-  // public JoystickButton pivoter = new JoystickButton(launchPad, 9);
-  // private void configureButtonBindings() { 
-    //elevator pivot up } //TODO: test this command
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by instantiating a {@link GenericHID} or one of its subclasses
+   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
+  private void configureButtonBindings() {
+    final Button AUTO_FIRE_BTN = new JoystickButton(launchPad, 1);
+    AUTO_FIRE_BTN.whenPressed(() -> {
+      Constants.autoShoot = !Constants.autoShoot;
+    });
 
+    JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
+    conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
+
+    JoystickButton elevatorPivot = new JoystickButton(launchPad, 5);
+    elevatorPivot.whenPressed(new Pivot_Command());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -74,7 +99,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    m_autoCommand = Robot.m_chooser.getSelected();
+    m_autoCommand = m_chooser.getSelected();
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }

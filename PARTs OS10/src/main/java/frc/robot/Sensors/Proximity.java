@@ -15,26 +15,24 @@ import edu.wpi.first.wpilibj.AnalogInput;
  */
 public class Proximity {
 
-     public static AnalogInput proximitySensor = new AnalogInput(1);
+    private static AnalogInput proximitySensor = new AnalogInput(1);
 
-
-    //=====================================================================================
+    // =====================================================================================
     // Define Singleton Pattern
-    //=====================================================================================
-         private static Proximity _staticProximity = new Proximity();
-     public static Proximity getInstance(){
-         return _staticProximity;
-     }
-     
-     
-     /**
-      * 
-      * @return in feet
-      */
-     public double getDistance(){
-         return ((proximitySensor.getVoltage() / 0.04883) * Constants.VOLTS_TO_DIST) / 30.48;
-     }
+    // =====================================================================================
+    private static Proximity _staticProximity = new Proximity();
 
+    public static Proximity getInstance() {
+        return _staticProximity;
+    }
 
+    /**
+     * Get the distance of the robot from an object
+     * 
+     * @return in feet
+     */
+    public double getDistance() {
+        return ((proximitySensor.getVoltage() / 0.04883) * Constants.VOLTS_TO_DIST) / 30.48;
+    }
 
 }

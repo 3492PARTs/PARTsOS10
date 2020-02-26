@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 
-
 public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
@@ -24,90 +23,123 @@ public class Shooter extends SubsystemBase {
   private static Shooter _staticShooter = new Shooter();
   // private static final Encoder rShooterEnc = new Encoder(0,1);
   // private static final Encoder lShooterEnc = new Encoder(2,3);
-  int amps = 40;
-  int timeoutMs= 0;  
-  
-    //=====================================================================================
-    // Define Singleton Pattern
-    //=====================================================================================
-  public static Shooter getInstance(){
+  private int amps = 40;
+  private int timeoutMs = 0;
+  private double speed = .1;
+  private int counter = 0;
+
+  // =====================================================================================
+  // Define Singleton Pattern
+  // =====================================================================================
+  public static Shooter getInstance() {
     return _staticShooter;
   }
+
   public Shooter() {
-    shooterLeft.configPeakCurrentDuration(100, 10); 
+    shooterLeft.configPeakCurrentDuration(100, 10);
     shooterLeft.configContinuousCurrentLimit(55, timeoutMs);
     shooterLeft.configPeakCurrentLimit(amps, timeoutMs);
     shooterLeft.enableCurrentLimit(true);
 
-    shooterRight.configPeakCurrentDuration(100, 10); 
+    shooterRight.configPeakCurrentDuration(100, 10);
     shooterRight.configContinuousCurrentLimit(55, timeoutMs);
     shooterRight.configPeakCurrentLimit(amps, timeoutMs);
     shooterRight.enableCurrentLimit(true);
   }
-  double speed = .1;
-  int counter = 0;
 
-
-  public void toggleState(Direction dir){
-  /* 
-  counter counts up to a number. This number when multiplied by the += speed, and then added to the original speed should equal 1. this creates a ramping effect
-  */
-    if(dir == Direction.forward){
-      for(;counter<900; counter++){
+  public void toggleState(Direction dir) {
+    /*
+     * counter counts up to a number. This number when multiplied by the += speed,
+     * and then added to the original speed should equal 1. this creates a ramping
+     * effect
+     */
+    if (dir == Direction.forward) {
+      for (; counter < 900; counter++) {
         speed += .001;
         shooterRight.set(ControlMode.PercentOutput, speed);
         shooterLeft.set(ControlMode.PercentOutput, speed);
       }
-   } 
-   else if(dir == Direction.reverse){
-    shooterRight.set(ControlMode.PercentOutput, 1);
-    shooterLeft.set(ControlMode.PercentOutput, 1);
- } 
-   else{
-    shooterRight.set(ControlMode.PercentOutput,0);
-    shooterLeft.set(ControlMode.PercentOutput, 0);
-    
-   }
+    } else if (dir == Direction.reverse) {
+      shooterRight.set(ControlMode.PercentOutput, 1);
+      shooterLeft.set(ControlMode.PercentOutput, 1);
+    } else {
+      shooterRight.set(ControlMode.PercentOutput, 0);
+      shooterLeft.set(ControlMode.PercentOutput, 0);
+
+    }
   }
+
   /**
    * 
-   * @param dir output direction
+   * @param dir    output direction
    * @param adjust multiplies ramp up rate by decimal to decrease speed
    */
 
-  public void toggleState(Direction dir, double adjust){
-    
-    if(dir == Direction.forward){
-      for(;counter<(90 * adjust); counter++){
+  public void toggleState(Direction dir, double adjust) {
+    /*
+     * counter counts up to a number. This number when multiplied by the += speed,
+     * and then added to the original speed should equal 1. this creates a ramping
+     * effect
+     */
+    if (dir == Direction.forward) {
+      for (; counter < (90 * adjust); counter++) {
         speed += .01;
-       // end test rampup
+        // end test rampup
         shooterRight.set(ControlMode.PercentOutput, speed);
         shooterLeft.set(ControlMode.PercentOutput, speed);
       }
-   } 
-   else if(dir == Direction.reverse){
-    shooterRight.set(ControlMode.PercentOutput, 1 * adjust);
-    shooterLeft.set(ControlMode.PercentOutput, 1 * adjust);
- } 
-   else{
-    shooterRight.set(ControlMode.PercentOutput,0);
-    shooterLeft.set(ControlMode.PercentOutput, 0);
-    
-   }
+    } else if (dir == Direction.reverse) {
+      shooterRight.set(ControlMode.PercentOutput, 1 * adjust);
+      shooterLeft.set(ControlMode.PercentOutput, 1 * adjust);
+    } else {
+      shooterRight.set(ControlMode.PercentOutput, 0);
+      shooterLeft.set(ControlMode.PercentOutput, 0);
+
+    }
   }
 
+  /**
+   * Get the RPM of the right shooter wheen
+   * 
+   * @return RPM of the wheel
+   */
   public double getRightRPM() {
-    return 600.0 * (double)shooterRight.getSelectedSensorVelocity() / 4096.0;
+    return 600.0 * (double) shooterRight.getSelectedSensorVelocity() / 4096.0;
   }
 
+  /**
+   * Get the RPM of the left shooter wheen
+   * 
+   * @return RPM of the wheel
+   */
   public double getLeftRPM() {
-    return 600.0 * (double)shooterLeft.getSelectedSensorVelocity() / 4096.0;
+    return 600.0 * (double) shooterLeft.getSelectedSensorVelocity() / 4096.0;
   }
 
+  /**
+   * Gets the status of the right shooter wheel
+   * 
+   * @return true if the wheel is up to speed
+   */
+  public boolean getShooterStatusRight() {
+    return Math.abs(getRightRPM()) >= 4000.0;
+  }
+
+  /**
+   * Gets the status of the left shooter wheel
+   * 
+   * @return true if the wheel is up to speed
+   */
+  public boolean getShooterStatusLeft() {
+    return Math.abs(getLeftRPM()) >= 4000.0;
+  }
+
+  /**
+   * Stops the shooter wheels
+   */
   public void stop() {
     toggleState(Direction.off);
   }
-
 
   @Override
   public void periodic() {

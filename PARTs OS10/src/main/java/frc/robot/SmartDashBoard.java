@@ -7,7 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Sensors.PhotoElectricSensor;
 
 /**
@@ -16,43 +18,46 @@ import frc.robot.Sensors.PhotoElectricSensor;
 public class SmartDashBoard {
     private final RobotContainer m_robotContainer = new RobotContainer();
 
+    // =====================================================================================
+    // Define Singleton Pattern
+    // =====================================================================================
     private static SmartDashBoard _staticSmartDashboard = new SmartDashBoard();
-    public static SmartDashBoard getInstance(){
+
+    public static SmartDashBoard getInstance() {
         return _staticSmartDashboard;
     }
 
-/**
- * updates smartdashboard during described period
- */
-    public void robotInitUpdate(){
-        SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
+    /**
+     * updates smartdashboard during described period
+     */
+    public void robotInitUpdate() {
+        SmartDashboard.putString(Constants.SD_DRIVE_ORIENTATION, m_robotContainer.drive.getDriveFront());
         SmartDashboard.putNumber(Constants.SD_AUTO_DELAY, 0.0);
-        SmartDashboard.putBoolean("Should shoot LEFT?", false);
-        SmartDashboard.putBoolean("Should shoot RIGHT?", false);
-        SmartDashboard.putBoolean("Should shoot?", false);
-        SmartDashboard.putBoolean("Autoshoot", Robot.autoShoot);
+        SmartDashboard.putBoolean(Constants.SD_LEFT_SHOOTER_SPEED, false);
+        SmartDashboard.putBoolean(Constants.SD_RIGHT_SHOOTER_SPEED, false);
+        SmartDashboard.putBoolean(Constants.SD_SHOOTER_SPEED, false);
+        SmartDashboard.putBoolean(Constants.SD_AUTO_SHOOT, Constants.autoShoot);
     }
 
-    public void robotPeriodicUpdate(){
-        SmartDashboard.putBoolean("Should shoot LEFT?", Robot.shooterStatusLeft);
-        SmartDashboard.putBoolean("Should shoot RIGHT?", Robot.shooterStatusRight);
-        SmartDashboard.putBoolean("Should shoot?", Robot.shooterStatusLeft && Robot.shooterStatusRight);
-        SmartDashboard.putBoolean("Photo eye camera", PhotoElectricSensor.getInstance().photoEyeIntake.get());
+    public void robotPeriodicUpdate() {
+        SmartDashboard.putBoolean(Constants.SD_LEFT_SHOOTER_SPEED, m_robotContainer.shooter.getShooterStatusLeft());
+        SmartDashboard.putBoolean(Constants.SD_RIGHT_SHOOTER_SPEED, m_robotContainer.shooter.getShooterStatusRight());
+        SmartDashboard.putBoolean(Constants.SD_SHOOTER_SPEED,
+                m_robotContainer.shooter.getShooterStatusLeft() && m_robotContainer.shooter.getShooterStatusRight());
+        SmartDashboard.putNumber(Constants.SD_PROXIMITY_DIST, m_robotContainer.proximity.getDistance());
     }
 
-    public void autoPeriodicUpdate(){
-        SmartDashboard.putNumber("Proximity Distance", m_robotContainer.proximity.getDistance());
-        SmartDashboard.putNumber("Encoder Distance", m_robotContainer.encoders.getDistanceMovedRight());
+    public void autoPeriodicUpdate() {
+        SmartDashboard.putNumber(Constants.SD_ENCODER_DIST, m_robotContainer.encoders.getDistanceMovedRight());
     }
 
-    public void teleopPeriodicUpdate(){
-        SmartDashboard.putNumber("Pivot EL Encoder", m_robotContainer.encoders.getPivotElevatorEncoderRot());
-        SmartDashboard.putBoolean("PESensorShoot", m_robotContainer.PESensor.photoEyeShoot.get());
-        SmartDashboard.putBoolean("PESensorIntake", m_robotContainer.PESensor.photoEyeIntake.get());
-        SmartDashboard.putNumber("Prox. Distance", m_robotContainer.proximity.getDistance());
-        SmartDashboard.putNumber("Climb encoder", m_robotContainer.encoders.getElevatorEncoderRot());
-        SmartDashboard.putString("Drive Orientation", m_robotContainer.drive.driveFront);
-        SmartDashboard.putBoolean("Autoshoot", Robot.autoShoot);
-        SmartDashboard.putNumber("the number of balls", PhotoElectricSensor.getInstance().getCounter());
+    public void teleopPeriodicUpdate() {
+        SmartDashboard.putNumber(Constants.SD_PIVOT_EL_ENCODER, m_robotContainer.encoders.getPivotElevatorEncoderRot());
+        SmartDashboard.putBoolean(Constants.SD_PE_SHOOTER, m_robotContainer.PESensor.getPhotoEyeShoot().get());
+        SmartDashboard.putBoolean(Constants.SD_PE_INTAKE, m_robotContainer.PESensor.getPhotoEyeIntake().get());
+        SmartDashboard.putNumber(Constants.SD_CLIMB_ENCODER, m_robotContainer.encoders.getElevatorEncoderRot());
+        SmartDashboard.putString(Constants.SD_DRIVE_ORIENTATION, m_robotContainer.drive.getDriveFront());
+        SmartDashboard.putBoolean(Constants.SD_AUTO_SHOOT, Constants.autoShoot);
+        SmartDashboard.putNumber(Constants.SD_BALL_CNT, m_robotContainer.PESensor.getCounter());
     }
 }

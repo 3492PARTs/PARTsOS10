@@ -13,7 +13,6 @@ import frc.robot.subsystems.Climber;
 import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.Gyro;
 
-
 public class Pivot_Command extends CommandBase {
   /**
    * Creates a new Climber_Command.
@@ -21,6 +20,7 @@ public class Pivot_Command extends CommandBase {
   private Climber climber = Climber.getInstance();
   private Gyro gyro = Gyro.getInstance();
   private Encoders encoders = Encoders.getInstance();
+
   public Pivot_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,17 +28,15 @@ public class Pivot_Command extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  
+
   @Override
   public void execute() {
-  climber.pivotToggleState(Direction.forward);
+    climber.pivotToggleState(Direction.forward);
   }
-
-
 
   // Called once the command ends or is interrupted.
   @Override
@@ -50,6 +48,6 @@ public class Pivot_Command extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return encoders.getPivotElevatorEncoderRot()>=.251;
+    return encoders.getPivotElevatorEncoderRot() >= .251;
   }
 }

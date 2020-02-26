@@ -16,6 +16,7 @@ public class SwitchFront extends CommandBase {
    */
   RobotContainer m_robotContainer = new RobotContainer();
   boolean front;
+
   public SwitchFront(boolean front) {
     this.front = front;
     // Use addRequirements() here to declare subsystem dependencies.

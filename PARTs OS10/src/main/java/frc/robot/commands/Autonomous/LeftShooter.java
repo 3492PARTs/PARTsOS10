@@ -7,13 +7,9 @@
 
 package frc.robot.commands.Autonomous;
 
-
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Direction;
 import frc.robot.commands.*;
-
-
-
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -27,12 +23,9 @@ public class LeftShooter extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
-    addCommands(
-    new Delay(),
-    new DriveCom(10, Direction.reverse),
-    new AutoFire()
-     //new Shoot(proximity.getDistance())
+    addCommands(new Delay(), new DriveCom(10, Direction.reverse), new AutoFire()
+    // new Shoot(proximity.getDistance())
     );
-    
+
   }
 }

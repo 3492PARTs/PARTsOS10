@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 
-
 public class Delay extends CommandBase {
   /**
    * Creates a new Delay.
    */
   private long start_Time;
   private double choosenDelay;
+
   public Delay() {
     // Use addRequirements() here to declare subsystem dependencie
 
@@ -27,7 +27,7 @@ public class Delay extends CommandBase {
   @Override
   public void initialize() {
     start_Time = System.currentTimeMillis();
-    choosenDelay = 1000*(SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0));
+    choosenDelay = 1000 * (SmartDashboard.getNumber(Constants.SD_AUTO_DELAY, 0.0));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -19,37 +18,41 @@ public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private final double forwardHalt = 0.0; //TODO: set value
+  private final double forwardHalt = 0.0; // TODO: set value
   private final double reverseHalt = 0.0;
   private final TalonSRX wheelIntake;
-  public final TalonSRX pivotIntake;
+  private final TalonSRX pivotIntake;
+  private int amps = 25;
+  private int timeoutMs = 0;
 
-    //=====================================================================================
-    // Define Singleton Pattern
-    //=====================================================================================
+  // =====================================================================================
+  // Define Singleton Pattern
+  // =====================================================================================
   private static Intake _staticIntake = new Intake();
-  public static Intake getInstance(){
+
+  public static Intake getInstance() {
     return _staticIntake;
   }
-  int amps = 25;
-  int timeoutMs = 0;
 
   public Intake() {
-  
-  
     wheelIntake = new TalonSRX(Constants.INTAKE_WHEEL_PORT);
     pivotIntake = new TalonSRX(Constants.PIVOT_INTAKE_PORT);
-    wheelIntake.configPeakCurrentDuration(100, 10); 
+    wheelIntake.configPeakCurrentDuration(100, 10);
     wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
     wheelIntake.configPeakCurrentLimit(amps, timeoutMs);
     wheelIntake.enableCurrentLimit(true);
-    
-    wheelIntake.configPeakCurrentDuration(100, 10); 
+
+    wheelIntake.configPeakCurrentDuration(100, 10);
     wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
     wheelIntake.configPeakCurrentLimit(amps, timeoutMs);
     wheelIntake.enableCurrentLimit(true);
   }
 
+  /**
+   * Set the state of the wheels
+   * 
+   * @param dir What directions the wheels should spin
+   */
   public void wheelToggleState(Direction dir) {
     if (dir == Direction.forward) {
       wheelIntake.set(ControlMode.PercentOutput, .5);
@@ -60,25 +63,37 @@ public class Intake extends SubsystemBase {
     }
   }
 
-  public void pivotToggleState(Direction dir){// put in halts
-    if(dir == Direction.forward){
-      pivotIntake.set(ControlMode.PercentOutput,.3);
-    }
-    else if(dir == Direction.reverse){
-        pivotIntake.set(ControlMode.PercentOutput, -.3);
-    }
-    else{
+  /**
+   * Pivot the intake arm
+   * 
+   * @param dir What direction to pivot the arm
+   */
+  public void pivotToggleState(Direction dir) {// put in halts
+    if (dir == Direction.forward) {
+      pivotIntake.set(ControlMode.PercentOutput, .3);
+    } else if (dir == Direction.reverse) {
+      pivotIntake.set(ControlMode.PercentOutput, -.3);
+    } else {
       pivotIntake.set(ControlMode.PercentOutput, 0);
     }
   }
 
-  public void stop(){
+  /**
+   * Stop the while intake system from moving
+   */
+  public void stop() {
     wheelToggleState(Direction.off);
     pivotToggleState(Direction.off);
   }
 
-
-
+  /**
+   * Get the intake talon
+   * 
+   * @return the Pivod Intake Talon reference
+   */
+  public TalonSRX getPivotIntakeTalon() {
+    return pivotIntake;
+  }
 
   @Override
   public void periodic() {

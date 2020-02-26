@@ -18,13 +18,14 @@ public class Turn extends CommandBase {
   Gyro gyro = Gyro.getInstance();
   private double degrees;
   private double objDegrees;
-  private final double Speed = .1; //TODO: test for safe turning speed
+  private final double Speed = .1; // TODO: test for safe turning speed
   private DriveSparkMax drive = DriveSparkMax.getInstance();
-/**
- * 
- * @param objDegrees the degrees it should be
- */
-  public Turn( double objDegrees) {
+
+  /**
+   * 
+   * @param objDegrees the degrees it should be
+   */
+  public Turn(double objDegrees) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.objDegrees = objDegrees;
   }
@@ -32,17 +33,17 @@ public class Turn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //TODO: reset encoders
+    // TODO: reset encoders
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     degrees = gyro.getGyro().getAngle();
-    if(degrees < 180){
+    if (degrees < 180) {
       drive.move(Speed, -Speed);
     }
-    if(degrees > 180){
+    if (degrees > 180) {
       drive.move(-Speed, Speed);
     }
   }
@@ -55,10 +56,10 @@ public class Turn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(degrees < 180){
+    if (degrees < 180) {
       return degrees <= objDegrees;
     }
-    if(degrees > 180){
+    if (degrees > 180) {
       return degrees >= objDegrees;
     }
     return false;

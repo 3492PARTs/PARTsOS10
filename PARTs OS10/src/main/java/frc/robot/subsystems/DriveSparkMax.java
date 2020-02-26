@@ -17,102 +17,138 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-
 public class DriveSparkMax extends SubsystemBase {
   /**
    * Creates a new Drive.
    */
-private RobotContainer m_robotContainer;
+  private CANSparkMax Right1 = new CANSparkMax(Constants.Right1_port, MotorType.kBrushless);
+  private CANSparkMax Right2 = new CANSparkMax(Constants.Right2_port, MotorType.kBrushless);
+  private CANSparkMax Right3 = new CANSparkMax(Constants.Right3_port, MotorType.kBrushless);
 
-public  CANSparkMax Right1 = new CANSparkMax(Constants.Right1_port, MotorType.kBrushless);
-public  CANSparkMax Right2 = new CANSparkMax(Constants.Right2_port, MotorType.kBrushless);
-public  CANSparkMax Right3 = new CANSparkMax(Constants.Right3_port, MotorType.kBrushless);
+  private CANSparkMax Left1 = new CANSparkMax(Constants.Left1_port, MotorType.kBrushless);
+  private CANSparkMax Left2 = new CANSparkMax(Constants.Left2_port, MotorType.kBrushless);
+  private CANSparkMax Left3 = new CANSparkMax(Constants.Left3_port, MotorType.kBrushless);
 
-public  CANSparkMax Left1 = new CANSparkMax(Constants.Left1_port, MotorType.kBrushless);
-public  CANSparkMax Left2 = new CANSparkMax(Constants.Left2_port, MotorType.kBrushless);
-public  CANSparkMax Left3 = new CANSparkMax(Constants.Left3_port, MotorType.kBrushless);
+  private SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
+  private SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
+  private DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 
-public  SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
-public  SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
-public DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
+  private int amps = 55;
+  private int timeoutMs = 0;
+  private int peakAmps = 40;
+  private int mult = 1;
+  private String driveFront = "";
 
-  int amps = 55;
-  int timeoutMs = 0;
-  int peakAmps = 40;
-public static int mult = 1;
-public static String driveFront = "";
-//=====================================================================================
-// Define Singleton Pattern
-//=====================================================================================
-private static DriveSparkMax _staticDriveSparkMax = new DriveSparkMax();
-public static DriveSparkMax getInstance(){
-  return _staticDriveSparkMax;
-}
+  // =====================================================================================
+  // Define Singleton Pattern
+  // =====================================================================================
+  private static DriveSparkMax _staticDriveSparkMax = new DriveSparkMax();
+
+  public static DriveSparkMax getInstance() {
+    return _staticDriveSparkMax;
+  }
 
   public DriveSparkMax() {
-    
+
   }
-/**
- * makes the robit move
- * @param Speed left between 1, -1
- * @param Speed2 right drive train between 1,-1
- */
-public void move(Double Speed1,Double Speed2){
-  M_drive.tankDrive(Speed1, Speed2);
-}
 
-
-
-
-//joystick limiter
-double limitedJS1 = 0;
-double limitedJS2 = 0;
-/**
- * 
- * @param joyY joystick left y axis
- * @param JoyX joystick right y axis
- */
-public void moveLimited(Double joy1, Double joy2){
-  double limit = .02;
-  double change = joy1 -limitedJS1;
-  if(change>limit){
-    change = limit;
-  } else if (change <= limit){
-    change = - limit;
-  } 
-  limitedJS1 += change;
-
-  change = joy2 - limitedJS2;
-  if (change>limit) change = limit;
-  else if( change<=limit) change = -limit;
-  limitedJS2 += change;
-    M_drive.tankDrive((mult) * limitedJS1, (mult)* limitedJS2);
-}
-
-
-
-/**
- * 
- * @param orientation true = shooter is front, false = intake is front
- */
-public void switchFront(boolean orientation)
-{
-  if(orientation)
-  {
-    mult = 1;
-    driveFront = "Shoot";
+  /**
+   * Drive
+   * 
+   * @param Speed  left between 1, -1
+   * @param Speed2 right drive train between 1,-1
+   */
+  public void move(Double Speed1, Double Speed2) {
+    M_drive.tankDrive(Speed1, Speed2);
   }
-  else
-  {
-    mult = -1;
-    driveFront = "INTAKE";
-  }
-}
-// stops all motors
-public void stop(){
-  move(0.0, 0.0);
 
-}
+  // joystick limiter
+  private double limitedJS1 = 0;
+  private double limitedJS2 = 0;
+
+  /**
+   * Drive with speed ramp
+   * 
+   * @param joyY joystick left y axis
+   * @param JoyX joystick right y axis
+   */
+  public void moveLimited(Double joy1, Double joy2) {
+    double limit = .02;
+    double change = joy1 - limitedJS1;
+    if (change > limit) {
+      change = limit;
+    } else if (change <= limit) {
+      change = -limit;
+    }
+    limitedJS1 += change;
+
+    change = joy2 - limitedJS2;
+    if (change > limit)
+      change = limit;
+    else if (change <= limit)
+      change = -limit;
+    limitedJS2 += change;
+    M_drive.tankDrive((mult) * limitedJS1, (mult) * limitedJS2);
+  }
+
+  /**
+   * Toggle which side is the front of the robot
+   * 
+   * @param orientation true = shooter is front, false = intake is front
+   */
+  public void switchFront(boolean orientation) {
+    if (orientation) {
+      mult = 1;
+      driveFront = "Shoot";
+    } else {
+      mult = -1;
+      driveFront = "INTAKE";
+    }
+  }
+
+  /**
+   * Get the multiplier variable
+   * 
+   * @return mult
+   */
+  public int getMult() {
+    return mult;
+  }
+
+  /**
+   * Get which side is the front of the robot
+   * 
+   * @return driveFront
+   */
+  public String getDriveFront() {
+    return driveFront;
+  }
+
+  /**
+   * Get the Right1 spark max
+   * 
+   * @return Right1
+   */
+  public CANSparkMax getRight1SparkMax() {
+    return Right1;
+  }
+
+  /**
+   * Get the Left1 spark max
+   * 
+   * @return Left1
+   */
+  public CANSparkMax getLeft1SparkMax() {
+    return Left1;
+  }
+
+  /**
+   * Stop the motors
+   */
+  public void stop() {
+    move(0.0, 0.0);
+
+  }
 
   @Override
   public void periodic() {

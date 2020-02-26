@@ -17,19 +17,16 @@ import frc.robot.commands.*;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 
-
 public class StraightTopShooter extends SequentialCommandGroup {
   /**
    * Creates a new StraightTopShooter.
    */
   private final Proximity proximity = Proximity.getInstance();
+
   public StraightTopShooter() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
-    addCommands(
-      new Delay(),
-      new DriveCom(22, Direction.reverse),
-      new AutoFire());
+    addCommands(new Delay(), new DriveCom(22, Direction.reverse), new AutoFire());
   }
 }

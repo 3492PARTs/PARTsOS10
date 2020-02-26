@@ -23,7 +23,7 @@ public class MotorStopAll extends CommandBase {
   Climber climber = Climber.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
   DriveSparkMax drive = DriveSparkMax.getInstance();
-    
+
   public MotorStopAll() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -38,8 +38,7 @@ public class MotorStopAll extends CommandBase {
   public void execute() {
     intake.stop();
     shooter.stop();
-    //climber.stop();
-
+    // climber.stop();
 
   }
 

@@ -23,14 +23,9 @@ public class RightShooter extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
-    addCommands(
-      new Delay(),
-      new DriveCom(10, Direction.reverse),
-      new AutoFire()
-      //new Shoot(proximity.getDistance())
+    addCommands(new Delay(), new DriveCom(10, Direction.reverse), new AutoFire()
+    // new Shoot(proximity.getDistance())
     );
   }
-
-
 
 }

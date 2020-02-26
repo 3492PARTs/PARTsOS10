@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -21,14 +20,15 @@ public class ConveyerSpaceCom extends CommandBase {
   private long time;
   private double duration;
   private Conveyor conveyor = Conveyor.getInstance();
+
   /**
    * 
-   * @param time in seconds 
-   * if time is positive direction will be forward, if time is negative direction will be reversed
+   * @param time in seconds if time is positive direction will be forward, if time
+   *             is negative direction will be reversed
    */
   public ConveyerSpaceCom(double duration) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.duration = duration*1000;
+    this.duration = duration * 1000;
   }
 
   // Called when the command is initially scheduled.
@@ -36,18 +36,18 @@ public class ConveyerSpaceCom extends CommandBase {
   public void initialize() {
     time = System.currentTimeMillis();
     Constants.autoFireLock = true;
-    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(duration>0){
-    conveyor.toggleState(Direction.forward);
-  }
-  if(duration<0){
-    conveyor.toggleState(Direction.reverse);
-  }
+    if (duration > 0) {
+      conveyor.toggleState(Direction.forward);
+    }
+    if (duration < 0) {
+      conveyor.toggleState(Direction.reverse);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -62,6 +62,6 @@ public class ConveyerSpaceCom extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  return duration <= System.currentTimeMillis()-time;
+    return duration <= System.currentTimeMillis() - time;
   }
 }

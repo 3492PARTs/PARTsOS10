@@ -18,6 +18,7 @@ public class AutoFire extends CommandBase {
    * Creates a new AutoFire.
    */
   private Shooter shooter;
+
   public AutoFire() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -29,13 +30,11 @@ public class AutoFire extends CommandBase {
     Constants.autoFireCounter = 0;
   }
 
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     shooter.toggleState(Constants.Direction.forward);
-    if((Robot.shooterStatusRight || Robot.shooterStatusLeft) && !Constants.autoFireLock)
-    {
+    if ((Robot.shooterStatusRight || Robot.shooterStatusLeft) && !Constants.autoFireLock) {
       new ConveyerSpaceCom(1.5).schedule();
     }
   }

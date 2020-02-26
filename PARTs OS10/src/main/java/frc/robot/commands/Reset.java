@@ -7,11 +7,9 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Sensors.*;
 import frc.robot.*;
-
 
 public class Reset extends CommandBase {
   /**
@@ -23,7 +21,6 @@ public class Reset extends CommandBase {
 
   private Encoders encoders;
   private Gyro gyro;
-
 
   // Called when the command is initially scheduled.
   @Override
@@ -37,7 +34,7 @@ public class Reset extends CommandBase {
   public void execute() {
     encoders.resetEncoders(Constants.Encoder.all);
     gyro.zeroGyro();
-    
+
   }
 
   // Called once the command ends or is interrupted.

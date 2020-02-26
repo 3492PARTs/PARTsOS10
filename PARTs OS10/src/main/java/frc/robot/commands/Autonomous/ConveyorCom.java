@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Conveyor;
 
-
 public class ConveyorCom extends CommandBase {
   /**
    * Creates a new ConveyerCom.
@@ -20,15 +19,16 @@ public class ConveyorCom extends CommandBase {
   private long currentTime;
   private long duration;
   private Conveyor conveyor = Conveyor.getInstance();
+
   public ConveyorCom(long duration) {
-  this.duration = duration;
+    this.duration = duration;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  time = System.currentTimeMillis();
+    time = System.currentTimeMillis();
 
   }
 
@@ -37,9 +37,9 @@ public class ConveyorCom extends CommandBase {
   public void execute() {
     currentTime = System.currentTimeMillis();
     conveyor.toggleState(Direction.forward);
-    
+
   }
-  
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

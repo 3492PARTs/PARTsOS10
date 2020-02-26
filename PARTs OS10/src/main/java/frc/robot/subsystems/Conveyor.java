@@ -12,44 +12,51 @@ public class Conveyor extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-  TalonSRX conveyor;
-  int timeoutMs = 0;
-  
-  //=====================================================================================
-  // Define Singleton Pattern
-  //=====================================================================================
-  private static Conveyor _staticConveyor = new Conveyor();  
+  private TalonSRX conveyor;
+  private int timeoutMs = 0;
 
-  public static Conveyor getInstance(){
+  // =====================================================================================
+  // Define Singleton Pattern
+  // =====================================================================================
+  private static Conveyor _staticConveyor = new Conveyor();
+
+  public static Conveyor getInstance() {
     return _staticConveyor;
   }
+
   public Conveyor() {
-    conveyor = new TalonSRX(Constants.Conveyor_port);  
-  conveyor.configPeakCurrentDuration(100, 10); 
-  conveyor.configContinuousCurrentLimit(45, timeoutMs);
-  conveyor.configPeakCurrentLimit(25, timeoutMs);
-  conveyor.enableCurrentLimit(true);
+    conveyor = new TalonSRX(Constants.Conveyor_port);
+    conveyor.configPeakCurrentDuration(100, 10);
+    conveyor.configContinuousCurrentLimit(45, timeoutMs);
+    conveyor.configPeakCurrentLimit(25, timeoutMs);
+    conveyor.enableCurrentLimit(true);
   }
+
   /**
+   * Which direction the conveyor is moving
    * 
-   * @param result a value for the direction the motor should rotate. 0 is none, 1 is forward, 2 is out.
+   * @param result a value for the direction the motor should rotate. 0 is none, 1
+   *               is forward, 2 is out.
    */
-  public void toggleState(Direction dir){
-      if(dir == Direction.forward){
-       conveyor.set(ControlMode.PercentOutput, -1);
-    } 
-    else if(dir == Direction.reverse){
-        conveyor.set(ControlMode.PercentOutput, 1);
-    }
-    else conveyor.set(ControlMode.PercentOutput, 0);
+  public void toggleState(Direction dir) {
+    if (dir == Direction.forward) {
+      conveyor.set(ControlMode.PercentOutput, -1);
+    } else if (dir == Direction.reverse) {
+      conveyor.set(ControlMode.PercentOutput, 1);
+    } else
+      conveyor.set(ControlMode.PercentOutput, 0);
+  }
+
+  /**
+   * Stop the conveyor
+   */
+  public void stop() {
+    toggleState(Direction.off);
+
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
-  public void stop() {
-    toggleState(Direction.off);
-    
   }
 }

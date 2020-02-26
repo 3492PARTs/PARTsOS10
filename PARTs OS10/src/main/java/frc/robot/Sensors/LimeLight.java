@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
  */
 public class LimeLight {
 
-    //=====================================================================================
+    // =====================================================================================
     // Define Singleton Pattern
-    //=====================================================================================
+    // =====================================================================================
     private static LimeLight _staticLimeLight = new LimeLight();
 
     public static LimeLight getInstance() {

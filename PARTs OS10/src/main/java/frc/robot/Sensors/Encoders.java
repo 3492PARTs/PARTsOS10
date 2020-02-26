@@ -15,71 +15,94 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveSparkMax;
 import frc.robot.subsystems.Intake;
 
-
 public class Encoders {
     private final DriveSparkMax drive = DriveSparkMax.getInstance();
     private final Climber climber = Climber.getInstance();
     private final Intake intake = Intake.getInstance();
-    private CANEncoder rightEncoder = drive.Right1.getEncoder();
-    private CANEncoder leftEncoder = drive.Left1.getEncoder();
-        //=====================================================================================
-    // Define Singleton Pattern
-    //=====================================================================================
-    private static Encoders _staticEncoders = new Encoders();
-    public static Encoders getInstance()
-    {
-        return _staticEncoders;
-    }
+    private CANEncoder rightEncoder = drive.getRight1SparkMax().getEncoder();
+    private CANEncoder leftEncoder = drive.getLeft1SparkMax().getEncoder();
+
     private static double startPositionRight = 0;
     private static double startPositionLeft = 0;
     private static double startPosPivotElevator = 0;
     private static double startPosElevator = 0;
     private static double startPosArmPivot = 0;
+    // =====================================================================================
+    // Define Singleton Pattern
+    // =====================================================================================
+    private static Encoders _staticEncoders = new Encoders();
 
-    public double getDistanceMovedLeft(){
-        return Math.abs(((leftEncoder.getPosition() - startPositionLeft) * Constants.WHEEL_CIRCUMFERENCE) /  Constants.GEAR_RATIO) ;
+    public static Encoders getInstance() {
+        return _staticEncoders;
     }
-    public double getDistanceMovedRight(){
-        return Math.abs(((rightEncoder.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE) / Constants.GEAR_RATIO) ;
-    }
-    
+
     /**
+     * Distance of the left drive wheel
+     * 
+     * @return distance the left wheel moved in in ?
+     */
+    public double getDistanceMovedLeft() {
+        return Math.abs(((leftEncoder.getPosition() - startPositionLeft) * Constants.WHEEL_CIRCUMFERENCE)
+                / Constants.GEAR_RATIO);
+    }
+
+    /**
+     * Distance of the right drive wheel
+     * 
+     * @return distance the right wheel moved in in ?
+     */
+    public double getDistanceMovedRight() {
+        return Math.abs(((rightEncoder.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE)
+                / Constants.GEAR_RATIO);
+    }
+
+    /**
+     * Get the rotation of the elevator pivot
      * 
      * @return in rotations
      */
-    public double getPivotElevatorEncoderRot(){
-        return (((double)climber.elevatorPivot.getSelectedSensorPosition()) - startPosPivotElevator)/4096.0;
+    public double getPivotElevatorEncoderRot() {
+        return (((double) climber.getElevatorPivot().getSelectedSensorPosition()) - startPosPivotElevator) / 4096.0;
     }
 
-    public double getElevatorEncoderRot(){
-        return (((double)climber.elevator.getSelectedSensorPosition()) - startPosElevator)/4096.0;
+    /**
+     * Get the rotation of the elevator 
+     * @return in rotations
+     */
+    public double getElevatorEncoderRot() {
+        return (((double) climber.elevagetElevator()tor.getSelectedSensorPosition()) - startPosElevator) / 4096.0;
     }
 
-    public double getArmPivotEncoderRot(){
-        return (((double)intake.pivotIntake.getSelectedSensorPosition()) - startPosArmPivot);
+    /**
+     * Get the rotation of the arm pivot
+     * 
+     * @return in rotations
+     */
+    public double getArmPivotEncoderRot() {
+        return (((double) intake.getPivotIntakeTalon().getSelectedSensorPosition()) - startPosArmPivot);
     }
 
-
-    public void resetEncoders(Encoder encoder){
-        if(encoder == Encoder.drive){
+    /**
+     * Reset an encoder
+     * 
+     * @param encoder the encoder to reset
+     */
+    public void resetEncoders(Encoder encoder) {
+        if (encoder == Encoder.drive) {
             startPositionLeft = leftEncoder.getPosition();
             startPositionRight = rightEncoder.getPosition();
-        }
-        else if(encoder == Encoder.pivotElevator){
-            startPosPivotElevator = (double)climber.elevatorPivot.getSelectedSensorPosition();
-        }
-        else if(encoder == Encoder.elevator){
-            startPosElevator = (double)climber.elevator.getSelectedSensorPosition();
-        }
-        else if(encoder == Encoder.armPivot){
-            startPosArmPivot = (double)intake.pivotIntake.getSelectedSensorPosition();
-        }
-        else if(encoder == Encoder.all){
+        } else if (encoder == Encoder.pivotElevator) {
+            startPosPivotElevator = (double) climber.getElevatorPivot().getSelectedSensorPosition();
+        } else if (encoder == Encoder.elevator) {
+            startPosElevator = (double) climber.getElevator().getSelectedSensorPosition();
+        } else if (encoder == Encoder.armPivot) {
+            startPosArmPivot = (double) intake.getPivotIntakeTalon().getSelectedSensorPosition();
+        } else if (encoder == Encoder.all) {
             startPositionLeft = leftEncoder.getPosition();
             startPositionRight = rightEncoder.getPosition();
-            startPosPivotElevator = (double)climber.elevatorPivot.getSelectedSensorPosition();
-            startPosElevator = (double)climber.elevator.getSelectedSensorPosition();
-            startPosArmPivot = (double)intake.pivotIntake.getSelectedSensorPosition();
+            startPosPivotElevator = (double) climber.getElevatorPivot().getSelectedSensorPosition();
+            startPosElevator = (double) climber.getElevator().getSelectedSensorPosition();
+            startPosArmPivot = (double) intake.getPivotIntakeTalon().getSelectedSensorPosition();
         }
     }
 }

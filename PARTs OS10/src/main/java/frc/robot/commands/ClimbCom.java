@@ -20,6 +20,7 @@ public class ClimbCom extends CommandBase {
   private Encoders encoders;
   private double distance = 0; // TODO: what distance needs to traverse
   private Climber climber = Climber.getInstance();
+
   public ClimbCom() {
     // Use addRequirements() here to declare subsystem dependencies.
 
@@ -31,7 +32,6 @@ public class ClimbCom extends CommandBase {
     encoders.getInstance();
     encoders.resetEncoders(Encoder.elevator);
 
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,6 +49,6 @@ public class ClimbCom extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return encoders.getElevatorEncoderRot() >= 8.730225; 
+    return encoders.getElevatorEncoderRot() >= 8.730225;
   }
 }

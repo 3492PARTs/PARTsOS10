@@ -21,12 +21,13 @@ public class Shoot extends CommandBase {
   private int shootTime;
   private Shooter shooter = Shooter.getInstance();
   private StopWatch timer = new StopWatch();
+
   /**
    * 
    * @param distance distance robot should move
-   * @param speed shoot speed enum full, half, quarter
+   * @param speed    shoot speed enum full, half, quarter
    */
-  public Shoot(ShootSpeed speed , int time) {
+  public Shoot(ShootSpeed speed, int time) {
     this.speed = speed;
     shootTime = time;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,13 +42,11 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(speed == ShootSpeed.full){
+    if (speed == ShootSpeed.full) {
       shooter.toggleState(Constants.Direction.forward);
-    }
-    else if(speed == ShootSpeed.half){
+    } else if (speed == ShootSpeed.half) {
       shooter.toggleState(Constants.Direction.forward, .5);
-    }
-    else if(speed == ShootSpeed.quarter){
+    } else if (speed == ShootSpeed.quarter) {
       shooter.toggleState(Constants.Direction.forward, .25);
     }
 

@@ -9,39 +9,53 @@ package frc.robot.Sensors;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 
-
 /**
- * Add your docs here.
+ * Gyro Sensor on the robot
  */
 
-
 public class Gyro {
-    static Gyro _staticGyro = new Gyro();
-    AnalogGyro gyro;
-    //=====================================================================================
+    private static Gyro _staticGyro = new Gyro();
+    private AnalogGyro gyro;
+
+    // =====================================================================================
     // Define Singleton Pattern
-    //=====================================================================================
-   public Gyro(){
+    // =====================================================================================
+    public static Gyro getInstance() {
+
+        return _staticGyro;
+    }
+
+    public Gyro() {
         gyro = new AnalogGyro(0);
     }
 
-    public AnalogGyro getGyro(){
-    return gyro;   
+    /**
+     * Initialize the gyro
+     */
+    public void initGyro() {
+        gyro.initGyro();
     }
 
-
-    public static Gyro getInstance(){
-         
-        return _staticGyro;    
+    /**
+     * Calibrate the gyro
+     */
+    public void calibrate() {
+        gyro.calibrate();
     }
 
-
-
-    public double getAngle(){
+    /**
+     * Get the andle from the gyro
+     * 
+     * @return gyro angle
+     */
+    public double getAngle() {
         return gyro.getAngle();
     }
 
+    /**
+     * Zero the gyro
+     */
     public void zeroGyro() {
-        gyro.reset();        
+        gyro.reset();
     }
 }

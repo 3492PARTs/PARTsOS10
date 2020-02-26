@@ -13,55 +13,82 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
- * Add your docs here.
+ * Photo Electric sensor to count the balls
  */
 
 public class PhotoElectricSensor {
-    int counter = 0;
-    public DigitalInput photoEyeIntake = new DigitalInput(9);
-    public DigitalInput photoEyeShoot = new DigitalInput(8);
+    private int counter = 0;
+    private DigitalInput photoEyeIntake = new DigitalInput(9);
+    private DigitalInput photoEyeShoot = new DigitalInput(8);
     private static long timeAtCallFront;
     private static long timeAtCallBack;
-    //=====================================================================================
+    private boolean lockShootSens = false;
+    private boolean lockIntakeSens = false;
+
+    // =====================================================================================
     // Define Singleton Pattern
-    //=====================================================================================
+    // =====================================================================================
     private static PhotoElectricSensor _staticPhotoEye = new PhotoElectricSensor();
-    public static PhotoElectricSensor getInstance()
-    {
+
+    public static PhotoElectricSensor getInstance() {
         return _staticPhotoEye;
     }
 
     /**
-     * 
-     * @param sensor = photoelectrc sensor reading
-     * @return true if ball is breaking plane, false if not
+     * Run the PE sensor and count ballss
      */
-    public void counterIncrease(){
-        if(timeAtCallFront + 300 < System.currentTimeMillis()){
-        counter++;
-        Robot.photolockback = false;
-    }
-        else;
-    }
-    public void counterDecrease(){
-        if(timeAtCallBack + 100 < System.currentTimeMillis()){
-        counter--;
-        Robot.photolockfront = true;
-
+    public void runPESensor() {
+        if (photoEyeIntake.get() && !lockIntakeSens) {
+            lockIntakeSens = true;
+            counter++;
         }
-        else;
+
+        if (!photoEyeIntake.get()) {
+            lockIntakeSens = false;
+        }
+
+        if (photoEyeShoot.get() && !lockShootSens) {
+            lockShootSens = true;
+            counter--;
+        }
+
+        if (!photoEyeShoot.get()) {
+            lockIntakeSens = false;
+        }
+
     }
 
-    public void lockTimerFront(){
-       timeAtCallFront = System.currentTimeMillis();
-    }
-    public void lockTimerBack(){
-        timeAtCallBack = System.currentTimeMillis();
-    }
-    public void counterReset(){
+    /**
+     * Reset the counter
+     */
+    public void counterReset() {
         counter = 0;
     }
-    public int getCounter(){
+
+    /**
+     * Get the counter
+     * 
+     * @return counter
+     */
+    public int getCounter() {
         return counter;
+    }
+
+    /**
+     * Get the Photot Eye Intake sensor DI
+     * 
+     * @return photoEyeIntake
+     */
+    public DigitalInput getPhotoEyeIntake() {
+        return photoEyeIntake;
+    }
+
+    /**
+     * Get the Photot Eye Shoot sensor DI
+     * 
+     * @return photoEyeShoot
+     */
+    public DigitalInput getPhotoEyeShoot() {
+        return photoEyeShoot;
     }
 }

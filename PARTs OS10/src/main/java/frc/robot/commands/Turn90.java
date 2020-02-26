@@ -20,6 +20,7 @@ public class Turn90 extends CommandBase {
   private double speed;
   private Gyro gyro = Gyro.getInstance();
   private DriveSparkMax drive = DriveSparkMax.getInstance();
+
   public Turn90(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.speed = speed;
@@ -34,12 +35,12 @@ public class Turn90 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    degrees = gyro.getGyro().getAngle();    
-    if(rotationTarget < 91){
+    degrees = gyro.getGyro().getAngle();
+    if (rotationTarget < 91) {
       drive.move(speed, -speed);
     }
-    
-    else if(rotationTarget > 269) {
+
+    else if (rotationTarget > 269) {
       drive.move(-speed, speed);
       System.out.println("Dead code not dead");
     }
@@ -48,19 +49,19 @@ public class Turn90 extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-  drive.move(.0, .0);
+    drive.move(.0, .0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(degrees > 180){
-      return (rotationTarget - 180) <= degrees; 
+    if (degrees > 180) {
+      return (rotationTarget - 180) <= degrees;
     }
-    if(degrees < 180){
-      return (rotationTarget) <= degrees; 
+    if (degrees < 180) {
+      return (rotationTarget) <= degrees;
     }
     return false;
-    }
+  }
 
 }
