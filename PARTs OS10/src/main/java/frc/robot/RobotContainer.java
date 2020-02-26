@@ -43,22 +43,8 @@ public class RobotContainer {
   public static Joystick leftJoystick = new Joystick(1);
   public static Joystick launchPad = new Joystick(2);
   public JoystickButton conveyorSpace = new JoystickButton(leftJoystick, 1);
-  public JoystickButton elevatorPivot = new JoystickButton(leftJoystick, 10);
-  public JoystickButton elevatorPivot2 = new JoystickButton(rightJoystick, 10);
-  public JoystickButton climbUp = new JoystickButton(rightJoystick, 12);
+  public JoystickButton elevatorPivot = new JoystickButton(launchPad, 5);
   
-  //intake front
-  public POVButton orientIntake1 = new POVButton(rightJoystick, 1);
-  public POVButton orientIntake2 = new POVButton(rightJoystick, 2);
-  public POVButton orientIntake3 = new POVButton(rightJoystick, 3);
-
-  //shooter front 
-  public POVButton orientShoot1 = new POVButton(rightJoystick, 5);
-  public POVButton orientShoot2 = new POVButton(rightJoystick, 6);
-  public POVButton orientShoot3 = new POVButton(rightJoystick, 7);
-
-  public POVButton[] intakeFrontGroup;
-  //intakeFrontGroup = {orientShoot1, orientShoot2, orientShoot3};
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

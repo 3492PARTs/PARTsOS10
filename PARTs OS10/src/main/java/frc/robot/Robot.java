@@ -68,8 +68,6 @@ public class Robot extends TimedRobot {
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.conveyorSpace.whenPressed(new ConveyerSpaceCom(1.5));
     m_robotContainer.elevatorPivot.whenPressed(new Pivot_Command());
-    m_robotContainer.elevatorPivot2.whenPressed(new Pivot_Command());
-    m_robotContainer.climbUp.whenPressed(new ClimbCom());
     m_robotContainer.gyro.getGyro().initGyro();
     m_robotContainer.gyro.getGyro().calibrate();
     driveOrientation = true;
@@ -209,33 +207,53 @@ public class Robot extends TimedRobot {
 
     //Drive inversion
 
-    if(m_robotContainer.leftJoystick.getRawButton(3) || m_robotContainer.rightJoystick.getRawButton(3))
+    if(m_robotContainer.leftJoystick.getRawButton(3))
     {
       m_robotContainer.drive.switchFront(false);
     }
 
     //Drive inversion 2 electric boogaloo
-    if(m_robotContainer.leftJoystick.getRawButton(4) || m_robotContainer.rightJoystick.getRawButton(4))
+    if(m_robotContainer.leftJoystick.getRawButton(4))
     {
       m_robotContainer.drive.switchFront(true);
     }
 
-
-    
-    if(m_robotContainer.launchPad.getRawButton(1))//conveyor out
+    if(m_robotContainer.rightJoystick.getRawButton(4))
     {
-      m_robotContainer.conveyor.toggleState(Constants.Direction.forward);
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); //arm pivot up
     }
-    else if(m_robotContainer.launchPad.getRawButton(3))//conveyor in
+    else if(m_robotContainer.rightJoystick.getRawButton(3))
     {
-      m_robotContainer.conveyor.toggleState(Constants.Direction.reverse);
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm pivot down
+    }
+    else
+    {
+      m_robotContainer.intake.pivotToggleState((Constants.Direction.off));
+    }
+
+
+
+   if(m_robotContainer.launchPad.getRawButton(3))//winch (climber up)
+    {
+      m_robotContainer.climber.climbToggleState(Constants.Direction.reverse);
+    }
+    else
+    {
+      m_robotContainer.climber.climbToggleState(Constants.Direction.off);
+    }
+   
+    if(m_robotContainer.launchPad.getRawButton(6))
+    {
+      m_robotContainer.conveyor.toggleState(Constants.Direction.reverse); //conveyor in
+    }
+    else if(m_robotContainer.launchPad.getRawButton(7))
+    {
+      m_robotContainer.conveyor.toggleState(Constants.Direction.forward); //conveyor out
     }
     else
     {
       m_robotContainer.conveyor.toggleState(Constants.Direction.off);
     }
-   
-
     
     if(m_robotContainer.rightJoystick.getRawButton(1))
     {
@@ -252,11 +270,11 @@ public class Robot extends TimedRobot {
 
    
   
-    if(m_robotContainer.launchPad.getRawButton(8)) //elevator up
+    if(m_robotContainer.launchPad.getRawButton(9)) //elevator up
     {
       m_robotContainer.climber.elevatorToggleState(Constants.Direction.forward);
     }
-    else if(m_robotContainer.launchPad.getRawButton(6))//elevator down
+    else if(m_robotContainer.launchPad.getRawButton(8))//elevator down
     {
       m_robotContainer.climber.elevatorToggleState(Constants.Direction.reverse);
     }
@@ -266,17 +284,17 @@ public class Robot extends TimedRobot {
     }
 
     // climber
-    if(m_robotContainer.launchPad.getRawButton(5))
-    {
-      m_robotContainer.climber.climbToggleState(Constants.Direction.reverse);
-    }
-    else
-    {
-      m_robotContainer.climber.climbToggleState(Constants.Direction.off);
-    }
+    // if(m_robotContainer.launchPad.getRawButton(5))
+    // {
+    //   m_robotContainer.climber.climbToggleState(Constants.Direction.reverse);
+    // }
+    // else
+    // {
+    //   m_robotContainer.climber.climbToggleState(Constants.Direction.off);
+    // }
 
    
-    if(m_robotContainer.launchPad.getRawButton(7))//pivot back
+    if(m_robotContainer.leftJoystick.getRawButton(9) || m_robotContainer.rightJoystick.getRawButton(9))//pivot back
     {
       m_robotContainer.climber.pivotToggleState(Constants.Direction.reverse);
     }
@@ -297,28 +315,11 @@ public class Robot extends TimedRobot {
     }
     else if(m_robotContainer.launchPad.getRawButton(11))//shooter in
     {
-      m_robotContainer.shooter.toggleState(Constants.Direction.forward);
-    }
-    else if(m_robotContainer.leftJoystick.getRawButton(13) ||  m_robotContainer.rightJoystick.getRawButton(13))
-    {
-      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .35); //shooter low out
+      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .35);
     }
     else
     {
       m_robotContainer.shooter.toggleState(Constants.Direction.off);
-    }
-
-    if(m_robotContainer.leftJoystick.getRawButton(11) ||  m_robotContainer.rightJoystick.getRawButton(11))
-    {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); //arm pivot up
-    }
-    else if(m_robotContainer.leftJoystick.getRawButton(5) ||  m_robotContainer.rightJoystick.getRawButton(5))
-    {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); //arm pivot down
-    }
-    else
-    {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.off);
     }
 
 
