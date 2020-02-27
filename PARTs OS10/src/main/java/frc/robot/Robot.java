@@ -139,7 +139,7 @@ public class Robot extends TimedRobot {
     if ((m_robotContainer.shooter.getShooterStatusLeft() || m_robotContainer.shooter.getShooterStatusRight())
         && Constants.autoShoot) {
       // Constants.AutoFireReverseLock = false;
-      new ConveyerSpaceCom(1.5).schedule();
+      new ConveyerSpaceCom(1.35).schedule();
     }
 
     // =====================================================================================
