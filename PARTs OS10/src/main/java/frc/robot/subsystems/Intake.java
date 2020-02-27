@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
-import frc.robot.Constants.Encoder;
+import frc.robot.Sensors.Encoders;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -25,6 +25,10 @@ public class Intake extends SubsystemBase {
   private final TalonSRX pivotIntake;
   private int amps = 25;
   private int timeoutMs = 0;
+  Encoders encoders = Encoders.getInstance();
+  double maximumRotMin = 0;//TODO: set value
+  double minimumRotMin = 0;//TODO: set
+
 
   // =====================================================================================
   // Define Singleton Pattern

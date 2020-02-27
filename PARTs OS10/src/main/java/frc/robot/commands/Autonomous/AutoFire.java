@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.ConveyerSpaceCom;
 import frc.robot.subsystems.Shooter;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class AutoFire extends CommandBase {
   /**
