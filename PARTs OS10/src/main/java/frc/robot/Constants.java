@@ -58,7 +58,7 @@ public final class Constants {
 
     public static boolean autoShoot = false;
 
-    public static boolean AutoFireReverseLock = false;
+    // public static boolean AutoFireReverseLock = false;
 
     // =====================================================================================
     // Smart Dashboard Strings

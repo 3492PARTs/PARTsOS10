@@ -138,16 +138,16 @@ public class Robot extends TimedRobot {
     // =====================================================================================
     if ((m_robotContainer.shooter.getShooterStatusLeft() || m_robotContainer.shooter.getShooterStatusRight())
         && Constants.autoShoot) {
-      Constants.AutoFireReverseLock = false;
+      // Constants.AutoFireReverseLock = false;
       new ConveyerSpaceCom(1.5).schedule();
     }
 
     // =====================================================================================
     // UNTESTED -- Back the ball up if its touching the top wheels
     // =====================================================================================
-    if (Constants.autoShoot && m_robotContainer.PESensor.getPhotoEyeShoot().get() && !Constants.AutoFireReverseLock) {
-      new ConveyerSpaceCom(-.2);
-    }
+    // if (Constants.autoShoot && m_robotContainer.PESensor.getPhotoEyeShoot().get() && !Constants.AutoFireReverseLock) {
+    //   new ConveyerSpaceCom(-.2);
+    // }
 
     // =====================================================================================
     // DRIVE
@@ -242,6 +242,7 @@ public class Robot extends TimedRobot {
     if (m_robotContainer.leftJoystick.getRawButton(9) || m_robotContainer.rightJoystick.getRawButton(9)) { // pivot back
       m_robotContainer.climber.pivotToggleState(Constants.Direction.reverse);
     }
+    else m_robotContainer.climber.pivotToggleState(Direction.off);
 
   }
 

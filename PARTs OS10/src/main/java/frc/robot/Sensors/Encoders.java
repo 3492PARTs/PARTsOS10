@@ -70,7 +70,7 @@ public class Encoders {
      * @return in rotations
      */
     public double getElevatorEncoderRot() {
-        return (((double) climber.elevagetElevator()tor.getSelectedSensorPosition()) - startPosElevator) / 4096.0;
+        return (((double) climber.getElevator().getSelectedSensorPosition()) - startPosElevator) / 4096.0;
     }
 
     /**

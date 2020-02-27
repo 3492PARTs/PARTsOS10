@@ -56,7 +56,7 @@ public class ConveyerSpaceCom extends CommandBase {
     conveyor.toggleState(Direction.off);
     Constants.autoFireCounter++;
     Constants.autoFireLock = false;
-    Robot.AutoFireReverseLock = true;
+    // Robot.AutoFireReverseLock = true;
   }
 
   // Returns true when the command should end.

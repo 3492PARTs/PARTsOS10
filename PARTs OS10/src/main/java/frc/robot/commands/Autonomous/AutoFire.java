@@ -34,8 +34,8 @@ public class AutoFire extends CommandBase {
   @Override
   public void execute() {
     shooter.toggleState(Constants.Direction.forward);
-    if ((Robot.shooterStatusRight || Robot.shooterStatusLeft) && !Constants.autoFireLock) {
-      new ConveyerSpaceCom(1.5).schedule();
+    if ((shooter.getShooterStatusRight() || shooter.getShooterStatusLeft()) && !Constants.autoFireLock) {
+      new ConveyerSpaceCom(1.35).schedule();
     }
   }
 

@@ -25,8 +25,13 @@ public class Gyro {
         return _staticGyro;
     }
 
+
     public Gyro() {
         gyro = new AnalogGyro(0);
+    }
+
+    public AnalogGyro getGyro(){
+        return gyro;
     }
 
     /**
