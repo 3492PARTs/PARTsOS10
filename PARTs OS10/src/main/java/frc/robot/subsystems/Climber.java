@@ -23,8 +23,8 @@ public class Climber extends SubsystemBase {
   private final TalonSRX climb2;
   private final TalonSRX elevator;
   private final TalonSRX elevatorPivot;
-  private int peakAmps = 25;
-  private int amps = 45;
+  private int peakAmps = 45;
+  private int amps = 35;
   private int timeoutMs = 0;
   private double speed = .25;
 
