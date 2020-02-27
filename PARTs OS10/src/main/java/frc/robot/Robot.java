@@ -179,20 +179,13 @@ public class Robot extends TimedRobot {
     }
     // Intake Arm Pivot
     if (m_robotContainer.leftJoystick.getRawButton(11) || m_robotContainer.rightJoystick.getRawButton(11)) {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); // arm pivot up
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); // arm pivot up manual
     } else if (m_robotContainer.leftJoystick.getRawButton(5) || m_robotContainer.rightJoystick.getRawButton(5)) {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm pivot down
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm pivot down manual
     } else {
       m_robotContainer.intake.pivotToggleState(Constants.Direction.off);
     }
     // Intake Arm Pivot -- WHY IS THIS NOT IN THE ABOVE CODE AS AN OR???ß
-    if (m_robotContainer.rightJoystick.getRawButton(4)) {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); // arm pivot up
-    } else if (m_robotContainer.rightJoystick.getRawButton(3)) {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm pivot down
-    } else {
-      m_robotContainer.intake.pivotToggleState((Constants.Direction.off));
-    }
 
     // =====================================================================================
     // CONVEYOR

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.Direction;
 import frc.robot.Sensors.*;
 import frc.robot.commands.*;
 import frc.robot.commands.Autonomous.*;
@@ -50,6 +51,8 @@ public class RobotContainer {
   public final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
   public Pivot_Command climberCommand = new Pivot_Command();
   public ClimbCom climb = new ClimbCom();
+  public ArmPivotCom armPivotComUp = new ArmPivotCom(Direction.forward);
+  public ArmPivotCom armPivotComDown = new ArmPivotCom(Direction.reverse);
 
   // =====================================================================================
   // Joysticks
@@ -91,6 +94,11 @@ public class RobotContainer {
 
     JoystickButton elevatorPivot = new JoystickButton(launchPad, 5);
     elevatorPivot.whenPressed(new Pivot_Command());
+
+    JoystickButton armPivotUp = new JoystickButton(rightJoystick, 4);
+    armPivotUp.whenPressed(new ArmPivotCom(Direction.forward));
+    JoystickButton armPivotDown = new JoystickButton(rightJoystick, 3);
+    armPivotUp.whenPressed(new ArmPivotCom(Direction.reverse));
   }
 
   /**
