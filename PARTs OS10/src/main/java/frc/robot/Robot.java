@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
+import frc.robot.Constants.Encoder;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.CameraServer;
 
@@ -46,7 +47,7 @@ public class Robot extends TimedRobot {
     // driverShuffleboardTab.add("LL",
     // limelightFeed).withPosition(0,0).withSize(15,8).withProperties(Map.of("Show
     // Crosshair", true, "Show Controls", false));
-    CameraServer.getInstance().startAutomaticCapture();
+    // CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.smartDashBoard.robotInitUpdate();
     m_robotContainer.gyro.initGyro();
@@ -119,6 +120,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    m_robotContainer.encoders.resetEncoders(Encoder.elevator);
+    m_robotContainer.encoders.resetEncoders(Encoder.pivotElevator);
+    m_robotContainer.encoders.resetEncoders(Encoder.armPivot);
   }
 
   /**
@@ -136,6 +141,11 @@ public class Robot extends TimedRobot {
     // =====================================================================================
     // AUTO FIRE, If the shooter speed is good, fire the ball
     // =====================================================================================
+    if (m_robotContainer.launchPad.getRawButton(1)) {
+      Constants.autoShoot = true;
+    } else {
+      Constants.autoShoot = false;
+    }
     if ((m_robotContainer.shooter.getShooterStatusLeft() || m_robotContainer.shooter.getShooterStatusRight())
         && Constants.autoShoot) {
       // Constants.AutoFireReverseLock = false;
@@ -145,8 +155,9 @@ public class Robot extends TimedRobot {
     // =====================================================================================
     // UNTESTED -- Back the ball up if its touching the top wheels
     // =====================================================================================
-    // if (Constants.autoShoot && m_robotContainer.PESensor.getPhotoEyeShoot().get() && !Constants.AutoFireReverseLock) {
-    //   new ConveyerSpaceCom(-.2);
+    // if (Constants.autoShoot && m_robotContainer.PESensor.getPhotoEyeShoot().get()
+    // && !Constants.AutoFireReverseLock) {
+    // new ConveyerSpaceCom(-.2);
     // }
 
     // =====================================================================================
@@ -160,6 +171,15 @@ public class Robot extends TimedRobot {
     if (m_robotContainer.leftJoystick.getRawButton(4)) {
       m_robotContainer.drive.switchFront(true);
     }
+
+    if (m_robotContainer.rightJoystick.getRawButton(3)) {
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm pivot down
+    } else if (m_robotContainer.rightJoystick.getRawButton(4)) {
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); //arm pivot up
+    } else {
+      m_robotContainer.intake.pivotToggleState(Constants.Direction.off);
+    }
+
     // Drive Multiplier
     if (m_robotContainer.drive.getMult() > 0) {
       m_robotContainer.drive.moveLimited(Joystick1y, Joystick2y);
@@ -178,13 +198,17 @@ public class Robot extends TimedRobot {
       m_robotContainer.intake.wheelToggleState(Direction.off);
     }
     // Intake Arm Pivot
-    if (m_robotContainer.leftJoystick.getRawButton(11) || m_robotContainer.rightJoystick.getRawButton(11)) {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); // arm pivot up manual
-    } else if (m_robotContainer.leftJoystick.getRawButton(5) || m_robotContainer.rightJoystick.getRawButton(5)) {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm pivot down manual
-    } else {
-      m_robotContainer.intake.pivotToggleState(Constants.Direction.off);
-    }
+    // if (m_robotContainer.leftJoystick.getRawButton(11) ||
+    // m_robotContainer.rightJoystick.getRawButton(11)) {
+    // m_robotContainer.intake.pivotToggleState(Constants.Direction.forward); // arm
+    // pivot up manual
+    // } else if (m_robotContainer.leftJoystick.getRawButton(5) ||
+    // m_robotContainer.rightJoystick.getRawButton(5)) {
+    // m_robotContainer.intake.pivotToggleState(Constants.Direction.reverse); // arm
+    // pivot down manual
+    // } else {
+    // m_robotContainer.intake.pivotToggleState(Constants.Direction.off);
+    // }
     // Intake Arm Pivot -- WHY IS THIS NOT IN THE ABOVE CODE AS AN OR???ß
 
     // =====================================================================================
@@ -202,9 +226,9 @@ public class Robot extends TimedRobot {
     // SHOOTER
     // =====================================================================================
     if (m_robotContainer.launchPad.getRawButton(10)) { // shooter out
-      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .7);
+      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, 1);
     } else if (m_robotContainer.launchPad.getRawButton(11)) { // shooter in
-      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .35);
+      m_robotContainer.shooter.toggleState(Constants.Direction.reverse, .8);
     } else {
       m_robotContainer.shooter.toggleState(Constants.Direction.off);
     }
@@ -213,12 +237,6 @@ public class Robot extends TimedRobot {
     // CLIMBER
     // =====================================================================================
     if (m_robotContainer.launchPad.getRawButton(3)) { // winch (climber up)
-      m_robotContainer.climber.climbToggleState(Constants.Direction.reverse);
-    } else {
-      m_robotContainer.climber.climbToggleState(Constants.Direction.off);
-    }
-
-    if (m_robotContainer.rightJoystick.getRawButton(1)) { // winch (climber down)
       m_robotContainer.climber.climbToggleState(Constants.Direction.reverse);
     } else {
       m_robotContainer.climber.climbToggleState(Constants.Direction.off);
@@ -234,8 +252,8 @@ public class Robot extends TimedRobot {
     // DOES THIS NOT NEED A STOP??????
     if (m_robotContainer.leftJoystick.getRawButton(9) || m_robotContainer.rightJoystick.getRawButton(9)) { // pivot back
       m_robotContainer.climber.pivotToggleState(Constants.Direction.reverse);
-    }
-    else m_robotContainer.climber.pivotToggleState(Direction.off);
+    } else
+      m_robotContainer.climber.pivotToggleState(Direction.off);
 
   }
 

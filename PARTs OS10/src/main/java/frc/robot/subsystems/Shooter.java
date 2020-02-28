@@ -122,7 +122,8 @@ public class Shooter extends SubsystemBase {
    * @return true if the wheel is up to speed
    */
   public boolean getShooterStatusRight() {
-    return Math.abs(getRightRPM()) >= 4000.0;
+    System.out.println("rigth shoot" +  Math.abs(getRightRPM()));
+    return Math.abs(getRightRPM()) >= 3500.0;
   }
 
   /**
@@ -131,7 +132,8 @@ public class Shooter extends SubsystemBase {
    * @return true if the wheel is up to speed
    */
   public boolean getShooterStatusLeft() {
-    return Math.abs(getLeftRPM()) >= 4000.0;
+    System.out.println("left shoot" +  Math.abs(getRightRPM()));
+    return Math.abs(getLeftRPM()) >= 3500.0;
   }
 
   /**

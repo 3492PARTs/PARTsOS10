@@ -10,7 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.PhotoElectricSensor;
+import frc.robot.subsystems.Climber;
 
 /**
  * Add your docs here.
@@ -22,6 +24,7 @@ public class SmartDashBoard {
     // Define Singleton Pattern
     // =====================================================================================
     private static SmartDashBoard _staticSmartDashboard = new SmartDashBoard();
+    private static Encoders encoders = Encoders.getInstance();
 
     public static SmartDashBoard getInstance() {
         return _staticSmartDashboard;
@@ -45,6 +48,7 @@ public class SmartDashBoard {
         SmartDashboard.putBoolean(Constants.SD_SHOOTER_SPEED,
                 m_robotContainer.shooter.getShooterStatusLeft() && m_robotContainer.shooter.getShooterStatusRight());
         SmartDashboard.putNumber(Constants.SD_PROXIMITY_DIST, m_robotContainer.proximity.getDistance());
+        
     }
 
     public void autoPeriodicUpdate() {
@@ -59,5 +63,8 @@ public class SmartDashBoard {
         SmartDashboard.putString(Constants.SD_DRIVE_ORIENTATION, m_robotContainer.drive.getDriveFront());
         SmartDashboard.putBoolean(Constants.SD_AUTO_SHOOT, Constants.autoShoot);
         SmartDashboard.putNumber(Constants.SD_BALL_CNT, m_robotContainer.PESensor.getCounter());
+        SmartDashboard.putNumber(Constants.SD_ARM_PIVOT_COUNTER, m_robotContainer.encoders.getArmPivotEncoderRot());
+        SmartDashboard.putNumber("climber1 current", m_robotContainer.climber.climb1.getSupplyCurrent());
+        SmartDashboard.putNumber("climber2 current", m_robotContainer.climber.climb2.getSupplyCurrent());
     }
 }

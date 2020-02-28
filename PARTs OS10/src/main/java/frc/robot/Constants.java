@@ -76,6 +76,7 @@ public final class Constants {
     public static final String SD_PE_INTAKE = "PE Intake";
     public static final String SD_CLIMB_ENCODER = "Climb encoder";
     public static final String SD_BALL_CNT = "Ball Count";
+    public static final String SD_ARM_PIVOT_COUNTER = "ArmPivot";
 
     // =====================================================================================
     // ENUMS
