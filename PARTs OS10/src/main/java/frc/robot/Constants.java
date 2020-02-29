@@ -57,6 +57,7 @@ public final class Constants {
     public static boolean autoFireLock = false;
 
     public static boolean autoShoot = false;
+    public static boolean intakeToggle = false;
 
     // public static boolean AutoFireReverseLock = false;
 
@@ -77,6 +78,8 @@ public final class Constants {
     public static final String SD_CLIMB_ENCODER = "Climb encoder";
     public static final String SD_BALL_CNT = "Ball Count";
     public static final String SD_ARM_PIVOT_COUNTER = "ArmPivot";
+    public static final String SD_LEFT_SHOOTER_SPEED_LOW = "Left Shooter Speed Low";
+    public static final String SD_RIGHT_SHOOTER_SPEED_LOW = "Right Shooter Speed Low";
 
     // =====================================================================================
     // ENUMS

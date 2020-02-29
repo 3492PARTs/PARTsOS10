@@ -126,6 +126,9 @@ public class Robot extends TimedRobot {
     m_robotContainer.encoders.resetEncoders(Encoder.armPivot);
   }
 
+  
+  private boolean toggleIntake = false, intakeDir = true;
+
   /**
    * This function is called periodically during operator control.
    */
@@ -147,11 +150,16 @@ public class Robot extends TimedRobot {
       Constants.autoShoot = false;
     }
     if ((m_robotContainer.shooter.getShooterStatusLeft() || m_robotContainer.shooter.getShooterStatusRight())
-        && Constants.autoShoot) {
+        && Constants.autoShoot && m_robotContainer.launchPad.getRawButton(10)) {
       // Constants.AutoFireReverseLock = false;
       new ConveyerSpaceCom(1.35).schedule();
     }
 
+    if ((m_robotContainer.shooter.getShooterStatusLeftLow() || m_robotContainer.shooter.getShooterStatusRightLow())
+        && Constants.autoShoot && m_robotContainer.launchPad.getRawButton(11)) {
+      // Constants.AutoFireReverseLock = false;
+      new ConveyerSpaceCom(1.35).schedule();
+    }
     // =====================================================================================
     // UNTESTED -- Back the ball up if its touching the top wheels
     // =====================================================================================
@@ -190,12 +198,28 @@ public class Robot extends TimedRobot {
     // =====================================================================================
     // INTAKE
     // =====================================================================================
-    if (m_robotContainer.rightJoystick.getRawButton(1)) {
-      m_robotContainer.intake.wheelToggleState(Direction.reverse); // intake in
-    } else if (m_robotContainer.leftJoystick.getRawButton(7) || m_robotContainer.rightJoystick.getRawButton(7)) {
+    //System.out.println("' robit - oimtskr '" + Constants.intakeToggle);
+    if (toggleIntake && m_robotContainer.rightJoystick.getRawButton(1)) {  //Constants.intakeToggle
+      toggleIntake = false;
+      if(intakeDir){
+        intakeDir = false;
+        m_robotContainer.intake.wheelToggleState(Direction.reverse); // intake in
+      }
+      else {
+        intakeDir = true;        
+        m_robotContainer.intake.wheelToggleState(Direction.off); // intake off
+      }
+    } 
+    else if (!m_robotContainer.rightJoystick.getRawButton(1)) {
+      toggleIntake = true;
+    }
+
+    //intskeDir = true means direction is off and it can be intake out based off line 204
+    if (intakeDir && (m_robotContainer.leftJoystick.getRawButton(7) || m_robotContainer.rightJoystick.getRawButton(7))) {
       m_robotContainer.intake.wheelToggleState(Direction.forward);// intake out
-    } else {
-      m_robotContainer.intake.wheelToggleState(Direction.off);
+    }
+    else if (intakeDir && toggleIntake) {
+      m_robotContainer.intake.wheelToggleState(Direction.off); // intake off
     }
     // Intake Arm Pivot
     // if (m_robotContainer.leftJoystick.getRawButton(11) ||

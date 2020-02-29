@@ -26,7 +26,7 @@ public class Climber extends SubsystemBase {
   private int peakAmps = 45;
   private int amps = 35;
   private int timeoutMs = 0;
-  private double speed = .25;
+  private double speed = 1;
 
   // =====================================================================================
   // Define Singleton Pattern

@@ -48,6 +48,8 @@ public class SmartDashBoard {
         SmartDashboard.putBoolean(Constants.SD_SHOOTER_SPEED,
                 m_robotContainer.shooter.getShooterStatusLeft() && m_robotContainer.shooter.getShooterStatusRight());
         SmartDashboard.putNumber(Constants.SD_PROXIMITY_DIST, m_robotContainer.proximity.getDistance());
+        SmartDashboard.putBoolean(Constants.SD_LEFT_SHOOTER_SPEED_LOW, m_robotContainer.shooter.getShooterStatusLeft());
+        SmartDashboard.putBoolean(Constants.SD_RIGHT_SHOOTER_SPEED_LOW, m_robotContainer.shooter.getShooterStatusRight());
         
     }
 
