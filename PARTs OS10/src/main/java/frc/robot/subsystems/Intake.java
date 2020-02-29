@@ -62,9 +62,9 @@ public class Intake extends SubsystemBase {
    */
   public void wheelToggleState(Direction dir) {
     if (dir == Direction.forward) {
-      wheelIntake.set(ControlMode.PercentOutput, .5);
+      wheelIntake.set(ControlMode.PercentOutput, 1);
     } else if (dir == Direction.reverse) {
-      wheelIntake.set(ControlMode.PercentOutput, -.5);
+      wheelIntake.set(ControlMode.PercentOutput, -1);
     } else {
       wheelIntake.set(ControlMode.PercentOutput, 0);
     }
