@@ -19,8 +19,6 @@ public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private final double forwardHalt = 0.0; // TODO: set value
-  private final double reverseHalt = 0.0;
   private final TalonSRX wheelIntake;
   private final TalonSRX pivotIntake;
   private int amps = 25;
