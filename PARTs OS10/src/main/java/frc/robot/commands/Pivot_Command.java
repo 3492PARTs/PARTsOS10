@@ -35,7 +35,14 @@ public class Pivot_Command extends CommandBase {
 
   @Override
   public void execute() {
-    climber.pivotToggleState(Direction.forward);
+    // if(encoders.getPivotElevatorEncoderRot() <= 0.23)
+    // {
+      climber.pivotToggleState(Direction.forward);
+    //}
+    // else{
+    //   climber.pivotToggleState(Direction.off);
+    // }
+
   }
 
   // Called once the command ends or is interrupted.
@@ -47,7 +54,7 @@ public class Pivot_Command extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-    return encoders.getPivotElevatorEncoderRot() >= .251;
+    //return false;
+    return encoders.getPivotElevatorEncoderRot() >= 0.23;
   }
 }

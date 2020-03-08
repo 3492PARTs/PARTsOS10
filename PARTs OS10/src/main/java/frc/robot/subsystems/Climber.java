@@ -19,14 +19,14 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
 
-  private final TalonSRX climb1;
-  private final TalonSRX climb2;
+  public final TalonSRX climb1;
+  public  final TalonSRX climb2;
   private final TalonSRX elevator;
   private final TalonSRX elevatorPivot;
   private int peakAmps = 45;
   private int amps = 35;
   private int timeoutMs = 0;
-  private double speed = .25;
+  private double speed = 1; // oh dear lord why 
 
   // =====================================================================================
   // Define Singleton Pattern

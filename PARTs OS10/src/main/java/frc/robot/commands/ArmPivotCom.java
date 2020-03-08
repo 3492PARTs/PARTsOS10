@@ -8,47 +8,52 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Constants.Encoder;
 import frc.robot.Sensors.Encoders;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Intake;
 
-public class ClimbCom extends CommandBase {
+public class ArmPivotCom extends CommandBase {
   /**
-   * Creates a new ClimbCom.
+   * Creates a new IntakePivotCom.
    */
-  private Encoders encoders;
-  private double distance = 0; // TODO: what distance needs to traverse
-  private Climber climber;
-
-  public ClimbCom() {
+  private final Intake intake = Intake.getInstance();
+  private final Encoders encoders = Encoders.getInstance();
+  private Direction dir;
+  public ArmPivotCom(Direction dir) {
+    this.dir = dir;
     // Use addRequirements() here to declare subsystem dependencies.
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    encoders = Encoders.getInstance();
-    climber = Climber.getInstance();
-    encoders.resetEncoders(Encoder.elevator);
+    encoders.resetEncoders(Constants.Encoder.armPivot);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.elevatorToggleState(Direction.forward);
+    if(dir == Direction.forward)
+    {
+    intake.pivotToggleState(Direction.forward);
+    }
+    else if(dir == Direction.reverse)
+    {
+      intake.pivotToggleState(Direction.reverse);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.elevatorToggleState(Direction.reverse);
+    encoders.resetEncoders(Constants.Encoder.armPivot);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(encoders.getElevatorEncoderRot()) >= 7.345703;
+    return Math.abs(encoders.getArmPivotEncoderRot()) >= 54.2; 
   }
 }

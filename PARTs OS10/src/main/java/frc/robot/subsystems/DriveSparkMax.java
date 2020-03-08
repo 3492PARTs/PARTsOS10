@@ -33,9 +33,9 @@ public class DriveSparkMax extends SubsystemBase {
   private SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
   private DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 
-  private int amps = 55;
+  private int amps = 40;
   private int timeoutMs = 0;
-  private int peakAmps = 40;
+  private int peakAmps = 55;
   private int mult = 1;
   private String driveFront = "";
 

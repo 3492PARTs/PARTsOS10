@@ -19,11 +19,13 @@ public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private final TalonSRX wheelIntake;
-  private final TalonSRX pivotIntake;
+  private final double forwardHalt = 0.0; // TODO: set value
+  private final double reverseHalt = 0.0;
+  private TalonSRX wheelIntake;
+  private TalonSRX pivotIntake;
   private int amps = 25;
   private int timeoutMs = 0;
-  Encoders encoders = Encoders.getInstance();
+  //Encoders encoders = Encoders.getInstance();
   double maximumRotMin = 0;//TODO: set value
   double minimumRotMin = 0;//TODO: set
 
@@ -40,6 +42,8 @@ public class Intake extends SubsystemBase {
   public Intake() {
     wheelIntake = new TalonSRX(Constants.INTAKE_WHEEL_PORT);
     pivotIntake = new TalonSRX(Constants.PIVOT_INTAKE_PORT);
+    System.out.println("---------------------------------------pivot encoder");
+    System.out.println(pivotIntake);
     wheelIntake.configPeakCurrentDuration(100, 10);
     wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
     wheelIntake.configPeakCurrentLimit(amps, timeoutMs);
@@ -58,9 +62,9 @@ public class Intake extends SubsystemBase {
    */
   public void wheelToggleState(Direction dir) {
     if (dir == Direction.forward) {
-      wheelIntake.set(ControlMode.PercentOutput, .5);
+      wheelIntake.set(ControlMode.PercentOutput, 1);
     } else if (dir == Direction.reverse) {
-      wheelIntake.set(ControlMode.PercentOutput, -.5);
+      wheelIntake.set(ControlMode.PercentOutput, -1);
     } else {
       wheelIntake.set(ControlMode.PercentOutput, 0);
     }
