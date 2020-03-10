@@ -18,7 +18,8 @@ public class LimeLightAllignHorizontalCom extends CommandBase {
 
    Double HorizontalOffset;
    LimeLight limelight = LimeLight.getInstance();
-   double distancePerDegree = 0.0;
+   double distancePerDegree = .185185185;// TODO: test this value
+   boolean MovedRight;
    Direction dir;
   public LimeLightAllignHorizontalCom() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,11 +42,21 @@ public class LimeLightAllignHorizontalCom extends CommandBase {
   public void end(boolean interrupted) {
     if(HorizontalOffset < 0){
       new Turn90(.1,270);
+      MovedRight = true;
     }
-    if(HorizontalOffset > 0){
+    else if(HorizontalOffset > 0){
       new Turn90(.1, 90);
+      MovedRight = false;
     }
     new DriveCom(HorizontalOffset*distancePerDegree, Direction.forward);
+
+    
+    if(MovedRight){
+      new Turn90(.1, 270);
+    }
+    else if(!MovedRight){
+      new Turn90(.1, 90);
+    }
   }
 
   // Returns true when the command should end.
