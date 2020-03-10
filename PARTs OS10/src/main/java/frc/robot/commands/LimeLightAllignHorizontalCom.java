@@ -8,60 +8,49 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Sensors.Gyro;
-import frc.robot.subsystems.DriveSparkMax;
+import frc.robot.Constants.Direction;
+import frc.robot.Sensors.LimeLight;
 
-public class Turn90 extends CommandBase {
+public class LimeLightAllignHorizontalCom extends CommandBase {
   /**
-   * Creates a new Turn90.
+   * Creates a new LimeLightAllignCom.
    */
-  private double degrees;
-  private final double rotationTarget;
-  private double speed;
-  private Gyro gyro = Gyro.getInstance();
-  private DriveSparkMax drive = DriveSparkMax.getInstance();
 
-  public Turn90(double speed, double rotationTarget) {
+   Double HorizontalOffset;
+   LimeLight limelight = LimeLight.getInstance();
+   double distancePerDegree = 0.0;
+   Direction dir;
+  public LimeLightAllignHorizontalCom() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.speed = speed;
-    this.rotationTarget = rotationTarget;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    gyro.getGyro().reset();
+    HorizontalOffset = limelight.getHorizontalOffset();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    degrees = gyro.getGyro().getAngle();
-    if (rotationTarget < 91) {
-      drive.move(speed, -speed);
-    }
-
-    else if (rotationTarget > 269) {
-      drive.move(-speed, speed);
-    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.move(.0, .0);
+    if(HorizontalOffset < 0){
+      new Turn90(.1,270);
+    }
+    if(HorizontalOffset > 0){
+      new Turn90(.1, 90);
+    }
+    new DriveCom(HorizontalOffset*distancePerDegree, Direction.forward);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (degrees > 180) {
-      return (rotationTarget - 180) <= degrees;
-    }
-    if (degrees < 180) {
-      return (rotationTarget) <= degrees;
-    }
-    return false;
+    return true;
   }
-
 }
