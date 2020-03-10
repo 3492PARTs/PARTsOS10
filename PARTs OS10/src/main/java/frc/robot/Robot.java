@@ -29,10 +29,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private Command m_autonomousCommand;
-  private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  private NetworkTableEntry tx = table.getEntry("tx");
-  private NetworkTableEntry ty = table.getEntry("ty");
-  private NetworkTableEntry ta = table.getEntry("ta");
+
   private HttpCamera limelightFeed;
 
   /**
