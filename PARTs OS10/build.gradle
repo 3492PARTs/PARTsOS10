@@ -37,6 +37,9 @@ deploy {
     }
 }
 
+repositories{jcenter()}
+
+
 // Set this to true to enable desktop support.
 def includeDesktopSupport = true
 
@@ -52,7 +55,10 @@ dependencies {
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
+    implementation 'junit:junit:4.12'
+
     testImplementation 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:2.+"
 
     // Enable simulation gui support. Must check the box in vscode to enable support
     // upon debugging
