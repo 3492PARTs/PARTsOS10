@@ -8,6 +8,10 @@ targetCompatibility = JavaVersion.VERSION_11
 
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
 
+
+
+
+
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project EmbeddedTools.
 deploy {
@@ -58,13 +62,31 @@ dependencies {
     implementation 'junit:junit:4.12'
 
     testImplementation 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:2.+"
+    testCompile "org.mockito:mockito-core:2.28.2"
 
     // Enable simulation gui support. Must check the box in vscode to enable support
     // upon debugging
     simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
 }
 
+test{
+
+    useTestNG()
+
+    useJUnitPlatform()
+
+    maxHeapSize = '1G'
+    failFast = true
+
+    testLogging.showStandardStreams = true
+
+    reports.html.enabled = true
+
+
+
+
+
+}
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
 // in order to make them all available at runtime. Also adding the manifest so WPILib
 // knows where to look for our Robot Class.

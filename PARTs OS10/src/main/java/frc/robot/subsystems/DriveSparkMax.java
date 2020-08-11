@@ -55,7 +55,7 @@ public class DriveSparkMax extends SubsystemBase {
   /**
    * Drive
    * 
-   * @param Speed  left between 1, -1
+   * @param Speed1  left between 1, -1
    * @param Speed2 right drive train between 1,-1
    */
   public void move(Double Speed1, Double Speed2) {
@@ -69,8 +69,8 @@ public class DriveSparkMax extends SubsystemBase {
   /**
    * Drive with speed ramp
    * 
-   * @param joyY joystick left y axis
-   * @param JoyX joystick right y axis
+   * @param joy1 joystick left y axis
+   * @param joy2 joystick right y axis
    */
   public void moveLimited(Double joy1, Double joy2) {
     double limit = .02;
@@ -148,6 +148,15 @@ public class DriveSparkMax extends SubsystemBase {
   public void stop() {
     move(0.0, 0.0);
 
+  }
+
+  /**
+   *
+   * @return The speed of the motors in percent output
+   */
+  public double[] getSpeeds(){
+    double[] speeds = {Right.get(), Left.get()};
+    return speeds;
   }
 
   @Override
