@@ -19,20 +19,25 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSparkMax extends SubsystemBase {
+
   /**
    * Creates a new Drive.
    */
-  private CANSparkMax Right1 = new CANSparkMax(Constants.Right1_port, MotorType.kBrushless);
-  private CANSparkMax Right2 = new CANSparkMax(Constants.Right2_port, MotorType.kBrushless);
-  private CANSparkMax Right3 = new CANSparkMax(Constants.Right3_port, MotorType.kBrushless);
+  private CANSparkMax Right1;
+  private CANSparkMax Right2;
+  private CANSparkMax Right3;
 
-  private CANSparkMax Left1 = new CANSparkMax(Constants.Left1_port, MotorType.kBrushless);
-  private CANSparkMax Left2 = new CANSparkMax(Constants.Left2_port, MotorType.kBrushless);
-  private CANSparkMax Left3 = new CANSparkMax(Constants.Left3_port, MotorType.kBrushless);
+  private CANSparkMax Left1;
+  private CANSparkMax Left2;
+  private CANSparkMax Left3;
 
-  private SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
-  private SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
-  private DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
+  private SpeedControllerGroup Right;
+  private SpeedControllerGroup Left;
+  private DifferentialDrive M_drive;
+
+
+
+
 
   private int amps = 40;
   private int timeoutMs = 0;
@@ -49,7 +54,48 @@ public class DriveSparkMax extends SubsystemBase {
     return _staticDriveSparkMax;
   }
 
+
+  /**
+   * @param Right1
+   * @param Right2
+   * @param Right3
+   * @param Left1
+   * @param Left2
+   * @param Left3
+   */
+  public DriveSparkMax(CANSparkMax Right1, CANSparkMax Right2, CANSparkMax Right3, CANSparkMax Left1, CANSparkMax Left2, CANSparkMax Left3){
+
+    this.Right1 = Right1;
+    this.Right2 = Right2;
+    this.Right3 = Right3;
+
+    this.Left1 = Left1;
+    this.Left2 = Left2;
+    this.Left3 = Left3;
+
+    Right = new SpeedControllerGroup(Right1, Right2, Right3);
+    Left = new SpeedControllerGroup(Left1, Left2, Left3);
+    M_drive = new DifferentialDrive(Left, Right);
+
+  }
+
+
+  /**
+   * @see This is a constructor for physical hardware, as in not for unit testing
+   */
   public DriveSparkMax() {
+
+    Right1 = new CANSparkMax(Constants.Right1_port, MotorType.kBrushless);
+    Right2 = new CANSparkMax(Constants.Right2_port, MotorType.kBrushless);
+    Right3 = new CANSparkMax(Constants.Right3_port, MotorType.kBrushless);
+
+    Left1 = new CANSparkMax(Constants.Left1_port, MotorType.kBrushless);
+    Left2 = new CANSparkMax(Constants.Left2_port, MotorType.kBrushless);
+    Left3 = new CANSparkMax(Constants.Left3_port, MotorType.kBrushless);
+
+    Right = new SpeedControllerGroup(Right1, Right2, Right3);
+    Left = new SpeedControllerGroup(Left1, Left2, Left3);
+    M_drive = new DifferentialDrive(Left, Right);
 
   }
 
@@ -61,6 +107,7 @@ public class DriveSparkMax extends SubsystemBase {
    */
   public void move(Double Speed1, Double Speed2) {
     M_drive.tankDrive(Speed1, Speed2);
+
   }
 
   // joystick limiter
