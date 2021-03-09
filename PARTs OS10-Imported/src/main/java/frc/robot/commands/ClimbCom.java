@@ -21,9 +21,8 @@ public class ClimbCom extends CommandBase {
   private double distance = 0; // TODO: what distance needs to traverse
   private Climber climber;
 
-  public ClimbCom(double distance) {
+  public ClimbCom() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.distance = distance;
   }
 
   // Called when the command is initially scheduled.
