@@ -7,12 +7,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Sensors.Encoders;
-import frc.robot.Sensors.PhotoElectricSensor;
-import frc.robot.subsystems.Climber;
 
 /**
  * Add your docs here.
@@ -24,7 +20,6 @@ public class SmartDashBoard {
     // Define Singleton Pattern
     // =====================================================================================
     private static SmartDashBoard _staticSmartDashboard = new SmartDashBoard();
-    private static Encoders encoders = Encoders.getInstance();
 
     public static SmartDashBoard getInstance() {
         return _staticSmartDashboard;

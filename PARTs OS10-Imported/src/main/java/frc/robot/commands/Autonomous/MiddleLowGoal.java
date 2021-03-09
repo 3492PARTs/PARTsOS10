@@ -15,7 +15,6 @@ import frc.robot.Sensors.Proximity;
 import frc.robot.commands.Delay;
 import frc.robot.commands.DriveCom;
 import frc.robot.commands.Shoot;
-import frc.robot.commands.Autonomous.ConveyorCom;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
