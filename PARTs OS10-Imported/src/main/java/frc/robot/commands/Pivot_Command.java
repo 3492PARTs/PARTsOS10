@@ -20,6 +20,7 @@ public class Pivot_Command extends CommandBase {
   private Climber climber = Climber.getInstance();
   private Gyro gyro = Gyro.getInstance();
   private Encoders encoders = Encoders.getInstance();
+  private double distance = 0.23; 
 
   public Pivot_Command() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -55,6 +56,6 @@ public class Pivot_Command extends CommandBase {
   @Override
   public boolean isFinished() {
     //return false;
-    return encoders.getPivotElevatorEncoderRot() >= 0.23;
+    return encoders.getPivotElevatorEncoderRot() >= distance;
   }
 }

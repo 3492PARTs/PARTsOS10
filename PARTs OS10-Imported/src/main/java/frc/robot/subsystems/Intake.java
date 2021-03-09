@@ -41,8 +41,6 @@ public class Intake extends SubsystemBase {
   public Intake() {
     wheelIntake = new TalonSRX(Constants.INTAKE_WHEEL_PORT);
     pivotIntake = new TalonSRX(Constants.PIVOT_INTAKE_PORT);
-    System.out.println("---------------------------------------pivot encoder");
-    System.out.println(pivotIntake);
     wheelIntake.configPeakCurrentDuration(100, 10);
     wheelIntake.configContinuousCurrentLimit(55, timeoutMs);
     wheelIntake.configPeakCurrentLimit(amps, timeoutMs);

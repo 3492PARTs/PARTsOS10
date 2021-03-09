@@ -18,7 +18,7 @@ public class ClimbCom extends CommandBase {
    * Creates a new ClimbCom.
    */
   private Encoders encoders;
-  private double distance = 0; // TODO: what distance needs to traverse
+  private double distance = 7.345703; // TODO: what distance needs to traverse
   private Climber climber;
 
   public ClimbCom() {
@@ -48,6 +48,6 @@ public class ClimbCom extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(encoders.getElevatorEncoderRot()) >= 7.345703;
+    return Math.abs(encoders.getElevatorEncoderRot()) >= distance;
   }
 }
