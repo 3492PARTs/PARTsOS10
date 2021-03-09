@@ -10,7 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
-import frc.robot.Constants.Encoder;
 import frc.robot.Sensors.Encoders;
 import frc.robot.subsystems.Intake;
 

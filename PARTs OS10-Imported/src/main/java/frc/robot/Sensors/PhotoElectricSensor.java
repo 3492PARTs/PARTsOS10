@@ -7,10 +7,8 @@
 
 package frc.robot.Sensors;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.Constants;
-import frc.robot.Robot;
+
 
 /**
  * Photo Electric sensor to count the balls
