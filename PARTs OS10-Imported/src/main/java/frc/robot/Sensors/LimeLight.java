@@ -46,6 +46,7 @@ public class LimeLight {
         TargetArea = table.getEntry("ta");
     }
 
+
     public boolean isTargetAquired(){
         return TargetSighted.getBoolean(false);
     }

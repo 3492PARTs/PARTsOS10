@@ -24,7 +24,6 @@ public class Intake extends SubsystemBase {
   private TalonSRX pivotIntake;
   private int amps = 25;
   private int timeoutMs = 0;
-  //Encoders encoders = Encoders.getInstance();
   double maximumRotMin = 0;//TODO: set value
   double minimumRotMin = 0;//TODO: set
 
