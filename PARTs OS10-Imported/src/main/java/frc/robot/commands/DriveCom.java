@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Direction;
 import frc.robot.Sensors.Encoders;
-import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.GyroSensor;
 import frc.robot.subsystems.DriveSparkMax;
 
 public class DriveCom extends CommandBase {
@@ -22,7 +22,7 @@ public class DriveCom extends CommandBase {
   private Encoders encoders;
   private DriveSparkMax drive;
   private Direction dir;
-  private Gyro gyro;
+  private GyroSensor gyro;
 
   /**
    * 
@@ -41,7 +41,7 @@ public class DriveCom extends CommandBase {
   public void initialize() {
     encoders = Encoders.getInstance();
     drive = DriveSparkMax.getInstance();
-    gyro = Gyro.getInstance();
+    gyro = GyroSensor.getInstance();
 
     encoders.resetEncoders(Constants.Encoder.drive);
   }

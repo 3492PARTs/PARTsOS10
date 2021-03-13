@@ -7,39 +7,37 @@
 
 package frc.robot.Sensors;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * Gyro Sensor on the robot
  */
 
-public class Gyro {
-    private static Gyro _staticGyro = new Gyro();
-    private AnalogGyro gyro;
+public class GyroSensor {
+    private static GyroSensor _staticGyro = new GyroSensor();
+    private Gyro gyro;
+    
 
     // =====================================================================================
     // Define Singleton Pattern
     // =====================================================================================
-    public static Gyro getInstance() {
+    public static GyroSensor getInstance() {
 
         return _staticGyro;
     }
 
 
-    public Gyro() {
-        gyro = new AnalogGyro(0);
+    public GyroSensor() {
+        gyro = (Gyro) new ADXL345_I2C(null, null);// Todo: give port numbers
     }
 
-    public AnalogGyro getGyro(){
+    public Gyro getGyro(){
         return gyro;
     }
 
-    /**
-     * Initialize the gyro
-     */
-    public void initGyro() {
-        gyro.initGyro();
-    }
 
     /**
      * Calibrate the gyro

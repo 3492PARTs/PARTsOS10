@@ -43,7 +43,7 @@ public class RobotContainer {
   public final Intake intake = Intake.getInstance();
   public final Climber climber = Climber.getInstance();
   public final Proximity proximity = Proximity.getInstance();
-  public final Gyro gyro = Gyro.getInstance();
+  public final GyroSensor gyro = GyroSensor.getInstance();
   public final Encoders encoders = Encoders.getInstance();
   public final PhotoElectricSensor PESensor = PhotoElectricSensor.getInstance();
   public Pivot_Command climberCommand = new Pivot_Command();

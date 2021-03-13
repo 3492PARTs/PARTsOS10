@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Direction;
 import frc.robot.subsystems.Climber;
 import frc.robot.Sensors.Encoders;
-import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.GyroSensor;
 
 public class Pivot_Command extends CommandBase {
   /**
    * Creates a new Climber_Command.
    */
   private Climber climber = Climber.getInstance();
-  private Gyro gyro = Gyro.getInstance();
+  private GyroSensor gyro = GyroSensor.getInstance();
   private Encoders encoders = Encoders.getInstance();
   private double distance = 0.23; 
 

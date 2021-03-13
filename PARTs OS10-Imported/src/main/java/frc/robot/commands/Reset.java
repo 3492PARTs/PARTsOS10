@@ -20,13 +20,13 @@ public class Reset extends CommandBase {
   }
 
   private Encoders encoders;
-  private Gyro gyro;
+  private GyroSensor gyro;
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     encoders = Encoders.getInstance();
-    gyro = Gyro.getInstance();
+    gyro = GyroSensor.getInstance();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

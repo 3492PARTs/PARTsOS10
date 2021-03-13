@@ -9,12 +9,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Sensors.Encoders;
+import frc.robot.Sensors.GyroSensor;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 
 public class DriveSparkMax extends SubsystemBase {
   /**
@@ -32,11 +42,24 @@ public class DriveSparkMax extends SubsystemBase {
   private SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
   private DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 
+  private double ksVolts = 0;//TODO: get from characterization
+  private double kvVoltSecondsPerMeter = 0;//TODO: get from characterization
+  private double kaVoltSecondsSquaredPerMeter = 0;//TODO: get from characterization
+  private DifferentialDriveKinematics kDriveKinematics;// TODO: get from characterization
+  private double kRamseteB = 0;//TODO: get from characterization
+  private double kRamseteZeta = 0;//TODO: get from characterization
+
   private int amps = 40;
   private int timeoutMs = 0;
   private int peakAmps = 55;
   private int mult = 1;
   private String driveFront = "";
+  private double KPDrive = 0; //TODO SET PID P VALUE
+
+  private Encoders encoders = Encoders.getInstance(); 
+
+  private Gyro m_Gyro = GyroSensor.getInstance().getGyro();
+  private DifferentialDriveOdometry m_Odometry = new DifferentialDriveOdometry(m_Gyro.getRotation2d());
 
   // =====================================================================================
   // Define Singleton Pattern
@@ -48,7 +71,7 @@ public class DriveSparkMax extends SubsystemBase {
   }
 
   public DriveSparkMax() {
-
+    
   }
 
   /**
@@ -105,6 +128,14 @@ public class DriveSparkMax extends SubsystemBase {
     }
   }
 
+  public Pose2d getPose(){
+    return m_Odometry.getPoseMeters();
+  }
+
+  public void updatePose(){
+    m_Odometry.update(m_Gyro.getRotation2d(), encoders.getDistanceMovedLeft(), encoders.getDistanceMovedRight());
+  }
+
   /**
    * Get the multiplier variable
    * 
@@ -121,6 +152,12 @@ public class DriveSparkMax extends SubsystemBase {
    */
   public String getDriveFront() {
     return driveFront;
+  }
+
+  public void moveVolts(double leftV, double RightV){
+    Left.setVoltage(leftV);
+    Right.setVoltage(-RightV);
+    M_drive.feed();
   }
 
   /**
@@ -147,6 +184,37 @@ public class DriveSparkMax extends SubsystemBase {
   public void stop() {
     move(0.0, 0.0);
 
+  }
+
+  public double getKsVolts() {
+    return ksVolts;
+  }
+  public double getKaVoltSecondsSquaredPerMeter() {
+    return kaVoltSecondsSquaredPerMeter;
+  }
+
+  public double getKvVoltSecondsPerMeter() {
+    return kvVoltSecondsPerMeter;
+  }
+
+  public DifferentialDriveKinematics getkDriveKinematics() {
+    return kDriveKinematics;
+  }
+
+  public double getkRamseteB() {
+    return kRamseteB;
+  }
+
+  public double getkRamseteZeta() {
+    return kRamseteZeta;
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds(){
+    return new DifferentialDriveWheelSpeeds(encoders.getRate(frc.robot.Constants.Encoder.drive)[0], encoders.getRate(frc.robot.Constants.Encoder.drive)[1]);
+  }
+
+  public double getKPDrive() {
+    return KPDrive;
   }
 
   @Override

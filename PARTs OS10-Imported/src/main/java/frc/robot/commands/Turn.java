@@ -8,14 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.GyroSensor;
 import frc.robot.subsystems.DriveSparkMax;
 
 public class Turn extends CommandBase {
   /**
    * Creates a new Turn.
    */
-  Gyro gyro = Gyro.getInstance();
+  GyroSensor gyro = GyroSensor.getInstance();
   private double degrees;
   private double objDegrees;
   private final double Speed = .1; // TODO: test for safe turning speed

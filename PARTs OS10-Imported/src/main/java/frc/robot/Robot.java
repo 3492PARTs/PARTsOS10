@@ -43,7 +43,6 @@ public class Robot extends TimedRobot {
     // CameraServer.getInstance().startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.smartDashBoard.robotInitUpdate();
-    m_robotContainer.gyro.initGyro();
     m_robotContainer.gyro.calibrate();
   }
 

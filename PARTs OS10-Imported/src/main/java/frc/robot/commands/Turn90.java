@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Sensors.Gyro;
+import frc.robot.Sensors.GyroSensor;
 import frc.robot.subsystems.DriveSparkMax;
 
 public class Turn90 extends CommandBase {
@@ -18,7 +18,7 @@ public class Turn90 extends CommandBase {
   private double degrees;
   private final double rotationTarget;
   private double speed;
-  private Gyro gyro = Gyro.getInstance();
+  private GyroSensor gyro = GyroSensor.getInstance();
   private DriveSparkMax drive = DriveSparkMax.getInstance();
 
   public Turn90(double speed, double rotationTarget) {

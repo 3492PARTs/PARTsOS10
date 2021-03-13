@@ -66,7 +66,8 @@ public class Encoders {
     }
 
     /**
-     * Get the rotation of the elevator 
+     * Get the rotation of the elevator
+     * 
      * @return in rotations
      */
     public double getElevatorEncoderRot() {
@@ -81,6 +82,18 @@ public class Encoders {
     public double getArmPivotEncoderRot() {
         return (((double) intake.getPivotIntakeTalon().getSelectedSensorPosition()) - startPosArmPivot) / 4096.0;
     }
+
+    public double[] getRate(Encoder encoder) {
+        if (encoder == Encoder.drive) {
+            return new double[] { rightEncoder.getVelocity(), leftEncoder.getVelocity() };
+        }
+        
+        else return new double[]{0, 0};
+
+
+
+    }
+
 
     /**
      * Reset an encoder
