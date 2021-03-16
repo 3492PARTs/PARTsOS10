@@ -6,8 +6,6 @@ package frc.robot.commands.Autonomous;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.function.Function;
-
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -16,7 +14,6 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import frc.robot.Constants.Encoder;
 import frc.robot.Sensors.Encoders;
 import frc.robot.subsystems.DriveSparkMax;
 
@@ -28,8 +25,9 @@ public class PathFollower extends CommandBase {
   Encoders encoders = Encoders.getInstance();
 
   /** Creates a new PathFollower. */
-  public PathFollower() {
+  public PathFollower(Path path) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.path = path;
     try {
       trajectory = TrajectoryUtil.fromPathweaverJson(path);
     } catch (IOException e) {
@@ -39,7 +37,7 @@ public class PathFollower extends CommandBase {
     
   }
   public Command getPathFollowerCom(){
-    return ramseteCommand =
+     ramseteCommand =
      new RamseteCommand(trajectory, 
       drive::getPose,
       new RamseteController(drive.getkRamseteB(), drive.getkRamseteZeta()), 
@@ -55,7 +53,10 @@ public class PathFollower extends CommandBase {
       drive::moveVolts,
       drive
     );
+
+    
       
+    return ramseteCommand.andThen(() -> drive.stop());
   }
  
 }

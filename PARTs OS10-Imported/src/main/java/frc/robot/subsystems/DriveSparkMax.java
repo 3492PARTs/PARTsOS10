@@ -15,9 +15,6 @@ import frc.robot.Sensors.GyroSensor;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -45,7 +42,7 @@ public class DriveSparkMax extends SubsystemBase {
   private double ksVolts = 0;//TODO: get from characterization
   private double kvVoltSecondsPerMeter = 0;//TODO: get from characterization
   private double kaVoltSecondsSquaredPerMeter = 0;//TODO: get from characterization
-  private DifferentialDriveKinematics kDriveKinematics;// TODO: get from characterization
+  private DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(0.0);// TODO: get from Mechanical
   private double kRamseteB = 0;//TODO: get from characterization
   private double kRamseteZeta = 0;//TODO: get from characterization
 
