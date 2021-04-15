@@ -40,13 +40,13 @@ public final class Constants {
     public static final int Right2_port = 14;
     public static final int Right3_port = 15;
     // conveyor
-    public static final int Conveyor_port = 4;
+    public static final int Conveyor_port = 4; 
     // intake
-    public static final int INTAKE_WHEEL_PORT = 10;
+    public static final int INTAKE_WHEEL_PORT = 11; // was 10
     public static final int PIVOT_INTAKE_PORT = 9;
     // climber motor ports
     public static final int CLIMB_1_PORT = 7;
-    public static final int CLIMB_2_PORT = 11;
+    public static final int CLIMB_2_PORT = 18; 
     public static final int ELEVATOR_PORT = 6;
     public static final int ELEVATOR_PIVOT_PORT = 5;
 
