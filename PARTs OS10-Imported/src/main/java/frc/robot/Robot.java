@@ -7,13 +7,22 @@
 
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
 import edu.wpi.cscore.HttpCamera;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
 import frc.robot.Constants.Encoder;
 import frc.robot.commands.*;
+import frc.robot.commands.Autonomous.PathFollower;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +34,9 @@ import frc.robot.commands.*;
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private Command m_autonomousCommand;
+  String trajectoryJSON = "paths/TestPathWeaver.wpilib.json";
+  Trajectory trajectory = new Trajectory();
+
 
   private HttpCamera limelightFeed;
 
@@ -44,6 +56,14 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.smartDashBoard.robotInitUpdate();
     m_robotContainer.gyro.calibrate();
+
+    try{
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+    }
+    
   }
 
   /**
@@ -87,7 +107,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    m_autonomousCommand = new PathFollower().getPathFollowerCom(trajectory);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -184,7 +206,7 @@ public class Robot extends TimedRobot {
     if (m_robotContainer.drive.getMult() > 0) {
       m_robotContainer.drive.move(Joystick1y, Joystick2y);
     } else if (m_robotContainer.drive.getMult() < 0) {
-      m_robotContainer.drive.move(Joystick2y, Joystick1y);
+      m_robotContainer.drive.move(Joystick1y, Joystick2y);
     }
 
     // =====================================================================================

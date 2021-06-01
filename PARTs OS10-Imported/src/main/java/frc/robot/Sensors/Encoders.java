@@ -19,8 +19,8 @@ public class Encoders {
     private final DriveSparkMax drive = DriveSparkMax.getInstance();
     private final Climber climber = Climber.getInstance();
     private final Intake intake = Intake.getInstance();
-    private CANEncoder rightEncoder = drive.getRight1SparkMax().getEncoder();
-    private CANEncoder leftEncoder = drive.getLeft1SparkMax().getEncoder();
+    private CANEncoder rightEncoder;
+    private CANEncoder leftEncoder;
 
     private static double startPositionRight = 0;
     private static double startPositionLeft = 0;
@@ -33,7 +33,13 @@ public class Encoders {
     private static Encoders _staticEncoders = new Encoders();
 
     public static Encoders getInstance() {
+        
         return _staticEncoders;
+    }
+
+    public Encoders(){
+        rightEncoder = drive.getRight1SparkMax().getEncoder();
+        leftEncoder = drive.getLeft1SparkMax().getEncoder();
     }
 
     /**

@@ -18,25 +18,29 @@ import frc.robot.Sensors.Encoders;
 import frc.robot.subsystems.DriveSparkMax;
 
 public class PathFollower extends CommandBase {
-  Trajectory trajectory;
+  //Trajectory trajectory;
   DriveSparkMax drive = DriveSparkMax.getInstance();
   RamseteCommand ramseteCommand;
   Path path;
-  Encoders encoders = Encoders.getInstance();
+ // Encoders encoders = Encoders.getInstance();
+
+  public PathFollower() {
+  }
 
   /** Creates a new PathFollower. */
   public PathFollower(Path path) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.path = path;
-    try {
-      trajectory = TrajectoryUtil.fromPathweaverJson(path);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } // TODO set path
+    // this.path = path;
+    // try {
+    //   trajectory = TrajectoryUtil.fromPathweaverJson(path);
+    // } catch (IOException e) {
+    //   // TODO Auto-generated catch block
+    //   e.printStackTrace();
+    // } // TODO set path
     
   }
-  public Command getPathFollowerCom(){
+
+  public Command getPathFollowerCom(Trajectory trajectory){
      ramseteCommand =
      new RamseteCommand(trajectory, 
       drive::getPose,
@@ -54,9 +58,11 @@ public class PathFollower extends CommandBase {
       drive
     );
 
+    drive.feed();
     
       
     return ramseteCommand.andThen(() -> drive.stop());
+    
   }
  
 }

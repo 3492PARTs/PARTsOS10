@@ -8,6 +8,8 @@
 package frc.robot.Sensors;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
@@ -16,7 +18,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class GyroSensor {
     private static GyroSensor _staticGyro = new GyroSensor();
-    private Gyro gyro;
+    private AnalogGyro gyro;
     
 
     // =====================================================================================
@@ -29,7 +31,7 @@ public class GyroSensor {
 
 
     public GyroSensor() {
-        gyro = (Gyro) new ADXL345_I2C(null, null);// Todo: give port numbers
+        gyro = new AnalogGyro(0);// Todo: give port numbers
     }
 
     public Gyro getGyro(){

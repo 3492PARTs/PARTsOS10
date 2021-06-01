@@ -12,6 +12,7 @@ import frc.robot.Constants;
 import frc.robot.Sensors.Encoders;
 import frc.robot.Sensors.GyroSensor;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -39,24 +40,29 @@ public class DriveSparkMax extends SubsystemBase {
   private SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
   private DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
 
-  private double ksVolts = 0;//TODO: get from characterization
-  private double kvVoltSecondsPerMeter = 0;//TODO: get from characterization
-  private double kaVoltSecondsSquaredPerMeter = 0;//TODO: get from characterization
-  private DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(0.0);// TODO: get from Mechanical
-  private double kRamseteB = 0;//TODO: get from characterization
-  private double kRamseteZeta = 0;//TODO: get from characterization
+  private double ksVolts = 0.217;//TODO: get from characterization
+  private double kvVoltSecondsPerMeter = 11.5;//TODO: get from characterization 
+  private double kaVoltSecondsSquaredPerMeter = 2.95;//TODO: get from characterization
+  private DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(0.12732171733494124);// TODO: get from Mechanical
+  private double kRamseteB = 2;//given by wpilib
+  private double kRamseteZeta = 0.7;//given by wpilib
 
   private int amps = 40;
   private int timeoutMs = 0;
   private int peakAmps = 55;
   private int mult = 1;
   private String driveFront = "";
-  private double KPDrive = 0; //TODO SET PID P VALUE
+  private double KPDrive = 0.873; 
 
-  private Encoders encoders = Encoders.getInstance(); 
+  //private Encoders encoders = Encoders.getInstance(); 
 
   private Gyro m_Gyro = GyroSensor.getInstance().getGyro();
   private DifferentialDriveOdometry m_Odometry = new DifferentialDriveOdometry(m_Gyro.getRotation2d());
+
+  public DriveSparkMax(){
+    rightEncoder = getRight1SparkMax().getEncoder();
+    leftEncoder = getLeft1SparkMax().getEncoder();
+}
 
   // =====================================================================================
   // Define Singleton Pattern
@@ -67,11 +73,7 @@ public class DriveSparkMax extends SubsystemBase {
     return _staticDriveSparkMax;
   }
 
-  public DriveSparkMax() {
-    
-  }
-
-  /**
+    /**
    * Drive
    * 
    * @param Speed  left between 1, -1
@@ -130,7 +132,7 @@ public class DriveSparkMax extends SubsystemBase {
   }
 
   public void updatePose(){
-    m_Odometry.update(m_Gyro.getRotation2d(), encoders.getDistanceMovedLeft(), encoders.getDistanceMovedRight());
+    m_Odometry.update(m_Gyro.getRotation2d(), getDistanceMovedLeft(), getDistanceMovedRight());
   }
 
   /**
@@ -157,13 +159,17 @@ public class DriveSparkMax extends SubsystemBase {
     M_drive.feed();
   }
 
+  public void feed(){
+    M_drive.feed();
+  }
+
   /**
    * Get the Right1 spark max
    * 
    * @return Right1
    */
   public CANSparkMax getRight1SparkMax() {
-    return Right1;
+    return Right2;
   }
 
   /**
@@ -172,7 +178,7 @@ public class DriveSparkMax extends SubsystemBase {
    * @return Left1
    */
   public CANSparkMax getLeft1SparkMax() {
-    return Left1;
+    return Left2;
   }
 
   /**
@@ -207,7 +213,7 @@ public class DriveSparkMax extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds(){
-    return new DifferentialDriveWheelSpeeds(encoders.getRate(frc.robot.Constants.Encoder.drive)[0], encoders.getRate(frc.robot.Constants.Encoder.drive)[1]);
+    return new DifferentialDriveWheelSpeeds(getRate()[0], getRate()[1]);
   }
 
   public double getKPDrive() {
@@ -218,4 +224,83 @@ public class DriveSparkMax extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  private final Climber climber = Climber.getInstance();
+  private final Intake intake = Intake.getInstance();
+  private CANEncoder rightEncoder;
+  private CANEncoder leftEncoder;
+
+  private static double startPositionRight = 0;
+  private static double startPositionLeft = 0;
+  private static double startPosPivotElevator = 0;
+  private static double startPosElevator = 0;
+  private static double startPosArmPivot = 0;
+  
+
+  /**
+   * Distance of the left drive wheel
+   * 
+   * @return distance the left wheel moved in in ?
+   */
+  public double getDistanceMovedLeft() {
+      return Math.abs(((leftEncoder.getPosition() - startPositionLeft) * Constants.WHEEL_CIRCUMFERENCE)
+              / Constants.GEAR_RATIO)/39.37;
+  }
+
+  /**
+   * Distance of the right drive wheel
+   * 
+   * @return distance the right wheel moved in in ?
+   */
+  public double getDistanceMovedRight() {
+      return Math.abs(((rightEncoder.getPosition() - startPositionRight) * Constants.WHEEL_CIRCUMFERENCE)
+              / Constants.GEAR_RATIO)/39.37;
+  }
+
+  /**
+   * Get the rotation of the elevator pivot
+   * 
+   * @return in rotations
+   */
+  public double getPivotElevatorEncoderRot() {
+      return (((double) climber.getElevatorPivot().getSelectedSensorPosition()) - startPosPivotElevator) / 4096.0;
+  }
+
+  /**
+   * Get the rotation of the elevator
+   * 
+   * @return in rotations
+   */
+  public double getElevatorEncoderRot() {
+      return (((double) climber.getElevator().getSelectedSensorPosition()) - startPosElevator) / 4096.0;
+  }
+
+  /**
+   * Get the rotation of the arm pivot
+   * 
+   * @return in rotations
+   */
+  public double getArmPivotEncoderRot() {
+      return (((double) intake.getPivotIntakeTalon().getSelectedSensorPosition()) - startPosArmPivot) / 4096.0;
+  }
+
+  public double[] getRate() {
+      
+    return new double[] { rightEncoder.getVelocity(), leftEncoder.getVelocity() };
+     
+  }
+
+
+  /**
+   * Reset an encoder
+   * 
+   * @param encoder the encoder to reset
+   */
+  public void resetEncoders() {
+    
+    startPositionLeft = leftEncoder.getPosition();
+    startPositionRight = rightEncoder.getPosition();
+      
+  }
+
 }
