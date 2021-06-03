@@ -39,6 +39,7 @@ public class DriveSparkMax extends SubsystemBase {
   private SpeedControllerGroup Right = new SpeedControllerGroup(Right1, Right2, Right3);
   private SpeedControllerGroup Left = new SpeedControllerGroup(Left1, Left2, Left3);
   private DifferentialDrive M_drive = new DifferentialDrive(Left, Right);
+  
 
   private double ksVolts = 0.217;//TODO: get from characterization
   private double kvVoltSecondsPerMeter = 11.5;//TODO: get from characterization 
@@ -132,7 +133,7 @@ public class DriveSparkMax extends SubsystemBase {
   }
 
   public void updatePose(){
-    m_Odometry.update(m_Gyro.getRotation2d(), getDistanceMovedLeft(), getDistanceMovedRight());
+    m_Odometry.update(m_Gyro.getRotation2d().times(-1), getDistanceMovedLeft(), getDistanceMovedRight());
   }
 
   /**
@@ -153,14 +154,23 @@ public class DriveSparkMax extends SubsystemBase {
     return driveFront;
   }
 
+  public void setMotorSafety(boolean safety){
+    M_drive.setSafetyEnabled(safety);
+  }
+  
+  public void endCommandCleanup(){
+    stop();
+    setMotorSafety(true);
+  }
+
   public void moveVolts(double leftV, double RightV){
     Left.setVoltage(leftV);
-    Right.setVoltage(-RightV);
-    M_drive.feed();
+    Right.setVoltage(RightV);
+    feed();
   }
 
   public void feed(){
-    M_drive.feed();
+    M_drive.feedWatchdog();
   }
 
   /**

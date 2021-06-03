@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Direction;
 import frc.robot.Constants.Encoder;
+import frc.robot.Sensors.GyroSensor;
 import frc.robot.commands.*;
 import frc.robot.commands.Autonomous.PathFollower;
 
@@ -34,7 +35,7 @@ import frc.robot.commands.Autonomous.PathFollower;
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private Command m_autonomousCommand;
-  String trajectoryJSON = "paths/TestPathWeaver.wpilib.json";
+  String trajectoryJSON = "paths/EvenSlower.wpilib.json";
   Trajectory trajectory = new Trajectory();
 
 
@@ -106,7 +107,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
+    GyroSensor.getInstance().getGyro().reset();
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     m_autonomousCommand = new PathFollower().getPathFollowerCom(trajectory);

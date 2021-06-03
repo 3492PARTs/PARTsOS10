@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Sensors.GyroSensor;
 
 /**
  * Add your docs here.
@@ -49,6 +50,7 @@ public class SmartDashBoard {
 
     public void autoPeriodicUpdate() {
         SmartDashboard.putNumber(Constants.SD_ENCODER_DIST, m_robotContainer.encoders.getDistanceMovedRight());
+        System.out.println("-----------------------------: " + GyroSensor.getInstance().getGyro().getRotation2d().getDegrees());
     }
 
     public void teleopPeriodicUpdate() {

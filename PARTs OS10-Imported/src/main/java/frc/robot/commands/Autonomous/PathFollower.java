@@ -25,6 +25,8 @@ public class PathFollower extends CommandBase {
  // Encoders encoders = Encoders.getInstance();
 
   public PathFollower() {
+    drive.setMotorSafety(false);
+
   }
 
   /** Creates a new PathFollower. */
@@ -61,7 +63,7 @@ public class PathFollower extends CommandBase {
     drive.feed();
     
       
-    return ramseteCommand.andThen(() -> drive.stop());
+    return ramseteCommand.andThen(() -> drive.endCommandCleanup());
     
   }
  
